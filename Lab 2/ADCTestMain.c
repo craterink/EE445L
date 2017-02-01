@@ -125,7 +125,7 @@ void processData(void){
 	}
 	
 	// create probability mass function
-	uint32_t pmf[max - low];
+	uint32_t pmf[max - low + 1];
 	for(int i = 0; i < 1000; i++) {
 		pmf[ADCvals[i] - low] += 1;
 	}
@@ -153,6 +153,7 @@ int main(void){unsigned long volatile delay;
   while(1){
 		if(logindex >= 1000 && processed == 0) {
 			processData();
+			processTime();
 			processed = 1;
 		}
     GPIO_PORTF_DATA_R |= 0x04;          // profile
