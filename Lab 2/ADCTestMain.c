@@ -45,9 +45,16 @@ volatile unsigned long ADCvalue;
 // 2.25V    3072
 // 3.00V    4095
 
-
+// data logging vars
+uint32_t pmf[4096];
+uint32_t ADCtimes[1000];
+uint32_t ADCvals[1000];
+uint32_t logindex = 0;
+uint32_t lastTime = 0;
+uint32_t thisTime = 0;
 
 void (*PeriodicTask)(void);   // user function
+void (*PeriodicTask0)(void);   // user function
 
 // ***************** TIMER1_Init ****************
 // Activate TIMER1 interrupts to run user task periodically
@@ -79,11 +86,36 @@ void Timer1A_Handler(void){
   (*PeriodicTask)();                // execute user task
 }
 
-uint32_t ADCtimes[1000];
-uint32_t ADCvals[1000];
-uint32_t logindex = 0;
-uint32_t lastTime = 0;
-uint32_t thisTime = 0;
+
+// ***************** Timer0A_Init ****************
+// Activate TIMER0 interrupts to run user task periodically
+// Inputs:  task is a pointer to a user function
+//          period in units (1/clockfreq), 32 bits
+// Outputs: none
+void Timer0A_Init(void(*task)(void), uint32_t period){long sr;
+  sr = StartCritical(); 
+  SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
+  PeriodicTask0 = task;          // user function
+  TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
+  TIMER0_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
+  TIMER0_TAMR_R = 0x00000002;   // 3) configure for periodic mode, default down-count settings
+  TIMER0_TAILR_R = period-1;    // 4) reload value
+  TIMER0_TAPR_R = 0;            // 5) bus clock resolution
+  TIMER0_ICR_R = 0x00000001;    // 6) clear TIMER0A timeout flag
+  TIMER0_IMR_R = 0x00000001;    // 7) arm timeout interrupt
+  NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF)|0x80000000; // 8) priority 4
+// interrupts enabled in the main program after all devices initialized
+// vector number 35, interrupt number 19
+  NVIC_EN0_R = 1<<19;           // 9) enable IRQ 19 in NVIC
+  TIMER0_CTL_R = 0x00000001;    // 10) enable TIMER0A
+  EndCritical(sr);
+}
+
+void Timer0A_Handler(void){
+  TIMER0_ICR_R = TIMER_ICR_TATOCINT;// acknowledge timer0A timeout
+  (*PeriodicTask0)();                // execute user task
+}
+
 void logValues(void){
 	if(logindex < 1000) {
 		thisTime = TIMER1_TAR_R; // get current time
@@ -115,10 +147,9 @@ void processTime(void){
 
 // processes collected ADC data
 void processData(void){
-	uint32_t pmf[4096];
 	int i;
+
 	// create probability mass function
-	
 	for(i = 0; i < 1000; i++) {
 		pmf[ADCvals[i]] += 1;
 	}
@@ -137,11 +168,8 @@ int main(void){unsigned long volatile delay;
   GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFFF0FF)+0x00000000;
   GPIO_PORTF_AMSEL_R = 0;               // disable analog functionality on PF
 	
-	// 3.
-	Timer1_Init(&logValues, 0xFFFFFFFF + 1);
-	
-	// 4.
-	
+	Timer1_Init(NULL, 0xFFFFFFFF);
+	Timer0A_Init(&logValues, 8000);
 	
   while(1){
 		if(logindex >= 1000 && processed == 0) {
