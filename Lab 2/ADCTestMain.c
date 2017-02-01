@@ -98,8 +98,10 @@ void logValues(void){
 // processes collected elapsed time data 
 void processTime(void){
 	uint32_t low = 0xFFFFFFFF, max = 0;
+	uint32_t timeJitter;
+	int i;
 	
-	for(int i = 0; i < 999; i++) {
+	for(i = 0; i < 999; i++) {
 		if(ADCtimes[i] < low) {
 			low = ADCtimes[i];
 		}
@@ -108,26 +110,17 @@ void processTime(void){
 		}
 	}
 	
-	uint32_t timeJitter = max - low;
+	timeJitter = max - low;
 }
 
 // processes collected ADC data
 void processData(void){
-	uint32_t low = 0xFFFFFFFF, max = 0;
-	
-	for(int i = 0; i < 1000; i++) {
-		if(ADCvals[i] < low) {
-			low = ADCvals[i];
-		}
-		if(ADCvals[i] > max) {
-			max = ADCvals[i];
-		}
-	}
-	
+	uint32_t pmf[4096];
+	int i;
 	// create probability mass function
-	uint32_t pmf[max - low + 1];
-	for(int i = 0; i < 1000; i++) {
-		pmf[ADCvals[i] - low] += 1;
+	
+	for(i = 0; i < 1000; i++) {
+		pmf[ADCvals[i]] += 1;
 	}
 }
 
