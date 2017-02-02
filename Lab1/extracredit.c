@@ -2,7 +2,6 @@
 #include <math.h>
 #include "fixed.h"
 
-
 void init(void){
 	
 }
@@ -27,6 +26,9 @@ void Test2(void){
     T2 = 1000 + ((125*N2+64)>>7); 	
   }
 }
+
+extern void Test3(void);
+extern void Test4(void);
 
 void test() {
 	Test1();

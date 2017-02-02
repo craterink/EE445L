@@ -17,6 +17,17 @@ extracredit.h(4): warning:  #1-D: last line of file ends without a newline
   void test(void);
 Lab1.c: 1 warning, 0 errors
 compiling extracredit.c...
+assembling extracredit2.s...
+extracredit2.s(52): warning: A1447W: Missing END directive at end of file, but found a label named END
+extracredit2.s(28): warning: A1581W: Added 2 bytes of padding at address 0x32
+extracredit2.s(52): warning: A1581W: Added 2 bytes of padding at address 0x72
 linking...
-Program Size: Code=8424 RO-data=4472 RW-data=84 ZI-data=1028  
-".\Lab1.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=9520 RO-data=4472 RW-data=100 ZI-data=1028  
+".\Lab1.axf" - 0 Error(s), 4 Warning(s).
+acredit2.s(50): warning: A1581W: Added 2 bytes of padding at address 0x72
+linking...
+Program Size: Code=9504 RO-data=4472 RW-data=100 ZI-data=1028  
+".\Lab1.axf" - 0 Error(s), 6 Warning(s).
+g at address 0x72
+".\Lab1.axf" - 2 Error(s), 6 Warning(s).
+Target not created
