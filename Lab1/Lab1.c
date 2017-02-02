@@ -25,6 +25,7 @@
 #include "PLL.h"
 #include "fixed.h"
 #include "inc/tm4c123gh6pm.h"
+#include "extracredit.h"
 void DelayWait10ms(uint32_t n);
 void PortF_Init(void);
 // const will place these structures in ROM
@@ -98,6 +99,7 @@ const int32_t StarYbuf[50] = {190, 172, 154, 136, 118, 100, 81, 63, 45, 27, 9, 2
 
 int main(void){uint32_t i;
   PLL_Init();
+	test();
   PortF_Init();
   ST7735_InitR(INITR_REDTAB);
   while(1){
