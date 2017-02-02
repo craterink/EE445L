@@ -1,0 +1,183 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;Version 3 assembly floating point
+    2 00000000         ; run with floating-point hardware active
+    3 00000000                 AREA             DATA, ALIGN=2
+    4 00000000 00 00 00 
+              00       T3      SPACE            4
+    5 00000004 00 00 00 
+              00       N3      SPACE            4
+    6 00000008                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+    7 00000000                 THUMB
+    8 00000000                 EXPORT           Test3
+    9 00000000                 EXPORT           Test4
+   10 00000000         Test3
+   11 00000000 F04F 0000       MOV              R0,#0
+   12 00000004 490B            LDR              R1,=N3      ;pointer to N
+   13 00000006 4A0C            LDR              R2,=T3      ;pointer to T
+   14 00000008 EDDF 0A0C       VLDR.F32         S1,=0.009768
+   15 0000000C EEB2 1A04       VLDR.F32         S2,=10
+   16 00000010 6008    loop3   STR              R0,[R1]     ; N is volatile
+   17 00000012 EE00 0A10       VMOV.F32         S0,R0
+   18 00000016 EEB8 0A40       VCVT.F32.U32     S0,S0       ; S0 has N
+   19 0000001A EE20 0A20       VMUL.F32         S0,S0,S1    ; N*0.09768
+   20 0000001E EE30 0A01       VADD.F32         S0,S0,S2    ; 10+N*0.0968
+   21 00000022 ED82 0A00       VSTR.F32         S0,[R2]     ; T=10+N*0.0968
+   22 00000026 F100 0001       ADD              R0,R0,#1
+   23 0000002A F5B0 5F80       CMP              R0,#4096
+   24 0000002E D1EF            BNE              loop3
+   25 00000030 4770            BX               LR
+   26 00000032         
+   27 00000032         ;version 4, assembly fixed point
+   28 00000032 00 00 00000000 
+              00000000 
+              3C2009F6         AREA             DATA, ALIGN=2
+   29 00000008 00 00 00 
+              00       T4      SPACE            4
+   30 0000000C 00 00 00 
+              00       N4      SPACE            4
+   31 00000010                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   32 00000040                 THUMB
+   33 00000040 B570    Test4   PUSH             {R4,R5,R6,LR}
+   34 00000042 F04F 0000       MOV              R0,#0
+   35 00000046 490B            LDR              R1,=N4      ;pointer to N
+   36 00000048 4A0B            LDR              R2,=T4      ;pointer to T
+   37 0000004A F04F 037D       MOV              R3,#125
+   38 0000004E F04F 0440       MOV              R4,#64
+   39 00000052 F44F 757A       MOV              R5,#1000
+   40 00000056 6008    loop4   STR              R0,[R1]     ; N is volatile
+   41 00000058 FB00 F603       MUL              R6,R0,R3    ; N*125
+   42 0000005C 4426            ADD              R6,R6,R4    ; N*125+64
+   43 0000005E EA4F 16D6       LSR              R6,R6,#7    ; (N*125+64)/128
+   44 00000062 442E            ADD              R6,R6,R5    ; 1000+(N*125+64)/1
+                                                            28
+   45 00000064 6016            STR              R6,[R2]     ; T = 1000+(N*125+6
+                                                            4)/128
+   46 00000066 F100 0001       ADD              R0,R0,#1
+   47 0000006A F5B0 5F80       CMP              R0,#4096
+   48 0000006E D1F2            BNE              loop4
+   49 00000070 BD70            POP              {R4,R5,R6,PC}
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   50 00000072         END
+   51 00000072         
+                       
+              00 00 00000000 
+              00000000 
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\ext
+racredit2.d -o.\extracredit2.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Inclu
+de -IC:\Keil\ARM\Inc\Luminary --predefine="__EVAL SETA 1" --predefine="__MICROL
+IB SETA 1" --list=.\extracredit2.lst extracredit2.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DATA 00000000
+
+Symbol: DATA
+   Definitions
+      At line 3 in file extracredit2.s
+   Uses
+      None
+Comment: DATA unused
+N3 00000004
+
+Symbol: N3
+   Definitions
+      At line 5 in file extracredit2.s
+   Uses
+      At line 12 in file extracredit2.s
+Comment: N3 used once
+N4 0000000C
+
+Symbol: N4
+   Definitions
+      At line 30 in file extracredit2.s
+   Uses
+      At line 35 in file extracredit2.s
+Comment: N4 used once
+T3 00000000
+
+Symbol: T3
+   Definitions
+      At line 4 in file extracredit2.s
+   Uses
+      At line 13 in file extracredit2.s
+Comment: T3 used once
+T4 00000008
+
+Symbol: T4
+   Definitions
+      At line 29 in file extracredit2.s
+   Uses
+      At line 36 in file extracredit2.s
+Comment: T4 used once
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 6 in file extracredit2.s
+   Uses
+      None
+Comment: .text unused
+END 00000072
+
+Symbol: END
+   Definitions
+      At line 50 in file extracredit2.s
+   Uses
+      None
+Comment: END unused
+Test3 00000000
+
+Symbol: Test3
+   Definitions
+      At line 10 in file extracredit2.s
+   Uses
+      At line 8 in file extracredit2.s
+Comment: Test3 used once
+Test4 00000040
+
+Symbol: Test4
+   Definitions
+      At line 33 in file extracredit2.s
+   Uses
+      At line 9 in file extracredit2.s
+Comment: Test4 used once
+loop3 00000010
+
+Symbol: loop3
+   Definitions
+      At line 16 in file extracredit2.s
+   Uses
+      At line 24 in file extracredit2.s
+Comment: loop3 used once
+loop4 00000056
+
+Symbol: loop4
+   Definitions
+      At line 40 in file extracredit2.s
+   Uses
+      At line 48 in file extracredit2.s
+Comment: loop4 used once
+6 symbols
+348 symbols in table
