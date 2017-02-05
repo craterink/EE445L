@@ -155,6 +155,31 @@ void processData(void){
 	}
 }
 
+// shows (1) time jitter w/o "extra interrupts"
+//   and (2) time jitter w/ "extra interrupts"
+void screenOne_TimeJitter(void) {
+	
+}
+
+// shows PMF w/o hardware averaging
+void screenTwo_DefaultPMF(void) {
+	
+}
+
+
+// shows a PMF of the hardware-averaged ADC values,
+//   where each point is an average of "samples_to_avg"
+//   number of ADC values
+void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
+	
+}
+
+// shows a demonstration of our line drawing method
+void screenThree_LineDrawing(void) {
+	
+}
+
+
 _Bool processed = 0;
 int main(void){unsigned long volatile delay;
   PLL_Init();                           // 80 MHz
