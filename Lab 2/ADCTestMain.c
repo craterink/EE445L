@@ -25,10 +25,13 @@
 // input signal connected to PE2/AIN1
 
 #include <stdint.h>
+#include <string.h>
+#include <stdio.h>
 #include "ADCSWTrigger.h"
 #include "../tm4c123gh6pm.h"
 #include "PLL.h"
 #include "stddef.h"
+#include "ST7735.h"
 
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -45,13 +48,19 @@ volatile unsigned long ADCvalue;
 // 2.25V    3072
 // 3.00V    4095
 
+
+// time logging vars
+uint32_t lastTime = 0, thisTime = 0;
+uint32_t timeLog[1000];
+uint32_t timeLogIndex = 0;
+_Bool timeLogFull = 0;
+
+
 // data logging vars
 uint32_t pmf[4096];
 uint32_t ADCtimes[1000];
 uint32_t ADCvals[1000];
 uint32_t logindex = 0;
-uint32_t lastTime = 0;
-uint32_t thisTime = 0;
 
 void (*PeriodicTask)(void);   // user function
 void (*PeriodicTask0)(void);   // user function
@@ -86,7 +95,6 @@ void Timer1A_Handler(void){
   (*PeriodicTask)();                // execute user task
 }
 
-
 // ***************** Timer0A_Init ****************
 // Activate TIMER0 interrupts to run user task periodically
 // Inputs:  task is a pointer to a user function
@@ -116,7 +124,42 @@ void Timer0A_Handler(void){
   (*PeriodicTask0)();                // execute user task
 }
 
-void logValues(void){
+void Timer0A_UpdateTask(void(*task)(void)){
+  PeriodicTask0 = task;
+}
+
+// ***************** Timer2_Init ****************
+// Activate Timer2 interrupts to run user task periodically
+// Inputs:  task is a pointer to a user function
+//          period in units (1/clockfreq)
+// Outputs: none
+void Timer2A_Init(void(*task)(void), unsigned long period){
+  SYSCTL_RCGCTIMER_R |= 0x04;   // 0) activate timer2
+  PeriodicTask = task;          // user function
+  TIMER2_CTL_R = 0x00000000;    // 1) disable timer2A during setup
+  TIMER2_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
+  TIMER2_TAMR_R = 0x00000002;   // 3) configure for periodic mode, default down-count settings
+  TIMER2_TAILR_R = period-1;    // 4) reload value
+  TIMER2_TAPR_R = 0;            // 5) bus clock resolution
+  TIMER2_ICR_R = 0x00000001;    // 6) clear timer2A timeout flag
+  TIMER2_IMR_R = 0x00000001;    // 7) arm timeout interrupt
+  NVIC_PRI5_R = (NVIC_PRI5_R&0x00FFFFFF)|0x20000000; // 8) priority 1
+// interrupts enabled in the main program after all devices initialized
+// vector number 39, interrupt number 23
+  NVIC_EN0_R = 1<<23;           // 9) enable IRQ 23 in NVIC
+  TIMER2_CTL_R = 0x00000001;    // 10) enable timer2A
+}
+
+void Timer2A_Handler(void){
+  TIMER2_ICR_R = TIMER_ICR_TATOCINT;// acknowledge TIMER2A timeout
+  (*PeriodicTask)();                // execute user task
+}
+
+void timer2(void){
+	int x = 0;			
+}
+
+/*void logValues(void){
 	if(logindex < 1000) {
 		thisTime = TIMER1_TAR_R; // get current time
 		ADCtimes[logindex] = thisTime - lastTime; // log time elapsed;
@@ -125,24 +168,24 @@ void logValues(void){
 		lastTime = thisTime; // iterate
 		logindex++;
 	}
-}
+}*/
 
 // processes collected elapsed time data 
-void processTime(void){
+uint32_t processTimes(void){
 	uint32_t low = 0xFFFFFFFF, max = 0;
 	uint32_t timeJitter;
 	int i;
 	
 	for(i = 0; i < 999; i++) {
-		if(ADCtimes[i] < low) {
-			low = ADCtimes[i];
+		if(timeLog[i] < low) {
+			low = timeLog[i];
 		}
-		else if (ADCtimes[i] > max) {
-			max = ADCtimes[i];
+		else if (timeLog[i] > max) {
+			max = timeLog[i];
 		}
 	}
 	
-	timeJitter = max - low;
+	return max - low;
 }
 
 // processes collected ADC data
@@ -155,10 +198,61 @@ void processData(void){
 	}
 }
 
+void logTimes(void) {
+	// beginning corner case
+	if(lastTime == 0) {
+		lastTime = TIMER1_TAR_R;
+	}
+	
+	// log times 
+	if(timeLogFull == 0) {
+		thisTime = TIMER1_TAR_R;
+		timeLog[timeLogIndex++] =  lastTime - thisTime;
+		lastTime = thisTime;
+	}
+	else{
+		timeLogFull = 1;
+	}
+}
+
 // shows (1) time jitter w/o "extra interrupts"
 //   and (2) time jitter w/ "extra interrupts"
 void screenOne_TimeJitter(void) {
+	// init vars
+	uint32_t timeJitterOne = 0, timeJitterTwo = 0;
+	char *messageOne, *messageTwo;
 	
+	// display screen one
+	ST7735_FillScreen(ST7735_BLACK); 
+  ST7735_SetCursor(0,0);
+	ST7735_OutString("Logging times with one interrupt...\r");
+	
+	// init counting/stopwatch timer
+	Timer1_Init(NULL, 0xFFFFFFFF);
+	
+	// init interrupt timer for logging.
+	// interrupts at 100Hz.
+	Timer0A_Init(&logTimes, 8000);
+	
+	// wait to log 1000 time deltas
+	while(timeLogFull == 0);
+	
+	// process time deltas to find max - min
+	timeJitterOne = processTimes();
+	sprintf(messageOne, "Time Jitter: %d \r", timeJitterOne);
+	ST7735_OutString(messageOne);
+	
+	ST7735_OutString("Logging times with higher priority interrupt...\r");
+	
+	Timer2A_Init(&timer2, 7500);
+	timeLogFull = 0;
+	timeLogIndex = 0;
+	
+	while(timeLogFull == 0);
+	
+	timeJitterTwo = processTimes();
+	sprintf(messageTwo, "Time Jitter: %d \r", timeJitterTwo);
+	ST7735_OutString(messageTwo);
 }
 
 // shows PMF w/o hardware averaging
@@ -169,7 +263,8 @@ void screenTwo_DefaultPMF(void) {
 
 // shows a PMF of the hardware-averaged ADC values,
 //   where each point is an average of "samples_to_avg"
-//   number of ADC values
+//   number of ADC values.
+// NOTE: samples_to_avg must be less than or equal to 64.
 void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	
 }
@@ -179,10 +274,17 @@ void screenThree_LineDrawing(void) {
 	
 }
 
+// waits until a rising edge from PF4
+_Bool lastPF4Val = 0;
+void waitForSwitchToggle(void){
+	while(((GPIO_PORTF_DATA_R & 0x08) == lastTime) ||	((GPIO_PORTF_DATA_R & 0x08) == 0)) {
+		lastPF4Val = (GPIO_PORTF_DATA_R & 0x08) > 0 ? 1 : 0;
+	}
+}
 
-_Bool processed = 0;
-int main(void){unsigned long volatile delay;
-  PLL_Init();                           // 80 MHz
+void initForADCTestMain(void) {
+	unsigned long volatile delay;
+	PLL_Init();                           // 80 MHz
   ADC0_InitSWTriggerSeq3_Ch1();         // ADC initialization PE2/AIN1
   SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOF; // activate port F
   delay = SYSCTL_RCGC2_R;
@@ -192,19 +294,44 @@ int main(void){unsigned long volatile delay;
                                         // configure PF2 as GPIO
   GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFFF0FF)+0x00000000;
   GPIO_PORTF_AMSEL_R = 0;               // disable analog functionality on PF
+}
+
+void initST7735() {
+	ST7735_InitR(INITR_REDTAB);
+}
+
+_Bool processed = 0;
+int main(void){
+  initForADCTestMain();
+	initST7735();
 	
-	Timer1_Init(NULL, 0xFFFFFFFF);
-	Timer0A_Init(&logValues, 8000);
+	// Lab demo screens
+	screenOne_TimeJitter();
+	waitForSwitchToggle();
 	
-  while(1){
+	screenTwo_DefaultPMF();
+	waitForSwitchToggle();
+	
+	screenTwo_HardAvgPMF(16);
+	waitForSwitchToggle();
+	
+	screenTwo_HardAvgPMF(64);
+	waitForSwitchToggle();
+	
+	screenThree_LineDrawing();
+	waitForSwitchToggle();
+	
+  /*while(1){
 		if(logindex >= 1000 && processed == 0) {
 			processData();
 			processTime();
 			processed = 1;
 		}
+		
+		// following code updates ADCvalue every 100,000 cycles
     GPIO_PORTF_DATA_R |= 0x04;          // profile
     ADCvalue = ADC0_InSeq3();
     GPIO_PORTF_DATA_R &= ~0x04;
     for(delay=0; delay<100000; delay++){};
-  }
+  }*/
 }
