@@ -25,12 +25,13 @@ void ST7735_XYplotInit(char *title, int32_t minX, int32_t maxX, int32_t minY, in
 	ST7735_OutString(title);
 }
 
-void ST7735_XYplot(uint32_t num, int32_t bufX[], int32_t bufY[]) {
+void ST7735_XYplot(uint32_t num, int16_t bufX[], int16_t bufY[]) {
 	uint32_t index = 0, xLCD, yLCD;
 	while(index < num) {
 		// check for out-of-bounds
 		if(bufX[index] < minX_global || bufX[index] > maxX_global
 			 || bufY[index] < minY_global || bufY[index] > maxY_global) {
+			index++;
 			continue;
 		}
 			 
@@ -39,7 +40,7 @@ void ST7735_XYplot(uint32_t num, int32_t bufX[], int32_t bufY[]) {
 		yLCD = height - height*(bufY[index] - minY_global)/(maxY_global - minY_global);
 		
 		// draw point and iterate
-		ST7735_FillRect(xLCD, yLCD + 10, 1, 1, ST7735_RED);
+		ST7735_FillRect(xLCD, yLCD + 10, 2, 2, ST7735_RED);
 		index++;
 	}
 }

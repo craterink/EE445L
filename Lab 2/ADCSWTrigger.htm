@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\ADCSWTrigger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\ADCSWTrigger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sun Feb 05 15:34:19 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon Feb 06 02:23:46 2017
 <BR><P>
-<H3>Maximum Stack Usage =      33288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; screenTwo_HardAvgPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
+__rt_entry_main &rArr; main &rArr; screenOne_TimeJitter &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 <P>
 <H3>
 Functions with no stack information
@@ -698,8 +698,8 @@ Global Symbols
 <P><STRONG><a name="[f0]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[90]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 33288 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; screenTwo_HardAvgPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; screenOne_TimeJitter &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -746,8 +746,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
 <P><STRONG><a name="[99]"></a>__printf</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, __printf.o(.text))
@@ -827,8 +827,9 @@ Global Symbols
 
 <P><STRONG><a name="[fd]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[c6]"></a>ADC0_InSeq3</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adcswtrigger.o(i.ADC0_InSeq3))
-<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<P><STRONG><a name="[be]"></a>ADC0_InSeq3</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adcswtrigger.o(i.ADC0_InSeq3))
+<BR><BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logADCData
 </UL>
 
 <P><STRONG><a name="[bc]"></a>ADC0_InitSWTriggerSeq3_Ch1</STRONG> (Thumb, 172 bytes, Stack size 8 bytes, adcswtrigger.o(i.ADC0_InitSWTriggerSeq3_Ch1))
@@ -894,9 +895,9 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_XYplotInit
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
 <P><STRONG><a name="[a7]"></a>ST7735_InitR</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, st7735.o(i.ST7735_InitR))
@@ -921,7 +922,7 @@ Global Symbols
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
 </UL>
 
 <P><STRONG><a name="[b1]"></a>ST7735_OutChar</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, st7735.o(i.ST7735_OutChar))
@@ -939,19 +940,19 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_XYplotInit
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
 <P><STRONG><a name="[ab]"></a>ST7735_SetCursor</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, st7735.o(i.ST7735_SetCursor))
 <BR><BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_XYplotInit
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
-<P><STRONG><a name="[b3]"></a>ST7735_XYplot</STRONG> (Thumb, 154 bytes, Stack size 32 bytes, plotter.o(i.ST7735_XYplot))
+<P><STRONG><a name="[b3]"></a>ST7735_XYplot</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, plotter.o(i.ST7735_XYplot))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = ST7735_XYplot &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
@@ -981,11 +982,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EndCritical
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartCritical
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
 <P><STRONG><a name="[c7]"></a>Timer0A_UpdateTask</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, adctestmain.o(i.Timer0A_UpdateTask))
-<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<BR><BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
 </UL>
 
 <P><STRONG><a name="[22]"></a>Timer1A_Handler</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, adctestmain.o(i.Timer1A_Handler))
@@ -993,8 +994,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[c3]"></a>Timer1_Init</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, adctestmain.o(i.Timer1_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<P><STRONG><a name="[c4]"></a>Timer1_Init</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, adctestmain.o(i.Timer1_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
 <P><STRONG><a name="[24]"></a>Timer2A_Handler</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, adctestmain.o(i.Timer2A_Handler))
@@ -1002,21 +1003,21 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[c5]"></a>Timer2_Init</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, adctestmain.o(i.Timer2_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<P><STRONG><a name="[c6]"></a>Timer2_Init</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, adctestmain.o(i.Timer2_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
-<P><STRONG><a name="[b9]"></a>drawPMF</STRONG> (Thumb, 118 bytes, Stack size 33064 bytes, adctestmain.o(i.drawPMF))
-<BR><BR>[Stack]<UL><LI>Max Depth = 33256<LI>Call Chain = drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
+<P><STRONG><a name="[b9]"></a>drawPMF</STRONG> (Thumb, 106 bytes, Stack size 40 bytes, adctestmain.o(i.drawPMF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_XYplotInit
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_XYplot
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
 </UL>
 
-<P><STRONG><a name="[ba]"></a>initForADCTestMain</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, adctestmain.o(i.initForADCTestMain))
+<P><STRONG><a name="[ba]"></a>initForADCTestMain</STRONG> (Thumb, 142 bytes, Stack size 8 bytes, adctestmain.o(i.initForADCTestMain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = initForADCTestMain &rArr; ADC0_InitSWTriggerSeq3_Ch1
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
@@ -1033,55 +1034,59 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[83]"></a>logADCData</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, adctestmain.o(i.logADCData))
+<P><STRONG><a name="[83]"></a>logADCData</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, adctestmain.o(i.logADCData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = logADCData
+</UL>
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC0_InSeq3
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> adctestmain.o(i.screenTwo_DefaultPMF)
 </UL>
-<P><STRONG><a name="[81]"></a>logTimes</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, adctestmain.o(i.logTimes))
+<P><STRONG><a name="[81]"></a>logTimes</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, adctestmain.o(i.logTimes))
 <BR>[Address Reference Count : 1]<UL><LI> adctestmain.o(i.screenOne_TimeJitter)
 </UL>
 <P><STRONG><a name="[91]"></a>main</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, adctestmain.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 33288 + Unknown Stack Size
-<LI>Call Chain = main &rArr; screenTwo_HardAvgPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
+<LI>Call Chain = main &rArr; screenOne_TimeJitter &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;waitForSwitchToggle
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;waitForSwitchToggle
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenThree_LineDrawing
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initST7735
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForADCTestMain
 </UL>
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[c8]"></a>processData</STRONG> (Thumb, 80 bytes, Stack size 20 bytes, adctestmain.o(i.processData))
+<P><STRONG><a name="[c8]"></a>processData</STRONG> (Thumb, 76 bytes, Stack size 20 bytes, adctestmain.o(i.processData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = processData
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
+<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_HardAvgPMF
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenTwo_DefaultPMF
 </UL>
 
-<P><STRONG><a name="[c4]"></a>processTimes</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, adctestmain.o(i.processTimes))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
+<P><STRONG><a name="[c5]"></a>processTimes</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, adctestmain.o(i.processTimes))
+<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;screenOne_TimeJitter
 </UL>
 
-<P><STRONG><a name="[be]"></a>screenOne_TimeJitter</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, adctestmain.o(i.screenOne_TimeJitter))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
+<P><STRONG><a name="[bf]"></a>screenOne_TimeJitter</STRONG> (Thumb, 140 bytes, Stack size 120 bytes, adctestmain.o(i.screenOne_TimeJitter))
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = screenOne_TimeJitter &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processTimes
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer2_Init
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_Init
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processTimes
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer2_Init
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_Init
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c2]"></a>screenThree_LineDrawing</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, adctestmain.o(i.screenThree_LineDrawing))
+<P><STRONG><a name="[c3]"></a>screenThree_LineDrawing</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, adctestmain.o(i.screenThree_LineDrawing))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = screenThree_LineDrawing &rArr; ST7735_Line &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
@@ -1091,8 +1096,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c0]"></a>screenTwo_DefaultPMF</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, adctestmain.o(i.screenTwo_DefaultPMF))
-<BR><BR>[Stack]<UL><LI>Max Depth = 33264<LI>Call Chain = screenTwo_DefaultPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
+<P><STRONG><a name="[c1]"></a>screenTwo_DefaultPMF</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, adctestmain.o(i.screenTwo_DefaultPMF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = screenTwo_DefaultPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
@@ -1100,13 +1105,13 @@ Global Symbols
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processData
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawPMF
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_UpdateTask
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC0_InSeq3
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC0_InSeq3
 </UL>
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c1]"></a>screenTwo_HardAvgPMF</STRONG> (Thumb, 176 bytes, Stack size 24 bytes, adctestmain.o(i.screenTwo_HardAvgPMF))
-<BR><BR>[Stack]<UL><LI>Max Depth = 33280 + Unknown Stack Size
+<P><STRONG><a name="[c2]"></a>screenTwo_HardAvgPMF</STRONG> (Thumb, 176 bytes, Stack size 24 bytes, adctestmain.o(i.screenTwo_HardAvgPMF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 256 + Unknown Stack Size
 <LI>Call Chain = screenTwo_HardAvgPMF &rArr; drawPMF &rArr; ST7735_XYplotInit &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
@@ -1119,7 +1124,7 @@ Global Symbols
 <P><STRONG><a name="[82]"></a>timer2</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, adctestmain.o(i.timer2))
 <BR>[Address Reference Count : 1]<UL><LI> adctestmain.o(i.screenOne_TimeJitter)
 </UL>
-<P><STRONG><a name="[bf]"></a>waitForSwitchToggle</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, adctestmain.o(i.waitForSwitchToggle))
+<P><STRONG><a name="[c0]"></a>waitForSwitchToggle</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, adctestmain.o(i.waitForSwitchToggle))
 <BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 

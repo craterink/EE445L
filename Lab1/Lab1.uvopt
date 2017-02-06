@@ -267,7 +267,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>79</TopLine>
+      <TopLine>733</TopLine>
       <CurrentLine>756</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ST7735.c</PathWithFileName>
@@ -281,10 +281,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>26</ColumnNumber>
+      <ColumnNumber>20</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>71</TopLine>
-      <CurrentLine>115</CurrentLine>
+      <TopLine>92</TopLine>
+      <CurrentLine>103</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\fixed.c</PathWithFileName>
       <FilenameWithoutPath>fixed.c</FilenameWithoutPath>
@@ -299,8 +299,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>96</TopLine>
-      <CurrentLine>100</CurrentLine>
+      <TopLine>123</TopLine>
+      <CurrentLine>79</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Lab1.c</PathWithFileName>
       <FilenameWithoutPath>Lab1.c</FilenameWithoutPath>
@@ -315,7 +315,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>6</TopLine>
       <CurrentLine>29</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\extracredit.c</PathWithFileName>
@@ -331,7 +331,7 @@
       <Focus>0</Focus>
       <ColumnNumber>4</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>2</TopLine>
       <CurrentLine>15</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\extracredit2.s</PathWithFileName>

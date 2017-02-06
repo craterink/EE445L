@@ -15,6 +15,9 @@
 #include "ST7735.h"
 #include "plotter.h"
 
+#define SWITCHES                (*((volatile unsigned long *)0x40025044))
+#define SW1       0x10                      // on the left side of the Launchpad board
+
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 long StartCritical (void);    // previous I bit, disable interrupts
@@ -34,15 +37,17 @@ unsigned long volatile delay;
 
 // time logging vars
 uint32_t lastTime = 0, thisTime = 0;
-uint32_t timeLog[1000];
+uint16_t timeLog[1000];
 uint32_t timeLogIndex = 0;
 _Bool timeLogFull = 0;
 
 
 // data logging vars
-uint32_t pmf[4096];
-uint32_t pmfMax = 0xFFFFFFFF, pmfMin = 0;
-uint32_t ADCLog[1000];
+uint16_t pmf[4096];
+uint16_t xBuf[100];
+uint16_t yBuf[100];
+uint32_t pmfMax = 0x0, pmfMin = 0xFFFFFFFF;
+uint16_t ADCLog[1000];
 uint32_t ADCLogIndex = 0;
 _Bool ADCLogFull = 0;
 
@@ -165,7 +170,7 @@ uint32_t processTimes(void){
 		if(timeLog[i] < low) {
 			low = timeLog[i];
 		}
-		else if (timeLog[i] > max) {
+		if (timeLog[i] > max) {
 			max = timeLog[i];
 		}
 	}
@@ -174,9 +179,9 @@ uint32_t processTimes(void){
 }
 
 // processes collected ADC data
-void processData(uint32_t *ADCLog, uint32_t logSize, uint32_t multiplier){
+void processData(uint16_t *ADCLog, uint32_t logSize, uint32_t multiplier){
 	int i;
-	uint32_t max = 0xFFFFFFFF, min = 0;
+	uint32_t max = 0x0, min = 0xFFFFFFFF;
 
 	// create probability mass function
 	for(i = 0; i < logSize; i++) {
@@ -184,7 +189,7 @@ void processData(uint32_t *ADCLog, uint32_t logSize, uint32_t multiplier){
 		if(ADCLog[i] < min) {
 			min = ADCLog[i];
 		}
-		else if (ADCLog[i] > max) {
+		if (ADCLog[i] > max) {
 			max = ADCLog[i];
 		}
 	}
@@ -212,6 +217,7 @@ void logTimes(void) {
 
 void logADCData(void) {
 	if(ADCLogFull == 0) {
+		ADCvalue = ADC0_InSeq3();
 		ADCLog[ADCLogIndex++] = ADCvalue;
 	}
 	
@@ -225,12 +231,12 @@ void logADCData(void) {
 void screenOne_TimeJitter(void) {
 	// init vars
 	uint32_t timeJitterOne = 0, timeJitterTwo = 0;
-	char *messageOne, *messageTwo;
+	char messageOne[50], messageTwo[50];
 	
 	// display screen one
 	ST7735_FillScreen(ST7735_BLACK); 
   ST7735_SetCursor(0,0);
-	ST7735_OutString("Logging times with one interrupt...\r");
+	ST7735_OutString("One interrupt...\r");
 	
 	// init counting/stopwatch timer
 	Timer1_Init(NULL, 0xFFFFFFFF);
@@ -244,10 +250,10 @@ void screenOne_TimeJitter(void) {
 	
 	// process time deltas to find max - min
 	timeJitterOne = processTimes();
-	sprintf(messageOne, "Time Jitter: %d \r", timeJitterOne);
+	sprintf(messageOne, "Time Jitter:\r %d \r\r", timeJitterOne);
 	ST7735_OutString(messageOne);
 	
-	ST7735_OutString("Logging times with higher priority interrupt...\r");
+	ST7735_OutString("Two interrupts...\r");
 	
 	Timer2_Init(&timer2, 7500);
 	timeLogFull = 0;
@@ -256,14 +262,14 @@ void screenOne_TimeJitter(void) {
 	while(timeLogFull == 0);
 	
 	timeJitterTwo = processTimes();
-	sprintf(messageTwo, "Time Jitter: %d \r", timeJitterTwo);
+	sprintf(messageTwo, "Time Jitter:\r %d \r", timeJitterTwo);
 	ST7735_OutString(messageTwo);
 }
 
 // global "inputs": (full) pmf[], and pmfMax, pmfMin
 void drawPMF(char *title) {
-	int32_t xMin, xMax, yMin, yMax, maxPmfVal = 0;
-	int32_t xBuf[4096], yBuf[4096], bufIndex = 0;
+	uint32_t xMin, xMax, yMin, yMax, maxPmfVal = 0;
+	uint32_t bufIndex = 0;
 	int i;
 	xMin = pmfMin;
 	xMax = pmfMax;
@@ -283,30 +289,25 @@ void drawPMF(char *title) {
 	yMax = maxPmfVal;
 	
 	ST7735_XYplotInit(title, xMin, xMax, yMin, yMax);
-	ST7735_XYplot(bufIndex, (int32_t *)xBuf, (int32_t *)yBuf);
+	ST7735_XYplot(bufIndex, (int16_t *)xBuf, (int16_t *)yBuf);
 }
 
 
 // shows PMF w/o hardware averaging
 void screenTwo_DefaultPMF(void) {
 	ADCvalue = ADC0_InSeq3();
-	Timer0A_UpdateTask(&logADCData);
 	
 	// display screen two
 	ST7735_FillScreen(ST7735_BLACK); 
   ST7735_SetCursor(0,0);
-	ST7735_OutString("Logging ADC values without hardware averaging...\r");
+	ST7735_OutString("Logging ADC vals...\r");
 	
-	while(ADCLogFull == 0) {
-		// following code updates ADCvalue every 100,000 cycles
-    GPIO_PORTF_DATA_R |= 0x04;          // profile
-    ADCvalue = ADC0_InSeq3();
-    GPIO_PORTF_DATA_R &= ~0x04;
-    for(delay=0; delay<100000; delay++){};
-	};
+	Timer0A_UpdateTask(&logADCData);
+	
+	while(ADCLogFull == 0);
 	
 	processData(ADCLog, 1000, 1);
-	drawPMF("PMF w/o hardware averaging");
+	drawPMF("PMF:");
 }
 
 
@@ -314,7 +315,7 @@ void screenTwo_DefaultPMF(void) {
 //   where each point is an average of "samples_to_avg"
 //   number of ADC values.
 // NOTE: 16 <= samples_to_avg <= 64.
-uint32_t avgData[63];
+uint16_t avgData[63];
 uint32_t runningAvg;
 void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	uint32_t avgIndex = 0, numLeftOver, dataLength, i;
@@ -336,7 +337,7 @@ void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	dataLength = ((1000 % samples_to_avg) == 0) ? (1000 / samples_to_avg) : (1000 / samples_to_avg + 1);
 	processData(avgData, dataLength, samples_to_avg);
 	
-	sprintf(messageOne, "PMF w/ %d-bit hardware avging", samples_to_avg);
+	sprintf(messageOne, "PMF: %d-bit avg", samples_to_avg);
 	drawPMF(messageOne);
 }
 
@@ -357,9 +358,8 @@ void screenThree_LineDrawing(void) {
 // waits until a rising edge from PF4
 _Bool lastPF4Val = 0;
 void waitForSwitchToggle(void){
-	while(((GPIO_PORTF_DATA_R & 0x08) == lastTime) ||	((GPIO_PORTF_DATA_R & 0x08) == 0)) {
-		lastPF4Val = (GPIO_PORTF_DATA_R & 0x08) > 0 ? 1 : 0;
-	}
+	while(SWITCHES == 0x00);
+	while(SWITCHES == SW1);
 }
 
 void initForADCTestMain(void) {
@@ -367,12 +367,15 @@ void initForADCTestMain(void) {
   ADC0_InitSWTriggerSeq3_Ch1();         // ADC initialization PE2/AIN1
   SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOF; // activate port F
   delay = SYSCTL_RCGC2_R;
-  GPIO_PORTF_DIR_R |= 0x04;             // make PF2 out (built-in LED)
-  GPIO_PORTF_AFSEL_R &= ~0x04;          // disable alt funct on PF2
-  GPIO_PORTF_DEN_R |= 0x04;             // enable digital I/O on PF2
-                                        // configure PF2 as GPIO
-  GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFFF0FF)+0x00000000;
-  GPIO_PORTF_AMSEL_R = 0;               // disable analog functionality on PF
+  SYSCTL_RCGCGPIO_R |= 0x20;        // 1) activate clock for Port F
+  while((SYSCTL_PRGPIO_R&0x20)==0){}; // allow time for clock to start
+                                    // 2) no need to unlock PF2, PF4
+  GPIO_PORTF_PCTL_R &= ~0x000F0F00; // 3) regular GPIO
+  GPIO_PORTF_AMSEL_R &= ~0x14;      // 4) disable analog function on PF2, PF4
+  GPIO_PORTF_PUR_R |= 0x10;         // 5) pullup for PF4
+  GPIO_PORTF_DIR_R |= 0x04;         // 5) set direction to output
+  GPIO_PORTF_AFSEL_R &= ~0x14;      // 6) regular port function
+  GPIO_PORTF_DEN_R |= 0x14;         // 7) enable digital port
 }
 
 void initST7735() {
