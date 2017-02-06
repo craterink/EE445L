@@ -149,6 +149,13 @@ void timer2(void){
 	x += x;
 }
 
+void resetPMF(void){
+	int i;
+	for(i=0; i<1000; i++){
+		pmf[i] = 0;
+	}
+}
+
 /*void logValues(void){
 	if(logindex < 1000) {
 		thisTime = TIMER1_TAR_R; // get current time
@@ -289,7 +296,7 @@ void drawPMF(char *title) {
 	yMax = maxPmfVal;
 	
 	ST7735_XYplotInit(title, xMin, xMax, yMin, yMax);
-	ST7735_XYplot(bufIndex, (int16_t *)xBuf, (int16_t *)yBuf);
+	ST7735_XYplot(bufIndex, (int16_t *)xBuf, (int16_t *)yBuf, 1);
 }
 
 
@@ -308,6 +315,7 @@ void screenTwo_DefaultPMF(void) {
 	
 	processData(ADCLog, 1000, 1);
 	drawPMF("PMF:");
+	resetPMF();
 }
 
 
@@ -337,8 +345,9 @@ void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	dataLength = ((1000 % samples_to_avg) == 0) ? (1000 / samples_to_avg) : (1000 / samples_to_avg + 1);
 	processData(avgData, dataLength, samples_to_avg);
 	
-	sprintf(messageOne, "PMF: %d-bit avg", samples_to_avg);
-	drawPMF(messageOne);
+	//sprintf(messageOne, "PMF: %d-bit avg", samples_to_avg);
+	drawPMF("PMF:hard avg");
+	resetPMF();
 }
 
 
@@ -387,18 +396,20 @@ int main(void){
   initForADCTestMain();
 	initST7735();
 	
-	// Lab demo screens
-	//screenOne_TimeJitter();
-	//waitForSwitchToggle();
+	screenOne_TimeJitter();
+	waitForSwitchToggle();
 	
-	//screenTwo_DefaultPMF();
-	//waitForSwitchToggle();
+	screenTwo_DefaultPMF();
+	waitForSwitchToggle();
 	
-	//screenTwo_HardAvgPMF(16);
-	//waitForSwitchToggle();
+	screenTwo_HardAvgPMF(4);
+	waitForSwitchToggle();
 	
-	//screenTwo_HardAvgPMF(64);
-	//waitForSwitchToggle();
+	screenTwo_HardAvgPMF(16);
+	waitForSwitchToggle();
+	
+	screenTwo_HardAvgPMF(64);
+	waitForSwitchToggle();
 	
 	screenThree_LineDrawing();
 

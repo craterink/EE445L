@@ -3,7 +3,7 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-C:\Keil\EE445L\Lab 2\Lab2.uvproj
+\\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 2\Lab2.uvproj
 Project File Date:  02/06/2017
 
 <h2>Output:</h2>
@@ -13,23 +13,28 @@ compiling ADCSWTrigger.c...
 compiling ADCTestMain.c...
 plotter.h(9): warning:  #1-D: last line of file ends without a newline
   void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-ADCTestMain.c(166): warning:  #177-D: variable "timeJitter" was declared but never referenced
+ADCTestMain.c(173): warning:  #177-D: variable "timeJitter" was declared but never referenced
         uint32_t timeJitter;
-ADCTestMain.c: 2 warnings, 0 errors
+ADCTestMain.c(330): warning:  #177-D: variable "messageOne" was declared but never referenced
+        char *messageOne;
+ADCTestMain.c: 3 warnings, 0 errors
 compiling PLL.c...
 compiling ST7735.c...
 compiling plotter.c...
 linking...
-Program Size: Code=7332 RO-data=2052 RW-data=112 ZI-data=13840  
-".\ADCSWTrigger.axf" - 0 Error(s), 2 Warning(s).
-Load "C:\\Keil\\EE445L\\Lab 2\\ADCSWTrigger.axf" 
+Program Size: Code=7696 RO-data=2052 RW-data=112 ZI-data=13840  
+".\ADCSWTrigger.axf" - 0 Error(s), 3 Warning(s).
+Load "\\\\psf\\Home\\Library\\Mobile Documents\\com~apple~CloudDocs\\School\\Spring 2017\\445L\\Keil\\EE445L\\Lab 2\\ADCSWTrigger.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
-DCTestMain.c: 2 warnings, 2 errors
-compiling PLL.c...
-compiling ST7735.c...
-compiling plotter.c...
-".\ADCSWTrigger.axf" - 2 Error(s), 2 Warning(s).
-Target not created
+Trigger.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Connection failed!, error code=&d
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "\\\\psf\\Home\\Library\\Mobile Documents\\com~apple~CloudDocs\\School\\Spring 2017\\445L\\Keil\\EE445L\\Lab 2\\ADCSWTrigger.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Erase Done.
+Programming Done.
+Verify OK.

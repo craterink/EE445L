@@ -10,40 +10,7 @@ int32_t maxY_global;
 const uint32_t width = 128;
 const uint32_t height = 128;
 
-void ST7735_XYplotInit(char *title, int32_t minX, int32_t maxX, int32_t minY, int32_t maxY) {
-	
-	minX_global = minX;
-	maxX_global = maxX;
-	minY_global = minY;
-	maxY_global = maxY;
-	
-	// clear plot
-	ST7735_FillScreen(ST7735_BLACK);
-	
-	// draw title
-	ST7735_SetCursor(minX / 1000, maxY / 1000);
-	ST7735_OutString(title);
-}
 
-void ST7735_XYplot(uint32_t num, int16_t bufX[], int16_t bufY[]) {
-	uint32_t index = 0, xLCD, yLCD;
-	while(index < num) {
-		// check for out-of-bounds
-		if(bufX[index] < minX_global || bufX[index] > maxX_global
-			 || bufY[index] < minY_global || bufY[index] > maxY_global) {
-			index++;
-			continue;
-		}
-			 
-		// calculate location of point transformed to LCD pixel coordinates
-		xLCD = width*(bufX[index] - minX_global)/(maxX_global - minX_global);
-		yLCD = height - height*(bufY[index] - minY_global)/(maxY_global - minY_global);
-		
-		// draw point and iterate
-		ST7735_FillRect(xLCD, yLCD + 10, 2, 2, ST7735_RED);
-		index++;
-	}
-}
 
 //************* ST7735_Line********************************************
 //  Draws one line on the ST7735 color LCD
@@ -59,9 +26,9 @@ void ST7735_XYplot(uint32_t num, int16_t bufX[], int16_t bufY[]) {
 // Output: none
 void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
 	uint32_t xMin, xMax, yMin, yMax, i, j;
-	int32_t sfVecX, sfVecY, dotProd;
-	int32_t seVecX, seVecY;
-	double cosTheta2, threshold = 0.9, sfMag2, seMag2;
+	int32_t sfVecX, sfVecY, dotProd, dotProdOther;
+	int32_t seVecX, seVecY, se2VecX, se2VecY;
+	double cosTheta2, cosTheta2Other, threshold = 0.99985, sfMag2, seMag2, se2Mag2;
 	
 	xMin = x1 < x2 ? x1 : x2;
 	xMax = x1 < x2 ? x2 : x1;
@@ -79,22 +46,73 @@ void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t co
 			// compute vector
 			seVecX = i - x1;
 			seVecY = j - y1;
+			se2VecX = x2 - i;
+			se2VecY = y2 - j;
 			
 			// compute sfVec [dot] seVec
 			dotProd = seVecY * sfVecY + seVecX * sfVecX;
+			dotProdOther =  - se2VecY * sfVecY - se2VecX * sfVecX;
 			
 			// compute cosTheta2
-			seMag2 = seVecX * seVecX + seVecY * seVecY; 
-			cosTheta2 = dotProd / (sfMag2 * seMag2);
+			seMag2 = seVecX * seVecX + seVecY * seVecY;
+			se2Mag2 = se2VecX * se2VecX + se2VecY * se2VecY;			
+			if(seMag2 == 0 || sfMag2 == 0 || se2Mag2 == 0) continue;
 			
-			if(cosTheta2 > threshold) {
-				ST7735_FillRect(i, j, 1, 1, color);
+			cosTheta2 = dotProd * dotProd / (sfMag2 * seMag2);
+			cosTheta2Other = dotProdOther * dotProdOther / (sfMag2 * se2Mag2);
+			
+			if(cosTheta2 > threshold && cosTheta2Other > threshold) {
+				ST7735_FillRect(i, j, 2, 2, color);
 			}
 		}
 	}
 	
 	
 }
+
+void ST7735_XYplotInit(char *title, int32_t minX, int32_t maxX, int32_t minY, int32_t maxY) {
+	
+	minX_global = minX;
+	maxX_global = maxX;
+	minY_global = minY;
+	maxY_global = maxY;
+	
+	// clear plot
+	ST7735_FillScreen(ST7735_BLACK);
+	
+	// draw title
+	ST7735_SetCursor(0, 0);
+	ST7735_OutString(title);
+}
+
+void ST7735_XYplot(uint32_t num, int16_t bufX[], int16_t bufY[], _Bool stem) {
+	uint32_t index = 0, xLCD, yLCD;
+	while(index < num) {
+		// check for out-of-bounds
+		if(bufX[index] < minX_global || bufX[index] > maxX_global
+			 || bufY[index] < minY_global || bufY[index] > maxY_global) {
+			index++;
+			continue;
+		}
+			 
+		// calculate location of point transformed to LCD pixel coordinates
+		xLCD = width*(bufX[index] - minX_global)/(maxX_global - minX_global);
+		yLCD = height - height*(bufY[index] - minY_global)/(maxY_global - minY_global);
+		
+		//plot stem for PMF
+		if(stem){
+			ST7735_Line(xLCD + 10, 160, xLCD + 10, yLCD + 10, ST7735_RED);
+		}
+		
+		else{
+		// draw point and iterate
+			ST7735_FillRect(xLCD, yLCD + 10, 2, 2, ST7735_RED);
+		}
+		index++;
+	}
+}
+	
+
 
 
 
