@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>ST7735</TargetName>
+      <TargetName>Lab1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>ST7735</OutputName>
+          <OutputName>Lab1</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -170,7 +170,7 @@
             <Capability>1</Capability>
             <DriverSelection>4097</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
+          <bUseTDR>1</bUseTDR>
           <Flash2>BIN\lmidk-agdi.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
@@ -421,9 +421,14 @@
               <FilePath>.\ST7735.c</FilePath>
             </File>
             <File>
-              <FileName>ST7735TestMain.c</FileName>
+              <FileName>fixed.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\ST7735TestMain.c</FilePath>
+              <FilePath>.\fixed.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lab1.c</FilePath>
             </File>
           </Files>
         </Group>

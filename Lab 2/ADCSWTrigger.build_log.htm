@@ -11,21 +11,29 @@ Rebuild target 'Lab2'
 assembling startup.s...
 compiling ADCSWTrigger.c...
 compiling ADCTestMain.c...
-ADCTestMain.c(145): warning:  #177-D: variable "timeJitter" was declared but never referenced
+plotter.h(9): warning:  #1-D: last line of file ends without a newline
+  void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+ADCTestMain.c(161): warning:  #177-D: variable "timeJitter" was declared but never referenced
         uint32_t timeJitter;
-ADCTestMain.c(215): error:  #18: expected a ")"
-  }
-ADCTestMain.c(215): error:  #65: expected a ";"
-  }
-ADCTestMain.c: 1 warning, 2 errors
-compiling PLL.c...
-compiling ST7735.c...
-".\ADCSWTrigger.axf" - 2 Error(s), 1 Warning(s).
-Target not created
+ADCTestMa</pre>
+</body>
+</html>
 
-  }
-ADCTestMain.c: 2 warnings, 2 errors
 compiling PLL.c...
 compiling ST7735.c...
-".\ADCSWTrigger.axf" - 2 Error(s), 2 Warning(s).
+compiling plotter.c...
+linking...
+Program Size: Code=7472 RO-data=2052 RW-data=112 ZI-data=25760  
+".\ADCSWTrigger.axf" - 0 Error(s), 2 Warning(s).
+otter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol maxX_global multiply defined (by plotter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol minY_global multiply defined (by plotter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol maxY_global multiply defined (by plotter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol ST7735_Line multiply defined (by plotter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol ST7735_XYplot multiply defined (by plotter.o and adctestmain.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol ST7735_XYplotInit multiply defined (by plotter.o and adctestmain.o).
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 9 error messages.
+".\ADCSWTrigger.axf" - 9 Error(s), 1 Warning(s).
 Target not created

@@ -1,28 +1,9 @@
-// ADCTestMain.c
-// Runs on LM4F120/TM4C123
-// This program periodically samples ADC channel 1 and stores the
-// result to a global variable that can be accessed with the JTAG
-// debugger and viewed with the variable watch feature.
-// Daniel Valvano
-// October 20, 2013
-
-/* This example accompanies the book
-   "Embedded Systems: Real Time Interfacing to Arm Cortex M Microcontrollers",
-   ISBN: 978-1463590154, Jonathan Valvano, copyright (c) 2013
-
- Copyright 2013 by Jonathan W. Valvano, valvano@mail.utexas.edu
-    You may use, edit, run or distribute this file
-    as long as the above copyright notice remains
- THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
- OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
- VALVANO SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
- OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
- For more information about my classes, my research, and my books, see
- http://users.ece.utexas.edu/~valvano/
- */
-
-// input signal connected to PE2/AIN1
+/*
+* Lab2.c
+*
+* By Rikin and Cooper
+*
+*/
 
 #include <stdint.h>
 #include <string.h>
@@ -32,6 +13,7 @@
 #include "PLL.h"
 #include "stddef.h"
 #include "ST7735.h"
+#include "plotter.h"
 
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -47,6 +29,7 @@ volatile unsigned long ADCvalue;
 // 1.50V    2048
 // 2.25V    3072
 // 3.00V    4095
+unsigned long volatile delay;
 
 
 // time logging vars
@@ -58,9 +41,10 @@ _Bool timeLogFull = 0;
 
 // data logging vars
 uint32_t pmf[4096];
-uint32_t ADCtimes[1000];
-uint32_t ADCvals[1000];
-uint32_t logindex = 0;
+uint32_t pmfMax = 0xFFFFFFFF, pmfMin = 0;
+uint32_t ADCLog[1000];
+uint32_t ADCLogIndex = 0;
+_Bool ADCLogFull = 0;
 
 void (*PeriodicTask)(void);   // user function
 void (*PeriodicTask0)(void);   // user function
@@ -133,7 +117,7 @@ void Timer0A_UpdateTask(void(*task)(void)){
 // Inputs:  task is a pointer to a user function
 //          period in units (1/clockfreq)
 // Outputs: none
-void Timer2A_Init(void(*task)(void), unsigned long period){
+void Timer2_Init(void(*task)(void), unsigned long period){
   SYSCTL_RCGCTIMER_R |= 0x04;   // 0) activate timer2
   PeriodicTask = task;          // user function
   TIMER2_CTL_R = 0x00000000;    // 1) disable timer2A during setup
@@ -156,7 +140,8 @@ void Timer2A_Handler(void){
 }
 
 void timer2(void){
-	int x = 0;			
+	int x = 0;
+	x += x;
 }
 
 /*void logValues(void){
@@ -189,13 +174,23 @@ uint32_t processTimes(void){
 }
 
 // processes collected ADC data
-void processData(void){
+void processData(uint32_t *ADCLog, uint32_t logSize, uint32_t multiplier){
 	int i;
+	uint32_t max = 0xFFFFFFFF, min = 0;
 
 	// create probability mass function
-	for(i = 0; i < 1000; i++) {
-		pmf[ADCvals[i]] += 1;
+	for(i = 0; i < logSize; i++) {
+		pmf[ADCLog[i]] += multiplier;
+		if(ADCLog[i] < min) {
+			min = ADCLog[i];
+		}
+		else if (ADCLog[i] > max) {
+			max = ADCLog[i];
+		}
 	}
+	
+	pmfMin = min;
+	pmfMax = max;
 }
 
 void logTimes(void) {
@@ -210,8 +205,18 @@ void logTimes(void) {
 		timeLog[timeLogIndex++] =  lastTime - thisTime;
 		lastTime = thisTime;
 	}
-	else{
+	if(timeLogIndex == 1000) {
 		timeLogFull = 1;
+	}
+}
+
+void logADCData(void) {
+	if(ADCLogFull == 0) {
+		ADCLog[ADCLogIndex++] = ADCvalue;
+	}
+	
+	if(ADCLogIndex == 1000) {
+		ADCLogFull = 1;
 	}
 }
 
@@ -244,7 +249,7 @@ void screenOne_TimeJitter(void) {
 	
 	ST7735_OutString("Logging times with higher priority interrupt...\r");
 	
-	Timer2A_Init(&timer2, 7500);
+	Timer2_Init(&timer2, 7500);
 	timeLogFull = 0;
 	timeLogIndex = 0;
 	
@@ -255,23 +260,98 @@ void screenOne_TimeJitter(void) {
 	ST7735_OutString(messageTwo);
 }
 
+// global "inputs": (full) pmf[], and pmfMax, pmfMin
+void drawPMF(char *title) {
+	int32_t xMin, xMax, yMin, yMax, maxPmfVal = 0;
+	int32_t xBuf[4096], yBuf[4096], bufIndex = 0;
+	int i;
+	xMin = pmfMin;
+	xMax = pmfMax;
+	yMin = 0;
+	
+	// construct xBuf, yBuf, yMax
+	for(i = pmfMin; i <= pmfMax; i++) {
+		xBuf[bufIndex] = i;
+		yBuf[bufIndex] = pmf[i];
+		
+		if(pmf[i] > maxPmfVal) {
+			maxPmfVal = pmf[i];
+		}
+		
+		bufIndex++;
+	}
+	yMax = maxPmfVal;
+	
+	ST7735_XYplotInit(title, xMin, xMax, yMin, yMax);
+	ST7735_XYplot(bufIndex, (int32_t *)xBuf, (int32_t *)yBuf);
+}
+
+
 // shows PMF w/o hardware averaging
 void screenTwo_DefaultPMF(void) {
+	ADCvalue = ADC0_InSeq3();
+	Timer0A_UpdateTask(&logADCData);
 	
+	// display screen two
+	ST7735_FillScreen(ST7735_BLACK); 
+  ST7735_SetCursor(0,0);
+	ST7735_OutString("Logging ADC values without hardware averaging...\r");
+	
+	while(ADCLogFull == 0) {
+		// following code updates ADCvalue every 100,000 cycles
+    GPIO_PORTF_DATA_R |= 0x04;          // profile
+    ADCvalue = ADC0_InSeq3();
+    GPIO_PORTF_DATA_R &= ~0x04;
+    for(delay=0; delay<100000; delay++){};
+	};
+	
+	processData(ADCLog, 1000, 1);
+	drawPMF("PMF w/o hardware averaging");
 }
 
 
 // shows a PMF of the hardware-averaged ADC values,
 //   where each point is an average of "samples_to_avg"
 //   number of ADC values.
-// NOTE: samples_to_avg must be less than or equal to 64.
+// NOTE: 16 <= samples_to_avg <= 64.
+uint32_t avgData[63];
+uint32_t runningAvg;
 void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
+	uint32_t avgIndex = 0, numLeftOver, dataLength, i;
+	char *messageOne;
+	runningAvg = 0;
+	for(i = 0; i < 1000; i++) {
+		runningAvg += ADCLog[i];
+		if(i % samples_to_avg == samples_to_avg - 1) {
+			avgData[avgIndex] = runningAvg / samples_to_avg;
+			avgIndex++;
+			runningAvg = 0;
+		}
+	}
+	if(runningAvg != 0) {
+		numLeftOver = 1000 % samples_to_avg;
+		avgData[avgIndex] = runningAvg / numLeftOver;
+	}
 	
+	dataLength = ((1000 % samples_to_avg) == 0) ? (1000 / samples_to_avg) : (1000 / samples_to_avg + 1);
+	processData(avgData, dataLength, samples_to_avg);
+	
+	sprintf(messageOne, "PMF w/ %d-bit hardware avging", samples_to_avg);
+	drawPMF(messageOne);
 }
+
+
+
 
 // shows a demonstration of our line drawing method
 void screenThree_LineDrawing(void) {
+	// display screen two
+	ST7735_FillScreen(ST7735_BLACK); 
+  ST7735_SetCursor(0,0);
 	
+	ST7735_Line(10, 10, 80, 80, ST7735_RED);
+	ST7735_Line(80, 80, 10, 10, ST7735_RED);
+	ST7735_Line(40, 40, 40, 100, ST7735_RED); // vertical line test
 }
 
 // waits until a rising edge from PF4
@@ -283,7 +363,6 @@ void waitForSwitchToggle(void){
 }
 
 void initForADCTestMain(void) {
-	unsigned long volatile delay;
 	PLL_Init();                           // 80 MHz
   ADC0_InitSWTriggerSeq3_Ch1();         // ADC initialization PE2/AIN1
   SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOF; // activate port F

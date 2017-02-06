@@ -7,3 +7,6 @@
 .\adctestmain.o: PLL.h
 .\adctestmain.o: C:\Keil\ARM\ARMCC\bin\..\include\stddef.h
 .\adctestmain.o: ST7735.h
+.\adctestmain.o: plotter.h
+.\adctestmain.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\adctestmain.o: ST7735.h
