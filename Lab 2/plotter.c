@@ -58,9 +58,9 @@ void ST7735_XYplot(uint32_t num, int16_t bufX[], int16_t bufY[]) {
 //        color 16-bit color, which can be produced by ST7735_Color565() 
 // Output: none
 void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
-	uint32_t xMin, xMax, yMin, yMax, i, j, dotProd;
-	uint32_t sfVecX, sfVecY;
-	uint32_t seVecX, seVecY;
+	uint32_t xMin, xMax, yMin, yMax, i, j;
+	int32_t sfVecX, sfVecY, dotProd;
+	int32_t seVecX, seVecY;
 	double cosTheta2, threshold = 0.9, sfMag2, seMag2;
 	
 	xMin = x1 < x2 ? x1 : x2;

@@ -388,19 +388,20 @@ int main(void){
 	initST7735();
 	
 	// Lab demo screens
-	screenOne_TimeJitter();
-	waitForSwitchToggle();
+	//screenOne_TimeJitter();
+	//waitForSwitchToggle();
 	
-	screenTwo_DefaultPMF();
-	waitForSwitchToggle();
+	//screenTwo_DefaultPMF();
+	//waitForSwitchToggle();
 	
-	screenTwo_HardAvgPMF(16);
-	waitForSwitchToggle();
+	//screenTwo_HardAvgPMF(16);
+	//waitForSwitchToggle();
 	
-	screenTwo_HardAvgPMF(64);
-	waitForSwitchToggle();
+	//screenTwo_HardAvgPMF(64);
+	//waitForSwitchToggle();
 	
 	screenThree_LineDrawing();
+
 	waitForSwitchToggle();
 	
   /*while(1){
