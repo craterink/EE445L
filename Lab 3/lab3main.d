@@ -1,0 +1,11 @@
+.\lab3main.o: Lab3Main.c
+.\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\lab3main.o: ../tm4c123gh6pm.h
+.\lab3main.o: PLL.h
+.\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\stddef.h
+.\lab3main.o: ST7735.h
+.\lab3main.o: plotter.h
+.\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\lab3main.o: ST7735.h
