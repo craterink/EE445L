@@ -37,7 +37,7 @@ unsigned long volatile delay;
 
 // time logging vars
 uint32_t lastTime = 0, thisTime = 0;
-uint16_t timeLog[1000];
+uint32_t timeLog[1000];
 uint32_t timeLogIndex = 0;
 _Bool timeLogFull = 0;
 
@@ -327,7 +327,7 @@ uint16_t avgData[63];
 uint32_t runningAvg;
 void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	uint32_t avgIndex = 0, numLeftOver, dataLength, i;
-	char *messageOne;
+	char messageOne[20];
 	runningAvg = 0;
 	for(i = 0; i < 1000; i++) {
 		runningAvg += ADCLog[i];
@@ -345,23 +345,31 @@ void screenTwo_HardAvgPMF(uint32_t samples_to_avg) {
 	dataLength = ((1000 % samples_to_avg) == 0) ? (1000 / samples_to_avg) : (1000 / samples_to_avg + 1);
 	processData(avgData, dataLength, samples_to_avg);
 	
-	//sprintf(messageOne, "PMF: %d-bit avg", samples_to_avg);
-	drawPMF("PMF:hard avg");
+	sprintf(messageOne, "PMF: %d-bit avg", samples_to_avg);
+	drawPMF(messageOne);
 	resetPMF();
 }
 
 
 
 
-// shows a demonstration of our line drawing method
 void screenThree_LineDrawing(void) {
+	double pi = acos(-1);
+	double w, wDelta = pi / 15.0, phaseShift = 2* pi / 3.0;
+	int xStart, yStart, xEnd, yEnd;
+	
 	// display screen two
 	ST7735_FillScreen(ST7735_BLACK); 
   ST7735_SetCursor(0,0);
+	ST7735_OutString("Lines!");
 	
-	ST7735_Line(10, 10, 80, 80, ST7735_RED);
-	ST7735_Line(80, 80, 10, 10, ST7735_RED);
-	ST7735_Line(40, 40, 40, 100, ST7735_RED); // vertical line test
+	for(w = 0; w < 2*pi; w += wDelta) {
+		xStart = 70 + (int)(cos(w)*50);
+		yStart = 80 + (int)(sin(w)*50);
+		xEnd = 70 + (int)(cos(w + phaseShift)*50);
+		yEnd = 80 + (int)(sin(w + phaseShift)*50);
+		ST7735_Line(xStart, yStart, xEnd, yEnd, ST7735_RED);
+	}
 }
 
 // waits until a rising edge from PF4

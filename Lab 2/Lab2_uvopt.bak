@@ -115,10 +115,6 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>DLGUARM</Key>
-        </SetRegEntry>
-        <SetRegEntry>
-          <Number>0</Number>
           <Key>DLGTARM</Key>
           <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
@@ -176,7 +172,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 2\\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 2\ADCTestMain.c</Filename>
+          <Filename>\\psf\Home\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 2\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 2\ADCTestMain.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\ADCSWTrigger\/psf/Home/Library/Mobile Documents/com~apple~CloudDocs/School/Spring 2017/445L/Keil/EE445L/Lab 2/ADCTestMain.c\406</Expression>
         </Bp>
@@ -341,7 +337,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>271</TopLine>
+      <TopLine>272</TopLine>
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\startup.s</PathWithFileName>
@@ -357,7 +353,7 @@
       <Focus>0</Focus>
       <ColumnNumber>37</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>31</TopLine>
+      <TopLine>41</TopLine>
       <CurrentLine>50</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ADCSWTrigger.c</PathWithFileName>
@@ -371,10 +367,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>61</ColumnNumber>
+      <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>273</TopLine>
-      <CurrentLine>299</CurrentLine>
+      <TopLine>347</TopLine>
+      <CurrentLine>373</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ADCTestMain.c</PathWithFileName>
       <FilenameWithoutPath>ADCTestMain.c</FilenameWithoutPath>
@@ -419,10 +415,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>27</ColumnNumber>
+      <ColumnNumber>19</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>87</TopLine>
-      <CurrentLine>104</CurrentLine>
+      <TopLine>24</TopLine>
+      <CurrentLine>40</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\plotter.c</PathWithFileName>
       <FilenameWithoutPath>plotter.c</FilenameWithoutPath>
