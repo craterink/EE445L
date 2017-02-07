@@ -9,3 +9,6 @@
 .\lab3main.o: plotter.h
 .\lab3main.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
 .\lab3main.o: ST7735.h
+.\lab3main.o: EventWatch.h
+.\lab3main.o: ClockTime.h
+.\lab3main.o: Screens.h

@@ -4,7 +4,7 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Keil\EE445L\Lab 3\Lab3.uvproj
-Project File Date:  02/06/2017
+Project File Date:  02/07/2017
 
 <h2>Output:</h2>
 Rebuild target 'Lab3'
@@ -15,13 +15,33 @@ compiling plotter.c...
 compiling Lab3Main.c...
 plotter.h(9): warning:  #1-D: last line of file ends without a newline
   void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-Lab3Main.c: 1 warning, 0 errors
+EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
+  void notifyEvent(uint8_t event);
+ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
+  void MinuteTick(void);
+Lab3Main.c: 3 warnings, 0 errors
 compiling EventWatch.c...
 compiling ClockTime.c...
-ClockTime.c(34): warning:  #1-D: last line of file ends without a newline
+EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
+  void notifyEvent(uint8_t event);
+ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
+  void MinuteTick(void);
+ClockTime.c: 2 warnings, 0 errors
+compiling Alarm.c...
+Alarm.c(7): warning:  #1-D: last line of file ends without a newline
   }
-ClockTime.c: 1 warning, 0 errors
+Alarm.c: 1 warning, 0 errors
+compiling Screens.c...
+Screens.c(12): warning:  #223-D: function "initST7735" declared implicitly
+        initST7735();
+Screens.c: 1 warning, 0 errors
 linking...
-Program Size: Code=2368 RO-data=2052 RW-data=56 ZI-data=1120  
-".\ADCSWTrigger.axf" - 0 Error(s), 2 Warning(s).
- Error(s), 2 Warning(s).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol currentTime multiply defined (by clocktime.o and lab3main.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol alarmTime multiply defined (by clocktime.o and lab3main.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol alarmEnabled multiply defined (by clocktime.o and lab3main.o).
+.\ADCSWTrigger.axf: Error: L6200E: Symbol currentScreen multiply defined (by screens.o and lab3main.o).
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 4 error messages.
+".\ADCSWTrigger.axf" - 4 Error(s), 7 Warning(s).
+Target not created

@@ -8,6 +8,7 @@
 #include "plotter.h"
 #include "EventWatch.h"
 #include "ClockTime.h"
+#include "Screens.h"
 
 #define SWITCHES                (*((volatile unsigned long *)0x40025044))
 #define SW1       0x10                      // on the left side of the Launchpad board
@@ -28,14 +29,12 @@ void initForLab3(void) {
   GPIO_PORTF_DEN_R |= 0x14;         // 7) enable digital port
 }
 
-void initST7735() {
-	ST7735_InitR(INITR_REDTAB);
-}
-
 int main(void){
   initForLab3();
-	initST7735();
+	
+	Screens_Init();
 	
 	EventWatch_Init();
 	RegisterHandler(EVENT_MINUTE_TICK, &MinuteTick);
+	RegisterHandler(EVENT_MINUTE_TICK, &drawCurrentScreen);
 }

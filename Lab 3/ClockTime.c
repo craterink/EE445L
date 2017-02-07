@@ -1,18 +1,8 @@
 #include <stdint.h>
 #include "../tm4c123gh6pm.h"
 #include "EventWatch.h"
+#include "ClockTime.h"
 
-struct time {
-   uint8_t hour;
-   uint8_t minute;
-};
-
-// clock
-struct time currentTime;
-
-// alarm
-struct time alarmTime;
-_Bool alarmEnabled;
 
 void checkAlarm(void) {
 	if(alarmEnabled) {

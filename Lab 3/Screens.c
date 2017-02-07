@@ -1,10 +1,19 @@
 #include <stdint.h>
 #include "../tm4c123gh6pm.h"
+#include "Screens.h"
+#include "ST7735.h"
 
-// screen definitions
-#define MAIN_MENU 0
-#define SETTINGS 1
-#define ANALOG_CLOCK 2
-#define DIGITAL_CLOCK 3
 
 #define NUM_SCREENS 4
+
+void Screens_Init(void){
+	currentScreen = MAIN_MENU;
+	
+	ST7735_InitR(INITR_REDTAB); // init LCD
+	drawCurrentScreen();
+}
+
+// screen drawing functions
+void drawCurrentScreen(void){
+	
+}
