@@ -6,8 +6,6 @@
 #define ANALOG_CLOCK 2
 #define DIGITAL_CLOCK 3
 
-uint8_t currentScreen;
-
 void Screens_Init(void);
 
 // screen drawing functions

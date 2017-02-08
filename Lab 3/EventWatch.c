@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "../tm4c123gh6pm.h"
+#include "EventWatch.h"
 
 // event registry
 #define NUM_EVENTS 5
@@ -49,9 +50,15 @@ void Timer0A_UpdateTask(void(*task)(void)){
   PeriodicTask = task;
 }
 
-// TO DO
+//TO DO button triggers
+
+uint16_t counter = 0;
 void eventCheck(void) {
-	
+	counter++;
+	if(counter == 60000) {
+		counter = 0;
+		notifyEvent(EVENT_MINUTE_TICK);
+	}
 }
 
 void notifyEvent(uint8_t event) {

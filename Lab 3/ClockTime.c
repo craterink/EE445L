@@ -3,6 +3,12 @@
 #include "EventWatch.h"
 #include "ClockTime.h"
 
+// clock
+struct time currentTime;
+
+// alarm
+struct time alarmTime;
+_Bool alarmEnabled;
 
 void checkAlarm(void) {
 	if(alarmEnabled) {
@@ -37,3 +43,26 @@ void ClockInit(void) {
 	RegisterHandler(EVENT_MINUTE_TICK, &MinuteTick);
 }
 
+struct time getCurrentTime(void) {
+	return currentTime;
+}
+
+void setCurrentTime(Time t) {
+	currentTime = t;
+}
+
+struct time getAlarmTime(void) {
+	return alarmTime;
+}
+
+void setAlarmTime(Time t) { 
+	alarmTime = t;
+}
+
+_Bool isAlarmEnabled(void) {
+	return alarmEnabled;
+}
+
+void setAlarmEnabled(_Bool enabled) {
+	alarmEnabled = enabled;
+}

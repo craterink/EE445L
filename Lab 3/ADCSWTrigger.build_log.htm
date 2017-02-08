@@ -18,30 +18,40 @@ plotter.h(9): warning:  #1-D: last line of file ends without a newline
 EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
   void notifyEvent(uint8_t event);
 ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
-  void MinuteTick(void);
+  void setAlarmEnabled(_Bool);
 Lab3Main.c: 3 warnings, 0 errors
 compiling EventWatch.c...
+EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
+  void notifyEvent(uint8_t event);
+EventWatch.c: 1 warning, 0 errors
 compiling ClockTime.c...
 EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
   void notifyEvent(uint8_t event);
 ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
-  void MinuteTick(void);
-ClockTime.c: 2 warnings, 0 errors
+  void setAlarmEnabled(_Bool);
+ClockTime.c(68): warning:  #1-D: last line of file ends without a newline
+  }
+ClockTime.c: 3 warnings, 0 errors
 compiling Alarm.c...
 Alarm.c(7): warning:  #1-D: last line of file ends without a newline
   }
 Alarm.c: 1 warning, 0 errors
 compiling Screens.c...
-Screens.c(12): warning:  #223-D: function "initST7735" declared implicitly
-        initST7735();
-Screens.c: 1 warning, 0 errors
+ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
+  void setAlarmEnabled(_Bool);
+Screens.c(126): warning:  #186-D: pointless comparison of unsigned integer with zero
+        if(currentMenuOpt < 0)
+Screens.c: 2 warnings, 0 errors
 linking...
-.\ADCSWTrigger.axf: Error: L6200E: Symbol currentTime multiply defined (by clocktime.o and lab3main.o).
-.\ADCSWTrigger.axf: Error: L6200E: Symbol alarmTime multiply defined (by clocktime.o and lab3main.o).
-.\ADCSWTrigger.axf: Error: L6200E: Symbol alarmEnabled multiply defined (by clocktime.o and lab3main.o).
-.\ADCSWTrigger.axf: Error: L6200E: Symbol currentScreen multiply defined (by screens.o and lab3main.o).
-Not enough information to list image symbols.
-Not enough information to list the image map.
-Finished: 2 information, 0 warning and 4 error messages.
-".\ADCSWTrigger.axf" - 4 Error(s), 7 Warning(s).
-Target not created
+Program Size: Code=2756 RO-data=2052 RW-data=144 ZI-data=1280  
+".\ADCSWTrigger.axf" - 0 Error(s), 10 Warning(s).
+ced
+        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
+Screens.c(101): warning:  #177-D: variable "aEnabled" was declared but never referenced
+        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
+Screens.c(101): warning:  #177-D: variable "aampm" was declared but never referenced
+        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
+Screens.c: 6 warnings, 0 errors
+linking...
+Program Size: Code=4192 RO-data=2052 RW-data=144 ZI-data=1280  
+".\ADCSWTrigger.axf" - 0 Error(s), 13 Warning(s).
