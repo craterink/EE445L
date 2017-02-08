@@ -6,12 +6,12 @@
 #include "ST7735.h"
 #include "ClockTime.h"
 
-#define NUM_SCREENS 4
-#define DIGITAL_XLOC 20			//x location for first number of digital clock. Optimize later
-#define DIGITAL_YLOC 60			// same
-#define DIGITAL_FONT_SIZE 10	
-#define DIGITAL_XMOVE 10
+
 uint8_t currentScreen;
+
+uint8_t getCurrentScreen(void){
+	return currentScreen;
+}
 
 char convertASCII(uint8_t x){
 	return '0' + x;
@@ -28,7 +28,10 @@ void Screens_Init(void){
 	// RegisterHandler(EVENT_BTN_RIGHT, &handleRight);
 }
 
-void draw_DigitalClock(void){
+void drawAnalogClock(void){
+}
+
+void drawDigitalClock(void){
 	uint8_t minOnes, minTens, hour, hourOnes, hourTens, i;
 	char min_ones, min_tens, hour_ones, hour_tens;
 	char display[8]; 
@@ -65,19 +68,11 @@ void draw_DigitalClock(void){
 	display[5] = ' ';
 	display[7] = 'M';
 	
+	ST7735_FillScreen(ST7735_BLACK);
 	for(i = 0; i < 8; i++){
 		ST7735_DrawChar(DIGITAL_XLOC + (DIGITAL_XMOVE * i), DIGITAL_YLOC, display[i], ST7735_RED, ST7735_BLACK, DIGITAL_FONT_SIZE);    
 	}
 }
-
-#define MENU_ANALOG 0
-#define MENU_DIGITAL 1
-#define MENU_SETTINGS 2
-#define NUM_MENU_ITEMS 3
-#define MENU_STR "445L Clock Menu"
-#define MENU_ANALOG_STR "Analog Clock"
-#define MENU_DIGITAL_STR "Digital Clock"
-#define MENU_SETTINGS_STR "Settings"
 
 // main menu vars
 uint8_t currentMenuOpt = 0;
@@ -85,6 +80,15 @@ uint16_t menuColor;
 uint16_t menuFontColor;
 char *menuPointer = ">";
 char menuItems[3][20] = {MENU_ANALOG_STR, MENU_DIGITAL_STR, MENU_SETTINGS_STR};
+
+uint8_t getCurrentMenuOpt(void){
+	return currentMenuOpt;
+}
+
+void setCurrentMenuOpt(uint8_t menu){
+	currentMenuOpt = menu;
+}
+
 void drawMainMenu(void) {
 	int i;
 	/*menuColor = ST7735_Color565(0,191,255);
@@ -146,6 +150,42 @@ uint8_t currentSettingsOpt = 0;
 Time settingTime;
 Time alarmSettingTime;
 _Bool alarmSettingEnabled;
+uint8_t currentSettingsOpt2 = 0;
+
+uint8_t getCurrentSettingsOpt(void){
+	return currentSettingsOpt;
+}
+
+void setCurrentSettingsOpt(uint8_t set){
+	currentSettingsOpt = set;
+}
+
+uint8_t getCurrentSettingsOpt2(void){
+	return currentSettingsOpt2;
+}
+
+void setCurrentSettingsOpt2(uint8_t set){
+	currentSettingsOpt2 = set;
+}
+
+struct time getSettingTime(void){
+	return settingTime;
+}
+
+void setSettingTime(struct time input){
+	settingTime.hour = input.hour;
+	settingTime.minute = input.minute;
+}
+
+struct time getAlarmSettingTime(void){
+	return alarmSettingTime;
+}
+
+void setAlarmSettingTime(struct time input){
+	alarmSettingTime.hour = input.hour;
+	alarmSettingTime.minute = input.minute;
+}
+
 void drawSettings(void) {
 	char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
 	settingTime = getCurrentTime();
@@ -167,12 +207,12 @@ void drawSettings(void) {
 	ST7735_OutString("445L Clock Settings\r\r\r");
 	
 	// ====== Current Time =====
-	currentMenuOpt == 0 ? ST7735_OutString(">") : ST7735_OutString(" "); 
+	currentSettingsOpt == 0 ? ST7735_OutString(">") : ST7735_OutString(" "); 
 	ST7735_OutString("Current Hour: ");
 	ST7735_OutString(hourStr);
 	ST7735_OutString(ampm);
 	ST7735_OutString("\r");
-	currentMenuOpt == 1 ? ST7735_OutString(">") : ST7735_OutString(" "); 
+	currentSettingsOpt == 1 ? ST7735_OutString(">") : ST7735_OutString(" "); 
 	ST7735_OutString("Current Minute: ");
 	ST7735_OutString(minuteStr);
 	ST7735_OutString("\r\r");
@@ -199,15 +239,21 @@ void drawSettings(void) {
 
 // screen drawing functions
 void drawCurrentScreen(void){
-	/* MAIN MENU TEST
-	drawMainMenu();
-	currentMenuOpt = 1;
-	drawMainMenu();
-	currentMenuOpt = 2;
-	drawMainMenu();
-	*/
+	if(getCurrentScreen() == MAIN_MENU){
+		drawMainMenu();
+	}
 	
-	// drawSettings();
+	if(getCurrentScreen() == SETTINGS){
+		drawSettings();
+	}
+	
+	if(getCurrentScreen() == ANALOG_CLOCK){
+		drawAnalogClock();
+	}
+	
+	if(getCurrentScreen() == DIGITAL_CLOCK){
+		drawDigitalClock();
+	}
 	
 }
 

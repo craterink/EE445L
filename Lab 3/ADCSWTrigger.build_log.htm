@@ -3,7 +3,7 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-C:\Keil\EE445L\Lab 3\Lab3.uvproj
+\\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 3\Lab3.uvproj
 Project File Date:  02/07/2017
 
 <h2>Output:</h2>
@@ -17,19 +17,23 @@ plotter.h(9): warning:  #1-D: last line of file ends without a newline
   void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
   void notifyEvent(uint8_t event);
-ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
-  void setAlarmEnabled(_Bool);
+ClockTime.h(19): warning:  #1-D: last line of file ends without a newline
+  void checkAlarm(void);
 Lab3Main.c: 3 warnings, 0 errors
 compiling EventWatch.c...
 EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
   void notifyEvent(uint8_t event);
-EventWatch.c: 1 warning, 0 errors
+ClockTime.h(19): warning:  #1-D: last line of file ends without a newline
+  void checkAlarm(void);
+EventWatch.c(220): warning:  #177-D: variable "update" was declared but never referenced
+        struct time update;
+EventWatch.c: 3 warnings, 0 errors
 compiling ClockTime.c...
 EventWatch.h(14): warning:  #1-D: last line of file ends without a newline
   void notifyEvent(uint8_t event);
-ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
-  void setAlarmEnabled(_Bool);
-ClockTime.c(68): warning:  #1-D: last line of file ends without a newline
+ClockTime.h(19): warning:  #1-D: last line of file ends without a newline
+  void checkAlarm(void);
+ClockTime.c(86): warning:  #1-D: last line of file ends without a newline
   }
 ClockTime.c: 3 warnings, 0 errors
 compiling Alarm.c...
@@ -37,21 +41,13 @@ Alarm.c(7): warning:  #1-D: last line of file ends without a newline
   }
 Alarm.c: 1 warning, 0 errors
 compiling Screens.c...
-ClockTime.h(15): warning:  #1-D: last line of file ends without a newline
-  void setAlarmEnabled(_Bool);
-Screens.c(126): warning:  #186-D: pointless comparison of unsigned integer with zero
+ClockTime.h(19): warning:  #1-D: last line of file ends without a newline
+  void checkAlarm(void);
+Screens.c(130): warning:  #186-D: pointless comparison of unsigned integer with zero
         if(currentMenuOpt < 0)
 Screens.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=2756 RO-data=2052 RW-data=144 ZI-data=1280  
-".\ADCSWTrigger.axf" - 0 Error(s), 10 Warning(s).
-ced
-        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
-Screens.c(101): warning:  #177-D: variable "aEnabled" was declared but never referenced
-        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
-Screens.c(101): warning:  #177-D: variable "aampm" was declared but never referenced
-        char hourStr[5] = "     ", minuteStr[5] = "     ", aHourStr[5] = "     ", aMinuteStr[5] = "     ", *aEnabled, *ampm, *aampm;
-Screens.c: 6 warnings, 0 errors
-linking...
-Program Size: Code=4192 RO-data=2052 RW-data=144 ZI-data=1280  
-".\ADCSWTrigger.axf" - 0 Error(s), 13 Warning(s).
+Program Size: Code=5320 RO-data=2052 RW-data=148 ZI-data=1124  
+".\ADCSWTrigger.axf" - 0 Error(s), 12 Warning(s).
+Trigger.axf" - 1 Error(s), 11 Warning(s).
+Target not created

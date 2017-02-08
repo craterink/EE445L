@@ -6,10 +6,14 @@ typedef struct time {
 } Time;
 
 void MinuteTick(void);
-
+void ClockInit(void);
 Time getCurrentTime(void);
 void setCurrentTime(Time);
 Time getAlarmTime(void);
 void setAlarmTime(Time);
 _Bool isAlarmEnabled(void);
 void setAlarmEnabled(_Bool);
+void HourTick(void);
+void MinuteTickAlarm(void);
+void HourTickAlarm(void);
+void checkAlarm(void);

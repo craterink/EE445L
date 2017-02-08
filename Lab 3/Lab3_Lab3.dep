@@ -1,46 +1,48 @@
 Dependencies for Project 'Lab3', Target 'Lab3': (DO NOT MODIFY !)
-F (.\startup.s)(0x519B8E3E)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\PLL.c)(0x5263E5C6)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
-I (PLL.h)(0x5263E5C6)
-F (..\Lab1\ST7735.c)(0x55197E76)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\st7735.o --omf_browse .\st7735.crf --depend .\st7735.d)
-I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (..\Lab1\ST7735.h)(0x5888DD44)
-I (..\inc/tm4c123gh6pm.h)(0x5388B4CA)
-F (.\plotter.c)(0x5898CF1C)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\plotter.o --omf_browse .\plotter.crf --depend .\plotter.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\math.h)(0x51C87C24)
-I (ST7735.h)(0x5888DD44)
-F (.\Lab3Main.c)(0x589A501F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\lab3main.o --omf_browse .\lab3main.crf --depend .\lab3main.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C87C24)
-I (../tm4c123gh6pm.h)(0x51D4A8F2)
-I (PLL.h)(0x5263E5C6)
-I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C87C24)
-I (ST7735.h)(0x5888DD44)
-I (plotter.h)(0x5898B089)
-I (C:\Keil\ARM\ARMCC\include\math.h)(0x51C87C24)
-I (EventWatch.h)(0x589A33EF)
-I (ClockTime.h)(0x589A5EE5)
-I (Screens.h)(0x589A5728)
-F (.\EventWatch.c)(0x589A6A65)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\eventwatch.o --omf_browse .\eventwatch.crf --depend .\eventwatch.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (../tm4c123gh6pm.h)(0x51D4A8F2)
-I (EventWatch.h)(0x589A33EF)
-F (.\ClockTime.c)(0x589A5EE3)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\clocktime.o --omf_browse .\clocktime.crf --depend .\clocktime.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (../tm4c123gh6pm.h)(0x51D4A8F2)
-I (EventWatch.h)(0x589A33EF)
-I (ClockTime.h)(0x589A5EE5)
-F (.\Alarm.c)(0x589A35BD)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\alarm.o --omf_browse .\alarm.crf --depend .\alarm.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (../tm4c123gh6pm.h)(0x51D4A8F2)
-F (.\Screens.c)(0x589A7DB5)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\screens.o --omf_browse .\screens.crf --depend .\screens.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C87C24)
-I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C87C24)
-I (../tm4c123gh6pm.h)(0x51D4A8F2)
-I (Screens.h)(0x589A5728)
-I (ST7735.h)(0x5888DD44)
-I (ClockTime.h)(0x589A5EE5)
+F (.\startup.s)(0x589A506C)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\PLL.c)(0x589A506C)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
+I (PLL.h)(0x589A506C)
+F (..\Lab1\ST7735.c)(0x58913F17)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\st7735.o --omf_browse .\st7735.crf --depend .\st7735.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (..\Lab1\ST7735.h)(0x58913F17)
+I (..\inc/tm4c123gh6pm.h)(0x58913F17)
+F (.\plotter.c)(0x589A506C)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\plotter.o --omf_browse .\plotter.crf --depend .\plotter.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\math.h)(0x51C88A34)
+I (ST7735.h)(0x589A506C)
+F (.\Lab3Main.c)(0x589AC90F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\lab3main.o --omf_browse .\lab3main.crf --depend .\lab3main.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C88A34)
+I (../tm4c123gh6pm.h)(0x58913F17)
+I (PLL.h)(0x589A506C)
+I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C88A34)
+I (ST7735.h)(0x589A506C)
+I (plotter.h)(0x589A506C)
+I (C:\Keil\ARM\ARMCC\include\math.h)(0x51C88A34)
+I (EventWatch.h)(0x589A9B9C)
+I (ClockTime.h)(0x589AC503)
+I (Screens.h)(0x589AC90F)
+F (.\EventWatch.c)(0x589AC90F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\eventwatch.o --omf_browse .\eventwatch.crf --depend .\eventwatch.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (../tm4c123gh6pm.h)(0x58913F17)
+I (EventWatch.h)(0x589A9B9C)
+I (Screens.h)(0x589AC90F)
+I (ClockTime.h)(0x589AC503)
+F (.\ClockTime.c)(0x589AC90F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\clocktime.o --omf_browse .\clocktime.crf --depend .\clocktime.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (../tm4c123gh6pm.h)(0x58913F17)
+I (EventWatch.h)(0x589A9B9C)
+I (ClockTime.h)(0x589AC503)
+F (.\Alarm.c)(0x589A506C)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\alarm.o --omf_browse .\alarm.crf --depend .\alarm.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (../tm4c123gh6pm.h)(0x58913F17)
+F (.\Screens.c)(0x589AC503)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\screens.o --omf_browse .\screens.crf --depend .\screens.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C88A34)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C88A34)
+I (../tm4c123gh6pm.h)(0x58913F17)
+I (Screens.h)(0x589AC90F)
+I (ST7735.h)(0x589A506C)
+I (ClockTime.h)(0x589AC503)

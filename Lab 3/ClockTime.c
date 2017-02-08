@@ -14,11 +14,31 @@ void checkAlarm(void) {
 	if(alarmEnabled) {
 		if(currentTime.hour == alarmTime.hour &&
 						currentTime.minute == alarmTime.minute) {
-			
+			//ring alarm
 		}
 	}
 }
+/*
+void HourTickAlarm(void){
+	alarmTime.hour = (currentTime.hour + 1)%24;
+}
 
+void MinuteTickAlarm(void){
+	alarmTime.minute += 1;
+	if(alarmTime.minute == 60) {
+		alarmTime.minute = 0;
+		alarmTime.hour += 1;
+		if(alarmTime.hour == 24) {
+			alarmTime.hour = 0;
+		}
+	}
+	
+}
+
+void HourTick(void){
+	currentTime.hour = (currentTime.hour + 1)%24;
+}
+*/
 void MinuteTick(void) {
 	currentTime.minute += 1;
 	if(currentTime.minute == 60) {
@@ -28,8 +48,6 @@ void MinuteTick(void) {
 			currentTime.hour = 0;
 		}
 	}
-	
-	checkAlarm();
 }
 
 void ClockInit(void) {
@@ -40,14 +58,14 @@ void ClockInit(void) {
 	alarmTime.minute = 0;
 	alarmEnabled = 0;
 	
-	RegisterHandler(EVENT_MINUTE_TICK, &MinuteTick);
+	//RegisterHandler(EVENT_MINUTE_TICK, &MinuteTick);
 }
 
 struct time getCurrentTime(void) {
 	return currentTime;
 }
 
-void setCurrentTime(Time t) {
+void setCurrentTime(struct time t) {
 	currentTime = t;
 }
 
@@ -55,7 +73,7 @@ struct time getAlarmTime(void) {
 	return alarmTime;
 }
 
-void setAlarmTime(Time t) { 
+void setAlarmTime(struct time t) { 
 	alarmTime = t;
 }
 
