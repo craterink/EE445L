@@ -1,3 +1,5 @@
 #include <stdint.h>
 
-void ringAlarm(void);
+void toggleAlarm(void);
+
+void alarmInit(void);

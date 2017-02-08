@@ -6,3 +6,4 @@
 .\screens.o: Screens.h
 .\screens.o: ST7735.h
 .\screens.o: ClockTime.h
+.\screens.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h

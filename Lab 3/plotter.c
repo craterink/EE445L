@@ -22,11 +22,12 @@ const uint32_t height = 128;
 //               159 is near the wires, 0 is the side opposite the wires
 //        color 16-bit color, which can be produced by ST7735_Color565() 
 // Output: none
+double lineThreshold = 1;
 void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
 	uint32_t xMin, xMax, yMin, yMax, i, j;
 	int32_t sfVecX, sfVecY, dotProd, dotProdOther;
 	int32_t seVecX, seVecY, se2VecX, se2VecY;
-	double cosTheta2, cosTheta2Other, threshold = 1, sfMag2, seMag2, se2Mag2, seBisecDist, se2BisecDist;
+	double cosTheta2, cosTheta2Other, threshold = lineThreshold, sfMag2, seMag2, se2Mag2, seBisecDist, se2BisecDist;
 	
 	xMin = x1 < x2 ? x1 : x2;
 	xMax = x1 < x2 ? x2 : x1;
@@ -71,6 +72,10 @@ void ST7735_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t co
 	}
 	
 	
+}
+
+void setLineThreshold(double newThreshold) {
+	lineThreshold = newThreshold;
 }
 
 void ST7735_XYplotInit(char *title, int32_t minX, int32_t maxX, int32_t minY, int32_t maxY) {

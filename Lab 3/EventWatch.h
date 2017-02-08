@@ -9,6 +9,6 @@
 
 void EventWatch_Init(void);
 
-void RegisterHandler(uint8_t event, void (*handlerFn)(void));
+void RegisterHandler(uint8_t event, uint8_t screen, void (*handlerFn)(void));
 
 void notifyEvent(uint8_t event);
