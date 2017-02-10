@@ -12,3 +12,8 @@ void EventWatch_Init(void);
 void RegisterHandler(uint8_t event, uint8_t screen, void (*handlerFn)(void));
 
 void notifyEvent(uint8_t event);
+
+//void GPIOPortF_Handler(void);
+void down(void);
+void up(void);
+void enter(void);

@@ -77,8 +77,8 @@
       </OPTFL>
       <CpuCode>0</CpuCode>
       <DebugOpt>
-        <uSim>1</uSim>
-        <uTrg>0</uTrg>
+        <uSim>0</uSim>
+        <uTrg>1</uTrg>
         <sLdApp>1</sLdApp>
         <sGomain>1</sGomain>
         <sRbreak>1</sRbreak>
@@ -99,7 +99,7 @@
         <tPdscDbg>0</tPdscDbg>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
-        <nTsel>2</nTsel>
+        <nTsel>3</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -113,6 +113,10 @@
         <pMon>BIN\lmidk-agdi.dll</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>DLGUARM</Key>
+        </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGTARM</Key>
@@ -163,18 +167,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>39</LineNumber>
+          <LineNumber>70</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>2710</Address>
+          <Address>1598</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>\\psf\Home\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 3\psf\Home\Library\Mobile Documents\com~apple~CloudDocs\School\Spring 2017\445L\Keil\EE445L\Lab 3\Lab3Main.c</Filename>
+          <Filename>.\Lab3Main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ADCSWTrigger\/psf/Home/Library/Mobile Documents/com~apple~CloudDocs/School/Spring 2017/445L/Keil/EE445L/Lab 3/Lab3Main.c\39</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -222,6 +226,16 @@
           <count>8</count>
           <WinNumber>1</WinNumber>
           <ItemText>messageOne</ItemText>
+        </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>BASEPRI</ItemText>
+        </Ww>
+        <Ww>
+          <count>10</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>PRIMASK</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -272,7 +286,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>272</TopLine>
+      <TopLine>269</TopLine>
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\startup.s</PathWithFileName>
@@ -304,8 +318,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>824</TopLine>
+      <CurrentLine>825</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Lab1\ST7735.c</PathWithFileName>
       <FilenameWithoutPath>ST7735.c</FilenameWithoutPath>
@@ -318,10 +332,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>49</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>1</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\plotter.c</PathWithFileName>
       <FilenameWithoutPath>plotter.c</FilenameWithoutPath>
@@ -334,10 +348,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>11</ColumnNumber>
+      <ColumnNumber>16</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>23</TopLine>
-      <CurrentLine>51</CurrentLine>
+      <TopLine>59</TopLine>
+      <CurrentLine>73</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Lab3Main.c</PathWithFileName>
       <FilenameWithoutPath>Lab3Main.c</FilenameWithoutPath>
@@ -350,10 +364,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>48</ColumnNumber>
+      <ColumnNumber>15</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>225</TopLine>
-      <CurrentLine>181</CurrentLine>
+      <TopLine>205</TopLine>
+      <CurrentLine>248</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\EventWatch.c</PathWithFileName>
       <FilenameWithoutPath>EventWatch.c</FilenameWithoutPath>
@@ -366,10 +380,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>25</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>55</TopLine>
-      <CurrentLine>76</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>1</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ClockTime.c</PathWithFileName>
       <FilenameWithoutPath>ClockTime.c</FilenameWithoutPath>
@@ -384,8 +398,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>1</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Alarm.c</PathWithFileName>
       <FilenameWithoutPath>Alarm.c</FilenameWithoutPath>
@@ -398,10 +412,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>22</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>163</TopLine>
-      <CurrentLine>175</CurrentLine>
+      <TopLine>383</TopLine>
+      <CurrentLine>399</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Screens.c</PathWithFileName>
       <FilenameWithoutPath>Screens.c</FilenameWithoutPath>

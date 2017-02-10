@@ -9,6 +9,7 @@ Section Cross References
     startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers to startup.o(STACK) for StackMem
     startup.o(RESET) refers to eventwatch.o(i.Timer0A_Handler) for Timer0A_Handler
+    startup.o(RESET) refers to lab3main.o(i.GPIOPortF_Handler) for GPIOPortF_Handler
     startup.o(RESET) refers to __main.o(!!!main) for __main
     startup.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(.text) refers to startup.o(HEAP) for HeapMem
@@ -121,19 +122,20 @@ Section Cross References
     plotter.o(i.ST7735_XYplotInit) refers to st7735.o(i.ST7735_OutString) for ST7735_OutString
     plotter.o(i.ST7735_XYplotInit) refers to plotter.o(.data) for minX_global
     plotter.o(i.setLineThreshold) refers to plotter.o(.data) for lineThreshold
+    lab3main.o(i.GPIOPortF_Handler) refers to eventwatch.o(i.down) for down
+    lab3main.o(i.GPIOPortF_Handler) refers to screens.o(i.drawCurrentScreen) for drawCurrentScreen
+    lab3main.o(i.GPIOPortF_Handler) refers to eventwatch.o(i.enter) for enter
+    lab3main.o(i.GPIOPortF_Handler) refers to eventwatch.o(i.up) for up
     lab3main.o(i.initForLab3) refers to pll.o(i.PLL_Init) for PLL_Init
+    lab3main.o(i.initForLab3) refers to startup.o(.text) for EnableInterrupts
     lab3main.o(i.main) refers to lab3main.o(i.initForLab3) for initForLab3
     lab3main.o(i.main) refers to screens.o(i.Screens_Init) for Screens_Init
     lab3main.o(i.main) refers to clocktime.o(i.ClockInit) for ClockInit
     lab3main.o(i.main) refers to eventwatch.o(i.EventWatch_Init) for EventWatch_Init
+    lab3main.o(i.main) refers to startup.o(.text) for WaitForInterrupt
     eventwatch.o(i.EventWatch_Init) refers to eventwatch.o(i.Timer0A_Init) for Timer0A_Init
     eventwatch.o(i.EventWatch_Init) refers to eventwatch.o(i.minuteUpdate) for minuteUpdate
-    eventwatch.o(i.GPIO_PortF_Handler) refers to eventwatch.o(i.down) for down
-    eventwatch.o(i.GPIO_PortF_Handler) refers to eventwatch.o(i.enter) for enter
-    eventwatch.o(i.GPIO_PortF_Handler) refers to eventwatch.o(i.up) for up
-    eventwatch.o(i.GPIO_PortF_Handler) refers to screens.o(i.drawCurrentScreen) for drawCurrentScreen
     eventwatch.o(i.Timer0A_Handler) refers to eventwatch.o(.data) for PeriodicTask
-    eventwatch.o(i.Timer0A_Init) refers to startup.o(.text) for StartCritical
     eventwatch.o(i.Timer0A_Init) refers to eventwatch.o(.data) for PeriodicTask
     eventwatch.o(i.Timer0A_UpdateTask) refers to eventwatch.o(.data) for PeriodicTask
     eventwatch.o(i.down) refers to screens.o(i.getCurrentScreen) for getCurrentScreen
@@ -158,9 +160,9 @@ Section Cross References
     eventwatch.o(i.enter) refers to screens.o(i.getAlarmSettingTime) for getAlarmSettingTime
     eventwatch.o(i.enter) refers to clocktime.o(i.setAlarmTime) for setAlarmTime
     eventwatch.o(i.minuteUpdate) refers to clocktime.o(i.MinuteTick) for MinuteTick
-    eventwatch.o(i.minuteUpdate) refers to alarm.o(i.toggleAlarm) for toggleAlarm
     eventwatch.o(i.minuteUpdate) refers to clocktime.o(i.checkAlarm) for checkAlarm
     eventwatch.o(i.minuteUpdate) refers to screens.o(i.drawCurrentScreen) for drawCurrentScreen
+    eventwatch.o(i.minuteUpdate) refers to alarm.o(i.toggleAlarm) for toggleAlarm
     eventwatch.o(i.minuteUpdate) refers to eventwatch.o(.data) for counter
     eventwatch.o(i.up) refers to screens.o(i.getCurrentScreen) for getCurrentScreen
     eventwatch.o(i.up) refers to screens.o(i.getCurrentMenuOpt) for getCurrentMenuOpt
@@ -598,33 +600,16 @@ Removing Unused input sections from the image.
     Removing plotter.o(i.ST7735_XYplot), (208 bytes).
     Removing plotter.o(i.ST7735_XYplotInit), (76 bytes).
     Removing plotter.o(.constdata), (8 bytes).
-    Removing eventwatch.o(i.GPIO_PortF_Handler), (104 bytes).
     Removing eventwatch.o(i.Timer0A_UpdateTask), (12 bytes).
-    Removing eventwatch.o(i.down), (314 bytes).
-    Removing eventwatch.o(i.enter), (142 bytes).
-    Removing eventwatch.o(i.up), (296 bytes).
     Removing eventwatch.o(.bss), (160 bytes).
     Removing clocktime.o(i.setAlarmEnabled), (12 bytes).
-    Removing clocktime.o(i.setAlarmTime), (16 bytes).
-    Removing clocktime.o(i.setCurrentTime), (16 bytes).
     Removing alarm.o(i.InitPC4), (100 bytes).
     Removing alarm.o(i.alarmInit), (8 bytes).
-    Removing screens.o(i.getAlarmSettingTime), (20 bytes).
-    Removing screens.o(i.getCurrentMenuOpt), (12 bytes).
-    Removing screens.o(i.getCurrentSettingsOpt), (12 bytes).
-    Removing screens.o(i.getCurrentSettingsOpt2), (12 bytes).
-    Removing screens.o(i.getSettingTime), (20 bytes).
     Removing screens.o(i.handleDown), (28 bytes).
     Removing screens.o(i.handleRight), (52 bytes).
     Removing screens.o(i.handleUp), (28 bytes).
-    Removing screens.o(i.setAlarmSettingTime), (24 bytes).
-    Removing screens.o(i.setCurrentMenuOpt), (12 bytes).
-    Removing screens.o(i.setCurrentScreen), (12 bytes).
-    Removing screens.o(i.setCurrentSettingsOpt), (12 bytes).
-    Removing screens.o(i.setCurrentSettingsOpt2), (12 bytes).
-    Removing screens.o(i.setSettingTime), (24 bytes).
 
-55 unused section(s) (total 3560 bytes) removed from the image.
+38 unused section(s) (total 2500 bytes) removed from the image.
 
 ==============================================================================
 
@@ -635,72 +620,72 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_errno_addr_intlibspace.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_errno_addr.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_errno_addr.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/fenv.c                           0x00000000   Number         0  _rserrno.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __printf_flags_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_intcommon.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __2sprintf.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  noretval__2sprintf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _sputc.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss.o ABSOLUTE
-    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  noretval__2sprintf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __2sprintf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_intcommon.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_d.o ABSOLUTE
+    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent_end.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/daddsub.s                       0x00000000   Number         0  daddsub_clz.o ABSOLUTE
@@ -720,12 +705,12 @@ Image Symbol Table
     ../fplib/scalbn.s                        0x00000000   Number         0  scalbn.o ABSOLUTE
     ../fplib/trapv.s                         0x00000000   Number         0  trapv.o ABSOLUTE
     ../fplib/usenofp.s                       0x00000000   Number         0  usenofp.o ABSOLUTE
-    ../mathlib/acos.c                        0x00000000   Number         0  acos_x.o ABSOLUTE
     ../mathlib/acos.c                        0x00000000   Number         0  acos.o ABSOLUTE
+    ../mathlib/acos.c                        0x00000000   Number         0  acos_x.o ABSOLUTE
     ../mathlib/asin.c                        0x00000000   Number         0  asin_x.o ABSOLUTE
     ../mathlib/asin.c                        0x00000000   Number         0  asin.o ABSOLUTE
-    ../mathlib/cos.c                         0x00000000   Number         0  cos_x.o ABSOLUTE
     ../mathlib/cos.c                         0x00000000   Number         0  cos.o ABSOLUTE
+    ../mathlib/cos.c                         0x00000000   Number         0  cos_x.o ABSOLUTE
     ../mathlib/cos_i.c                       0x00000000   Number         0  cos_i.o ABSOLUTE
     ../mathlib/dunder.c                      0x00000000   Number         0  dunder.o ABSOLUTE
     ../mathlib/fpclassify.c                  0x00000000   Number         0  fpclassify.o ABSOLUTE
@@ -733,10 +718,10 @@ Image Symbol Table
     ../mathlib/rred.c                        0x00000000   Number         0  rred.o ABSOLUTE
     ../mathlib/sin.c                         0x00000000   Number         0  sin_x.o ABSOLUTE
     ../mathlib/sin.c                         0x00000000   Number         0  sin.o ABSOLUTE
-    ../mathlib/sin_i.c                       0x00000000   Number         0  sin_i.o ABSOLUTE
     ../mathlib/sin_i.c                       0x00000000   Number         0  sin_i_x.o ABSOLUTE
-    ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt_x.o ABSOLUTE
+    ../mathlib/sin_i.c                       0x00000000   Number         0  sin_i.o ABSOLUTE
     ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt.o ABSOLUTE
+    ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt_x.o ABSOLUTE
     ..\Lab1\ST7735.c                         0x00000000   Number         0  st7735.o ABSOLUTE
     Alarm.c                                  0x00000000   Number         0  alarm.o ABSOLUTE
     ClockTime.c                              0x00000000   Number         0  clocktime.o ABSOLUTE
@@ -813,106 +798,123 @@ Image Symbol Table
     i.ClockInit                              0x000005e8   Section        0  clocktime.o(i.ClockInit)
     i.Delay1ms                               0x00000608   Section        0  st7735.o(i.Delay1ms)
     i.EventWatch_Init                        0x00000628   Section        0  eventwatch.o(i.EventWatch_Init)
-    i.MinuteTick                             0x0000063c   Section        0  clocktime.o(i.MinuteTick)
-    i.PLL_Init                               0x0000066c   Section        0  pll.o(i.PLL_Init)
-    i.ST7735_DrawBitmap                      0x000006e8   Section        0  st7735.o(i.ST7735_DrawBitmap)
-    i.ST7735_DrawChar                        0x00000808   Section        0  st7735.o(i.ST7735_DrawChar)
-    i.ST7735_DrawCharS                       0x00000914   Section        0  st7735.o(i.ST7735_DrawCharS)
-    i.ST7735_DrawPixel                       0x00000a08   Section        0  st7735.o(i.ST7735_DrawPixel)
-    i.ST7735_DrawString                      0x00000a50   Section        0  st7735.o(i.ST7735_DrawString)
-    i.ST7735_FillRect                        0x00000aa4   Section        0  st7735.o(i.ST7735_FillRect)
-    i.ST7735_FillScreen                      0x00000b50   Section        0  st7735.o(i.ST7735_FillScreen)
-    i.ST7735_InitR                           0x00000b74   Section        0  st7735.o(i.ST7735_InitR)
-    i.ST7735_Line                            0x00000bf0   Section        0  plotter.o(i.ST7735_Line)
-    i.ST7735_OutChar                         0x00000ddc   Section        0  st7735.o(i.ST7735_OutChar)
-    i.ST7735_OutString                       0x00000eb0   Section        0  st7735.o(i.ST7735_OutString)
-    i.ST7735_SetCursor                       0x00000ec8   Section        0  st7735.o(i.ST7735_SetCursor)
-    i.Screens_Init                           0x00000ee8   Section        0  screens.o(i.Screens_Init)
-    i.Timer0A_Handler                        0x00000f00   Section        0  eventwatch.o(i.Timer0A_Handler)
-    i.Timer0A_Init                           0x00000f18   Section        0  eventwatch.o(i.Timer0A_Init)
-    i.__ARM_fpclassify                       0x00000f8c   Section        0  fpclassify.o(i.__ARM_fpclassify)
-    i.__ieee754_rem_pio2                     0x00000fb4   Section        0  rred.o(i.__ieee754_rem_pio2)
-    i.__kernel_cos                           0x0000133c   Section        0  cos_i.o(i.__kernel_cos)
-    i.__kernel_poly                          0x00001438   Section        0  poly.o(i.__kernel_poly)
-    i.__kernel_sin                           0x000014e4   Section        0  sin_i.o(i.__kernel_sin)
-    i.__mathlib_dbl_underflow                0x000015d0   Section        0  dunder.o(i.__mathlib_dbl_underflow)
-    i.acos                                   0x000015e0   Section        0  acos.o(i.acos)
-    i.asin                                   0x00001868   Section        0  asin.o(i.asin)
-    i.checkAlarm                             0x00001ae4   Section        0  clocktime.o(i.checkAlarm)
-    i.commandList                            0x00001af4   Section        0  st7735.o(i.commandList)
-    commandList                              0x00001af5   Thumb Code    86  st7735.o(i.commandList)
-    i.commonInit                             0x00001b4c   Section        0  st7735.o(i.commonInit)
-    commonInit                               0x00001b4d   Thumb Code   340  st7735.o(i.commonInit)
-    i.convertASCII                           0x00001cd0   Section        0  screens.o(i.convertASCII)
-    i.cos                                    0x00001cdc   Section        0  cos.o(i.cos)
-    i.drawAnalogClock                        0x00001d88   Section        0  screens.o(i.drawAnalogClock)
-    i.drawCurrentScreen                      0x0000202c   Section        0  screens.o(i.drawCurrentScreen)
-    i.drawDigitalClock                       0x0000205e   Section        0  screens.o(i.drawDigitalClock)
-    i.drawMainMenu                           0x00002140   Section        0  screens.o(i.drawMainMenu)
-    i.drawSettings                           0x000021c4   Section        0  screens.o(i.drawSettings)
-    i.getAlarmTime                           0x0000243c   Section        0  clocktime.o(i.getAlarmTime)
-    i.getCurrentScreen                       0x00002450   Section        0  screens.o(i.getCurrentScreen)
-    i.getCurrentTime                         0x0000245c   Section        0  clocktime.o(i.getCurrentTime)
-    i.initForLab3                            0x00002470   Section        0  lab3main.o(i.initForLab3)
-    i.isAlarmEnabled                         0x00002570   Section        0  clocktime.o(i.isAlarmEnabled)
-    i.main                                   0x0000257c   Section        0  lab3main.o(i.main)
-    i.minuteUpdate                           0x00002590   Section        0  eventwatch.o(i.minuteUpdate)
-    i.pushColor                              0x000025d8   Section        0  st7735.o(i.pushColor)
-    pushColor                                0x000025d9   Thumb Code    18  st7735.o(i.pushColor)
-    i.setAddrWindow                          0x000025ec   Section        0  st7735.o(i.setAddrWindow)
-    setAddrWindow                            0x000025ed   Thumb Code   106  st7735.o(i.setAddrWindow)
-    i.setLineThreshold                       0x00002660   Section        0  plotter.o(i.setLineThreshold)
-    i.sin                                    0x0000266c   Section        0  sin.o(i.sin)
-    i.sqrt                                   0x0000271c   Section        0  sqrt.o(i.sqrt)
-    i.toggleAlarm                            0x00002768   Section        0  alarm.o(i.toggleAlarm)
-    i.writecommand                           0x000027a8   Section        0  st7735.o(i.writecommand)
-    writecommand                             0x000027a9   Thumb Code    40  st7735.o(i.writecommand)
-    i.writedata                              0x000027d8   Section        0  st7735.o(i.writedata)
-    writedata                                0x000027d9   Thumb Code    24  st7735.o(i.writedata)
-    x$fpl$dadd                               0x000027f8   Section      336  daddsub_clz.o(x$fpl$dadd)
-    _dadd1                                   0x00002809   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
-    x$fpl$dcheck1                            0x00002948   Section       16  dcheck1.o(x$fpl$dcheck1)
-    x$fpl$dcmpinf                            0x00002958   Section       24  dcmpi.o(x$fpl$dcmpinf)
-    x$fpl$ddiv                               0x00002970   Section      688  ddiv.o(x$fpl$ddiv)
-    ddiv_entry                               0x00002977   Thumb Code     0  ddiv.o(x$fpl$ddiv)
-    x$fpl$deqf                               0x00002c20   Section      120  deqf.o(x$fpl$deqf)
-    x$fpl$dfix                               0x00002c98   Section       94  dfix.o(x$fpl$dfix)
-    x$fpl$dflt                               0x00002cf6   Section       46  dflt_clz.o(x$fpl$dflt)
-    x$fpl$dfltu                              0x00002d24   Section       38  dflt_clz.o(x$fpl$dfltu)
-    x$fpl$dleqf                              0x00002d4c   Section      120  dleqf.o(x$fpl$dleqf)
-    x$fpl$dmul                               0x00002dc4   Section      340  dmul.o(x$fpl$dmul)
-    x$fpl$dnaninf                            0x00002f18   Section      156  dnaninf.o(x$fpl$dnaninf)
-    x$fpl$dretinf                            0x00002fb4   Section       12  dretinf.o(x$fpl$dretinf)
-    x$fpl$drsb                               0x00002fc0   Section       22  daddsub_clz.o(x$fpl$drsb)
-    x$fpl$dsqrt                              0x00002fd8   Section      408  dsqrt_umaal.o(x$fpl$dsqrt)
-    x$fpl$dsub                               0x00003170   Section      468  daddsub_clz.o(x$fpl$dsub)
-    _dsub1                                   0x00003181   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
-    x$fpl$retnan                             0x00003344   Section      100  retnan.o(x$fpl$retnan)
-    x$fpl$scalbn                             0x000033a8   Section       92  scalbn.o(x$fpl$scalbn)
-    x$fpl$trapveneer                         0x00003404   Section       48  trapv.o(x$fpl$trapveneer)
-    .constdata                               0x00003434   Section     2018  st7735.o(.constdata)
-    x$fpl$usenofp                            0x00003434   Section        0  usenofp.o(x$fpl$usenofp)
-    Font                                     0x00003434   Data        1275  st7735.o(.constdata)
-    Bcmd                                     0x0000392f   Data         103  st7735.o(.constdata)
-    Rcmd1                                    0x00003996   Data          59  st7735.o(.constdata)
-    Rcmd2green                               0x000039d1   Data          13  st7735.o(.constdata)
-    Rcmd2red                                 0x000039de   Data          13  st7735.o(.constdata)
-    Rcmd3                                    0x000039eb   Data          43  st7735.o(.constdata)
-    .constdata                               0x00003c16   Section     4096  screens.o(.constdata)
-    .constdata                               0x00004c18   Section       80  acos.o(.constdata)
-    pS                                       0x00004c18   Data          48  acos.o(.constdata)
-    qS                                       0x00004c48   Data          32  acos.o(.constdata)
-    .constdata                               0x00004c68   Section       80  asin.o(.constdata)
-    pS                                       0x00004c68   Data          48  asin.o(.constdata)
-    qS                                       0x00004c98   Data          32  asin.o(.constdata)
-    .constdata                               0x00004cb8   Section       48  cos_i.o(.constdata)
-    C                                        0x00004cb8   Data          48  cos_i.o(.constdata)
-    .constdata                               0x00004ce8   Section      200  rred.o(.constdata)
-    pio2s                                    0x00004ce8   Data          48  rred.o(.constdata)
-    twooverpi                                0x00004d18   Data         152  rred.o(.constdata)
-    .constdata                               0x00004db0   Section       40  sin_i.o(.constdata)
-    S                                        0x00004db0   Data          40  sin_i.o(.constdata)
-    .conststring                             0x00004dd8   Section        2  screens.o(.conststring)
+    i.GPIOPortF_Handler                      0x0000063c   Section        0  lab3main.o(i.GPIOPortF_Handler)
+    i.MinuteTick                             0x000006b0   Section        0  clocktime.o(i.MinuteTick)
+    i.PLL_Init                               0x000006e0   Section        0  pll.o(i.PLL_Init)
+    i.ST7735_DrawBitmap                      0x0000075c   Section        0  st7735.o(i.ST7735_DrawBitmap)
+    i.ST7735_DrawChar                        0x0000087c   Section        0  st7735.o(i.ST7735_DrawChar)
+    i.ST7735_DrawCharS                       0x00000988   Section        0  st7735.o(i.ST7735_DrawCharS)
+    i.ST7735_DrawPixel                       0x00000a7c   Section        0  st7735.o(i.ST7735_DrawPixel)
+    i.ST7735_DrawString                      0x00000ac4   Section        0  st7735.o(i.ST7735_DrawString)
+    i.ST7735_FillRect                        0x00000b18   Section        0  st7735.o(i.ST7735_FillRect)
+    i.ST7735_FillScreen                      0x00000bc4   Section        0  st7735.o(i.ST7735_FillScreen)
+    i.ST7735_InitR                           0x00000be8   Section        0  st7735.o(i.ST7735_InitR)
+    i.ST7735_Line                            0x00000c64   Section        0  plotter.o(i.ST7735_Line)
+    i.ST7735_OutChar                         0x00000e50   Section        0  st7735.o(i.ST7735_OutChar)
+    i.ST7735_OutString                       0x00000f24   Section        0  st7735.o(i.ST7735_OutString)
+    i.ST7735_SetCursor                       0x00000f3c   Section        0  st7735.o(i.ST7735_SetCursor)
+    i.Screens_Init                           0x00000f5c   Section        0  screens.o(i.Screens_Init)
+    i.Timer0A_Handler                        0x00000f74   Section        0  eventwatch.o(i.Timer0A_Handler)
+    i.Timer0A_Init                           0x00000f8c   Section        0  eventwatch.o(i.Timer0A_Init)
+    i.__ARM_fpclassify                       0x00000fec   Section        0  fpclassify.o(i.__ARM_fpclassify)
+    i.__ieee754_rem_pio2                     0x00001014   Section        0  rred.o(i.__ieee754_rem_pio2)
+    i.__kernel_cos                           0x0000139c   Section        0  cos_i.o(i.__kernel_cos)
+    i.__kernel_poly                          0x00001498   Section        0  poly.o(i.__kernel_poly)
+    i.__kernel_sin                           0x00001544   Section        0  sin_i.o(i.__kernel_sin)
+    i.__mathlib_dbl_underflow                0x00001630   Section        0  dunder.o(i.__mathlib_dbl_underflow)
+    i.acos                                   0x00001640   Section        0  acos.o(i.acos)
+    i.asin                                   0x000018c8   Section        0  asin.o(i.asin)
+    i.checkAlarm                             0x00001b44   Section        0  clocktime.o(i.checkAlarm)
+    i.commandList                            0x00001b54   Section        0  st7735.o(i.commandList)
+    commandList                              0x00001b55   Thumb Code    86  st7735.o(i.commandList)
+    i.commonInit                             0x00001bac   Section        0  st7735.o(i.commonInit)
+    commonInit                               0x00001bad   Thumb Code   340  st7735.o(i.commonInit)
+    i.convertASCII                           0x00001d30   Section        0  screens.o(i.convertASCII)
+    i.cos                                    0x00001d3c   Section        0  cos.o(i.cos)
+    i.down                                   0x00001de8   Section        0  eventwatch.o(i.down)
+    i.drawAnalogClock                        0x00001f24   Section        0  screens.o(i.drawAnalogClock)
+    i.drawCurrentScreen                      0x000021c8   Section        0  screens.o(i.drawCurrentScreen)
+    i.drawDigitalClock                       0x000021fa   Section        0  screens.o(i.drawDigitalClock)
+    i.drawMainMenu                           0x000022dc   Section        0  screens.o(i.drawMainMenu)
+    i.drawSettings                           0x00002360   Section        0  screens.o(i.drawSettings)
+    i.enter                                  0x000025d8   Section        0  eventwatch.o(i.enter)
+    i.getAlarmSettingTime                    0x00002668   Section        0  screens.o(i.getAlarmSettingTime)
+    i.getAlarmTime                           0x0000267c   Section        0  clocktime.o(i.getAlarmTime)
+    i.getCurrentMenuOpt                      0x00002690   Section        0  screens.o(i.getCurrentMenuOpt)
+    i.getCurrentScreen                       0x0000269c   Section        0  screens.o(i.getCurrentScreen)
+    i.getCurrentSettingsOpt                  0x000026a8   Section        0  screens.o(i.getCurrentSettingsOpt)
+    i.getCurrentSettingsOpt2                 0x000026b4   Section        0  screens.o(i.getCurrentSettingsOpt2)
+    i.getCurrentTime                         0x000026c0   Section        0  clocktime.o(i.getCurrentTime)
+    i.getSettingTime                         0x000026d4   Section        0  screens.o(i.getSettingTime)
+    i.initForLab3                            0x000026e8   Section        0  lab3main.o(i.initForLab3)
+    i.isAlarmEnabled                         0x000027e8   Section        0  clocktime.o(i.isAlarmEnabled)
+    i.main                                   0x000027f4   Section        0  lab3main.o(i.main)
+    i.minuteUpdate                           0x0000280c   Section        0  eventwatch.o(i.minuteUpdate)
+    i.pushColor                              0x00002854   Section        0  st7735.o(i.pushColor)
+    pushColor                                0x00002855   Thumb Code    18  st7735.o(i.pushColor)
+    i.setAddrWindow                          0x00002868   Section        0  st7735.o(i.setAddrWindow)
+    setAddrWindow                            0x00002869   Thumb Code   106  st7735.o(i.setAddrWindow)
+    i.setAlarmSettingTime                    0x000028dc   Section        0  screens.o(i.setAlarmSettingTime)
+    i.setAlarmTime                           0x000028f4   Section        0  clocktime.o(i.setAlarmTime)
+    i.setCurrentMenuOpt                      0x00002904   Section        0  screens.o(i.setCurrentMenuOpt)
+    i.setCurrentScreen                       0x00002910   Section        0  screens.o(i.setCurrentScreen)
+    i.setCurrentSettingsOpt                  0x0000291c   Section        0  screens.o(i.setCurrentSettingsOpt)
+    i.setCurrentSettingsOpt2                 0x00002928   Section        0  screens.o(i.setCurrentSettingsOpt2)
+    i.setCurrentTime                         0x00002934   Section        0  clocktime.o(i.setCurrentTime)
+    i.setLineThreshold                       0x00002944   Section        0  plotter.o(i.setLineThreshold)
+    i.setSettingTime                         0x00002950   Section        0  screens.o(i.setSettingTime)
+    i.sin                                    0x00002968   Section        0  sin.o(i.sin)
+    i.sqrt                                   0x00002a18   Section        0  sqrt.o(i.sqrt)
+    i.toggleAlarm                            0x00002a64   Section        0  alarm.o(i.toggleAlarm)
+    i.up                                     0x00002aa4   Section        0  eventwatch.o(i.up)
+    i.writecommand                           0x00002bcc   Section        0  st7735.o(i.writecommand)
+    writecommand                             0x00002bcd   Thumb Code    40  st7735.o(i.writecommand)
+    i.writedata                              0x00002bfc   Section        0  st7735.o(i.writedata)
+    writedata                                0x00002bfd   Thumb Code    24  st7735.o(i.writedata)
+    x$fpl$dadd                               0x00002c1c   Section      336  daddsub_clz.o(x$fpl$dadd)
+    _dadd1                                   0x00002c2d   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
+    x$fpl$dcheck1                            0x00002d6c   Section       16  dcheck1.o(x$fpl$dcheck1)
+    x$fpl$dcmpinf                            0x00002d7c   Section       24  dcmpi.o(x$fpl$dcmpinf)
+    x$fpl$ddiv                               0x00002d94   Section      688  ddiv.o(x$fpl$ddiv)
+    ddiv_entry                               0x00002d9b   Thumb Code     0  ddiv.o(x$fpl$ddiv)
+    x$fpl$deqf                               0x00003044   Section      120  deqf.o(x$fpl$deqf)
+    x$fpl$dfix                               0x000030bc   Section       94  dfix.o(x$fpl$dfix)
+    x$fpl$dflt                               0x0000311a   Section       46  dflt_clz.o(x$fpl$dflt)
+    x$fpl$dfltu                              0x00003148   Section       38  dflt_clz.o(x$fpl$dfltu)
+    x$fpl$dleqf                              0x00003170   Section      120  dleqf.o(x$fpl$dleqf)
+    x$fpl$dmul                               0x000031e8   Section      340  dmul.o(x$fpl$dmul)
+    x$fpl$dnaninf                            0x0000333c   Section      156  dnaninf.o(x$fpl$dnaninf)
+    x$fpl$dretinf                            0x000033d8   Section       12  dretinf.o(x$fpl$dretinf)
+    x$fpl$drsb                               0x000033e4   Section       22  daddsub_clz.o(x$fpl$drsb)
+    x$fpl$dsqrt                              0x000033fc   Section      408  dsqrt_umaal.o(x$fpl$dsqrt)
+    x$fpl$dsub                               0x00003594   Section      468  daddsub_clz.o(x$fpl$dsub)
+    _dsub1                                   0x000035a5   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
+    x$fpl$retnan                             0x00003768   Section      100  retnan.o(x$fpl$retnan)
+    x$fpl$scalbn                             0x000037cc   Section       92  scalbn.o(x$fpl$scalbn)
+    x$fpl$trapveneer                         0x00003828   Section       48  trapv.o(x$fpl$trapveneer)
+    .constdata                               0x00003858   Section     2018  st7735.o(.constdata)
+    x$fpl$usenofp                            0x00003858   Section        0  usenofp.o(x$fpl$usenofp)
+    Font                                     0x00003858   Data        1275  st7735.o(.constdata)
+    Bcmd                                     0x00003d53   Data         103  st7735.o(.constdata)
+    Rcmd1                                    0x00003dba   Data          59  st7735.o(.constdata)
+    Rcmd2green                               0x00003df5   Data          13  st7735.o(.constdata)
+    Rcmd2red                                 0x00003e02   Data          13  st7735.o(.constdata)
+    Rcmd3                                    0x00003e0f   Data          43  st7735.o(.constdata)
+    .constdata                               0x0000403a   Section     4096  screens.o(.constdata)
+    .constdata                               0x00005040   Section       80  acos.o(.constdata)
+    pS                                       0x00005040   Data          48  acos.o(.constdata)
+    qS                                       0x00005070   Data          32  acos.o(.constdata)
+    .constdata                               0x00005090   Section       80  asin.o(.constdata)
+    pS                                       0x00005090   Data          48  asin.o(.constdata)
+    qS                                       0x000050c0   Data          32  asin.o(.constdata)
+    .constdata                               0x000050e0   Section       48  cos_i.o(.constdata)
+    C                                        0x000050e0   Data          48  cos_i.o(.constdata)
+    .constdata                               0x00005110   Section      200  rred.o(.constdata)
+    pio2s                                    0x00005110   Data          48  rred.o(.constdata)
+    twooverpi                                0x00005140   Data         152  rred.o(.constdata)
+    .constdata                               0x000051d8   Section       40  sin_i.o(.constdata)
+    S                                        0x000051d8   Data          40  sin_i.o(.constdata)
+    .conststring                             0x00005200   Section        2  screens.o(.conststring)
     .data                                    0x20000000   Section       44  st7735.o(.data)
     _width                                   0x2000000a   Data           2  st7735.o(.data)
     _height                                  0x2000000c   Data           2  st7735.o(.data)
@@ -1003,7 +1005,6 @@ Image Symbol Table
     GPIOPortC_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortD_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortE_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
-    GPIOPortF_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortG_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortH_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortJ_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
@@ -1173,84 +1174,101 @@ Image Symbol Table
     ClockInit                                0x000005e9   Thumb Code    20  clocktime.o(i.ClockInit)
     Delay1ms                                 0x00000609   Thumb Code    32  st7735.o(i.Delay1ms)
     EventWatch_Init                          0x00000629   Thumb Code    12  eventwatch.o(i.EventWatch_Init)
-    MinuteTick                               0x0000063d   Thumb Code    44  clocktime.o(i.MinuteTick)
-    PLL_Init                                 0x0000066d   Thumb Code   118  pll.o(i.PLL_Init)
-    ST7735_DrawBitmap                        0x000006e9   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
-    ST7735_DrawChar                          0x00000809   Thumb Code   256  st7735.o(i.ST7735_DrawChar)
-    ST7735_DrawCharS                         0x00000915   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
-    ST7735_DrawPixel                         0x00000a09   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
-    ST7735_DrawString                        0x00000a51   Thumb Code    84  st7735.o(i.ST7735_DrawString)
-    ST7735_FillRect                          0x00000aa5   Thumb Code   164  st7735.o(i.ST7735_FillRect)
-    ST7735_FillScreen                        0x00000b51   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
-    ST7735_InitR                             0x00000b75   Thumb Code    90  st7735.o(i.ST7735_InitR)
-    ST7735_Line                              0x00000bf1   Thumb Code   484  plotter.o(i.ST7735_Line)
-    ST7735_OutChar                           0x00000ddd   Thumb Code   176  st7735.o(i.ST7735_OutChar)
-    ST7735_OutString                         0x00000eb1   Thumb Code    22  st7735.o(i.ST7735_OutString)
-    ST7735_SetCursor                         0x00000ec9   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
-    Screens_Init                             0x00000ee9   Thumb Code    20  screens.o(i.Screens_Init)
-    Timer0A_Handler                          0x00000f01   Thumb Code    16  eventwatch.o(i.Timer0A_Handler)
-    Timer0A_Init                             0x00000f19   Thumb Code    94  eventwatch.o(i.Timer0A_Init)
-    __ARM_fpclassify                         0x00000f8d   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
-    __ieee754_rem_pio2                       0x00000fb5   Thumb Code   832  rred.o(i.__ieee754_rem_pio2)
-    __kernel_cos                             0x0000133d   Thumb Code   230  cos_i.o(i.__kernel_cos)
-    __kernel_poly                            0x00001439   Thumb Code   170  poly.o(i.__kernel_poly)
-    __kernel_sin                             0x000014e5   Thumb Code   224  sin_i.o(i.__kernel_sin)
-    __mathlib_dbl_underflow                  0x000015d1   Thumb Code    10  dunder.o(i.__mathlib_dbl_underflow)
-    acos                                     0x000015e1   Thumb Code   586  acos.o(i.acos)
-    asin                                     0x00001869   Thumb Code   584  asin.o(i.asin)
-    checkAlarm                               0x00001ae5   Thumb Code    10  clocktime.o(i.checkAlarm)
-    convertASCII                             0x00001cd1   Thumb Code    10  screens.o(i.convertASCII)
-    cos                                      0x00001cdd   Thumb Code   164  cos.o(i.cos)
-    drawAnalogClock                          0x00001d89   Thumb Code   650  screens.o(i.drawAnalogClock)
-    drawCurrentScreen                        0x0000202d   Thumb Code    50  screens.o(i.drawCurrentScreen)
-    drawDigitalClock                         0x0000205f   Thumb Code   226  screens.o(i.drawDigitalClock)
-    drawMainMenu                             0x00002141   Thumb Code    92  screens.o(i.drawMainMenu)
-    drawSettings                             0x000021c5   Thumb Code   438  screens.o(i.drawSettings)
-    getAlarmTime                             0x0000243d   Thumb Code    16  clocktime.o(i.getAlarmTime)
-    getCurrentScreen                         0x00002451   Thumb Code     6  screens.o(i.getCurrentScreen)
-    getCurrentTime                           0x0000245d   Thumb Code    16  clocktime.o(i.getCurrentTime)
-    initForLab3                              0x00002471   Thumb Code   218  lab3main.o(i.initForLab3)
-    isAlarmEnabled                           0x00002571   Thumb Code     6  clocktime.o(i.isAlarmEnabled)
-    main                                     0x0000257d   Thumb Code    20  lab3main.o(i.main)
-    minuteUpdate                             0x00002591   Thumb Code    66  eventwatch.o(i.minuteUpdate)
-    setLineThreshold                         0x00002661   Thumb Code     6  plotter.o(i.setLineThreshold)
-    sin                                      0x0000266d   Thumb Code   166  sin.o(i.sin)
-    sqrt                                     0x0000271d   Thumb Code    76  sqrt.o(i.sqrt)
-    toggleAlarm                              0x00002769   Thumb Code    50  alarm.o(i.toggleAlarm)
-    __aeabi_dadd                             0x000027f9   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
-    _dadd                                    0x000027f9   Thumb Code   332  daddsub_clz.o(x$fpl$dadd)
-    __fpl_dcheck_NaN1                        0x00002949   Thumb Code    10  dcheck1.o(x$fpl$dcheck1)
-    __fpl_dcmp_Inf                           0x00002959   Thumb Code    24  dcmpi.o(x$fpl$dcmpinf)
-    __aeabi_ddiv                             0x00002971   Thumb Code     0  ddiv.o(x$fpl$ddiv)
-    _ddiv                                    0x00002971   Thumb Code   552  ddiv.o(x$fpl$ddiv)
-    __aeabi_cdcmpeq                          0x00002c21   Thumb Code     0  deqf.o(x$fpl$deqf)
-    _dcmpeq                                  0x00002c21   Thumb Code   120  deqf.o(x$fpl$deqf)
-    __aeabi_d2iz                             0x00002c99   Thumb Code     0  dfix.o(x$fpl$dfix)
-    _dfix                                    0x00002c99   Thumb Code    94  dfix.o(x$fpl$dfix)
-    __aeabi_i2d                              0x00002cf7   Thumb Code     0  dflt_clz.o(x$fpl$dflt)
-    _dflt                                    0x00002cf7   Thumb Code    46  dflt_clz.o(x$fpl$dflt)
-    __aeabi_ui2d                             0x00002d25   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
-    _dfltu                                   0x00002d25   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
-    __aeabi_cdcmple                          0x00002d4d   Thumb Code     0  dleqf.o(x$fpl$dleqf)
-    _dcmple                                  0x00002d4d   Thumb Code   120  dleqf.o(x$fpl$dleqf)
-    __fpl_dcmple_InfNaN                      0x00002daf   Thumb Code     0  dleqf.o(x$fpl$dleqf)
-    __aeabi_dmul                             0x00002dc5   Thumb Code     0  dmul.o(x$fpl$dmul)
-    _dmul                                    0x00002dc5   Thumb Code   332  dmul.o(x$fpl$dmul)
-    __fpl_dnaninf                            0x00002f19   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
-    __fpl_dretinf                            0x00002fb5   Thumb Code    12  dretinf.o(x$fpl$dretinf)
-    __aeabi_drsub                            0x00002fc1   Thumb Code     0  daddsub_clz.o(x$fpl$drsb)
-    _drsb                                    0x00002fc1   Thumb Code    22  daddsub_clz.o(x$fpl$drsb)
-    _dsqrt                                   0x00002fd9   Thumb Code   404  dsqrt_umaal.o(x$fpl$dsqrt)
-    __aeabi_dsub                             0x00003171   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
-    _dsub                                    0x00003171   Thumb Code   464  daddsub_clz.o(x$fpl$dsub)
-    __fpl_return_NaN                         0x00003345   Thumb Code   100  retnan.o(x$fpl$retnan)
-    __ARM_scalbn                             0x000033a9   Thumb Code    92  scalbn.o(x$fpl$scalbn)
-    __fpl_cmpreturn                          0x00003405   Thumb Code    48  trapv.o(x$fpl$trapveneer)
-    __I$use$fp                               0x00003434   Number         0  usenofp.o(x$fpl$usenofp)
-    dBfs                                     0x00003a16   Data         512  st7735.o(.constdata)
-    ClockFace                                0x00003c16   Data        4096  screens.o(.constdata)
-    Region$$Table$$Base                      0x00004ddc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00004dfc   Number         0  anon$$obj.o(Region$$Table)
+    GPIOPortF_Handler                        0x0000063d   Thumb Code   110  lab3main.o(i.GPIOPortF_Handler)
+    MinuteTick                               0x000006b1   Thumb Code    44  clocktime.o(i.MinuteTick)
+    PLL_Init                                 0x000006e1   Thumb Code   118  pll.o(i.PLL_Init)
+    ST7735_DrawBitmap                        0x0000075d   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
+    ST7735_DrawChar                          0x0000087d   Thumb Code   256  st7735.o(i.ST7735_DrawChar)
+    ST7735_DrawCharS                         0x00000989   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
+    ST7735_DrawPixel                         0x00000a7d   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
+    ST7735_DrawString                        0x00000ac5   Thumb Code    84  st7735.o(i.ST7735_DrawString)
+    ST7735_FillRect                          0x00000b19   Thumb Code   164  st7735.o(i.ST7735_FillRect)
+    ST7735_FillScreen                        0x00000bc5   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
+    ST7735_InitR                             0x00000be9   Thumb Code    90  st7735.o(i.ST7735_InitR)
+    ST7735_Line                              0x00000c65   Thumb Code   484  plotter.o(i.ST7735_Line)
+    ST7735_OutChar                           0x00000e51   Thumb Code   176  st7735.o(i.ST7735_OutChar)
+    ST7735_OutString                         0x00000f25   Thumb Code    22  st7735.o(i.ST7735_OutString)
+    ST7735_SetCursor                         0x00000f3d   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
+    Screens_Init                             0x00000f5d   Thumb Code    20  screens.o(i.Screens_Init)
+    Timer0A_Handler                          0x00000f75   Thumb Code    16  eventwatch.o(i.Timer0A_Handler)
+    Timer0A_Init                             0x00000f8d   Thumb Code    76  eventwatch.o(i.Timer0A_Init)
+    __ARM_fpclassify                         0x00000fed   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
+    __ieee754_rem_pio2                       0x00001015   Thumb Code   832  rred.o(i.__ieee754_rem_pio2)
+    __kernel_cos                             0x0000139d   Thumb Code   230  cos_i.o(i.__kernel_cos)
+    __kernel_poly                            0x00001499   Thumb Code   170  poly.o(i.__kernel_poly)
+    __kernel_sin                             0x00001545   Thumb Code   224  sin_i.o(i.__kernel_sin)
+    __mathlib_dbl_underflow                  0x00001631   Thumb Code    10  dunder.o(i.__mathlib_dbl_underflow)
+    acos                                     0x00001641   Thumb Code   586  acos.o(i.acos)
+    asin                                     0x000018c9   Thumb Code   584  asin.o(i.asin)
+    checkAlarm                               0x00001b45   Thumb Code    10  clocktime.o(i.checkAlarm)
+    convertASCII                             0x00001d31   Thumb Code    10  screens.o(i.convertASCII)
+    cos                                      0x00001d3d   Thumb Code   164  cos.o(i.cos)
+    down                                     0x00001de9   Thumb Code   314  eventwatch.o(i.down)
+    drawAnalogClock                          0x00001f25   Thumb Code   650  screens.o(i.drawAnalogClock)
+    drawCurrentScreen                        0x000021c9   Thumb Code    50  screens.o(i.drawCurrentScreen)
+    drawDigitalClock                         0x000021fb   Thumb Code   226  screens.o(i.drawDigitalClock)
+    drawMainMenu                             0x000022dd   Thumb Code    92  screens.o(i.drawMainMenu)
+    drawSettings                             0x00002361   Thumb Code   438  screens.o(i.drawSettings)
+    enter                                    0x000025d9   Thumb Code   142  eventwatch.o(i.enter)
+    getAlarmSettingTime                      0x00002669   Thumb Code    16  screens.o(i.getAlarmSettingTime)
+    getAlarmTime                             0x0000267d   Thumb Code    16  clocktime.o(i.getAlarmTime)
+    getCurrentMenuOpt                        0x00002691   Thumb Code     6  screens.o(i.getCurrentMenuOpt)
+    getCurrentScreen                         0x0000269d   Thumb Code     6  screens.o(i.getCurrentScreen)
+    getCurrentSettingsOpt                    0x000026a9   Thumb Code     6  screens.o(i.getCurrentSettingsOpt)
+    getCurrentSettingsOpt2                   0x000026b5   Thumb Code     6  screens.o(i.getCurrentSettingsOpt2)
+    getCurrentTime                           0x000026c1   Thumb Code    16  clocktime.o(i.getCurrentTime)
+    getSettingTime                           0x000026d5   Thumb Code    16  screens.o(i.getSettingTime)
+    initForLab3                              0x000026e9   Thumb Code   198  lab3main.o(i.initForLab3)
+    isAlarmEnabled                           0x000027e9   Thumb Code     6  clocktime.o(i.isAlarmEnabled)
+    main                                     0x000027f5   Thumb Code    24  lab3main.o(i.main)
+    minuteUpdate                             0x0000280d   Thumb Code    66  eventwatch.o(i.minuteUpdate)
+    setAlarmSettingTime                      0x000028dd   Thumb Code    18  screens.o(i.setAlarmSettingTime)
+    setAlarmTime                             0x000028f5   Thumb Code    12  clocktime.o(i.setAlarmTime)
+    setCurrentMenuOpt                        0x00002905   Thumb Code     6  screens.o(i.setCurrentMenuOpt)
+    setCurrentScreen                         0x00002911   Thumb Code     6  screens.o(i.setCurrentScreen)
+    setCurrentSettingsOpt                    0x0000291d   Thumb Code     6  screens.o(i.setCurrentSettingsOpt)
+    setCurrentSettingsOpt2                   0x00002929   Thumb Code     6  screens.o(i.setCurrentSettingsOpt2)
+    setCurrentTime                           0x00002935   Thumb Code    12  clocktime.o(i.setCurrentTime)
+    setLineThreshold                         0x00002945   Thumb Code     6  plotter.o(i.setLineThreshold)
+    setSettingTime                           0x00002951   Thumb Code    18  screens.o(i.setSettingTime)
+    sin                                      0x00002969   Thumb Code   166  sin.o(i.sin)
+    sqrt                                     0x00002a19   Thumb Code    76  sqrt.o(i.sqrt)
+    toggleAlarm                              0x00002a65   Thumb Code    50  alarm.o(i.toggleAlarm)
+    up                                       0x00002aa5   Thumb Code   296  eventwatch.o(i.up)
+    __aeabi_dadd                             0x00002c1d   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
+    _dadd                                    0x00002c1d   Thumb Code   332  daddsub_clz.o(x$fpl$dadd)
+    __fpl_dcheck_NaN1                        0x00002d6d   Thumb Code    10  dcheck1.o(x$fpl$dcheck1)
+    __fpl_dcmp_Inf                           0x00002d7d   Thumb Code    24  dcmpi.o(x$fpl$dcmpinf)
+    __aeabi_ddiv                             0x00002d95   Thumb Code     0  ddiv.o(x$fpl$ddiv)
+    _ddiv                                    0x00002d95   Thumb Code   552  ddiv.o(x$fpl$ddiv)
+    __aeabi_cdcmpeq                          0x00003045   Thumb Code     0  deqf.o(x$fpl$deqf)
+    _dcmpeq                                  0x00003045   Thumb Code   120  deqf.o(x$fpl$deqf)
+    __aeabi_d2iz                             0x000030bd   Thumb Code     0  dfix.o(x$fpl$dfix)
+    _dfix                                    0x000030bd   Thumb Code    94  dfix.o(x$fpl$dfix)
+    __aeabi_i2d                              0x0000311b   Thumb Code     0  dflt_clz.o(x$fpl$dflt)
+    _dflt                                    0x0000311b   Thumb Code    46  dflt_clz.o(x$fpl$dflt)
+    __aeabi_ui2d                             0x00003149   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
+    _dfltu                                   0x00003149   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
+    __aeabi_cdcmple                          0x00003171   Thumb Code     0  dleqf.o(x$fpl$dleqf)
+    _dcmple                                  0x00003171   Thumb Code   120  dleqf.o(x$fpl$dleqf)
+    __fpl_dcmple_InfNaN                      0x000031d3   Thumb Code     0  dleqf.o(x$fpl$dleqf)
+    __aeabi_dmul                             0x000031e9   Thumb Code     0  dmul.o(x$fpl$dmul)
+    _dmul                                    0x000031e9   Thumb Code   332  dmul.o(x$fpl$dmul)
+    __fpl_dnaninf                            0x0000333d   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
+    __fpl_dretinf                            0x000033d9   Thumb Code    12  dretinf.o(x$fpl$dretinf)
+    __aeabi_drsub                            0x000033e5   Thumb Code     0  daddsub_clz.o(x$fpl$drsb)
+    _drsb                                    0x000033e5   Thumb Code    22  daddsub_clz.o(x$fpl$drsb)
+    _dsqrt                                   0x000033fd   Thumb Code   404  dsqrt_umaal.o(x$fpl$dsqrt)
+    __aeabi_dsub                             0x00003595   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
+    _dsub                                    0x00003595   Thumb Code   464  daddsub_clz.o(x$fpl$dsub)
+    __fpl_return_NaN                         0x00003769   Thumb Code   100  retnan.o(x$fpl$retnan)
+    __ARM_scalbn                             0x000037cd   Thumb Code    92  scalbn.o(x$fpl$scalbn)
+    __fpl_cmpreturn                          0x00003829   Thumb Code    48  trapv.o(x$fpl$trapveneer)
+    __I$use$fp                               0x00003858   Number         0  usenofp.o(x$fpl$usenofp)
+    dBfs                                     0x00003e3a   Data         512  st7735.o(.constdata)
+    ClockFace                                0x0000403a   Data        4096  screens.o(.constdata)
+    Region$$Table$$Base                      0x00005204   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00005224   Number         0  anon$$obj.o(Region$$Table)
     StX                                      0x20000000   Data           4  st7735.o(.data)
     StY                                      0x20000004   Data           4  st7735.o(.data)
     StTextColor                              0x20000008   Data           2  st7735.o(.data)
@@ -1294,9 +1312,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00004eac, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x000052d4, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x00004dfc, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x00005224, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1369,94 +1387,113 @@ Memory Map of the image
     0x000005e6   0x00000002   PAD
     0x000005e8   0x00000020   Code   RO          464    i.ClockInit         clocktime.o
     0x00000608   0x00000020   Code   RO           28    i.Delay1ms          st7735.o
-    0x00000628   0x00000014   Code   RO          397    i.EventWatch_Init   eventwatch.o
-    0x0000063c   0x00000030   Code   RO          465    i.MinuteTick        clocktime.o
-    0x0000066c   0x0000007c   Code   RO           12    i.PLL_Init          pll.o
-    0x000006e8   0x00000120   Code   RO           35    i.ST7735_DrawBitmap  st7735.o
-    0x00000808   0x0000010c   Code   RO           36    i.ST7735_DrawChar   st7735.o
-    0x00000914   0x000000f4   Code   RO           37    i.ST7735_DrawCharS  st7735.o
-    0x00000a08   0x00000048   Code   RO           40    i.ST7735_DrawPixel  st7735.o
-    0x00000a50   0x00000054   Code   RO           41    i.ST7735_DrawString  st7735.o
-    0x00000aa4   0x000000ac   Code   RO           42    i.ST7735_FillRect   st7735.o
-    0x00000b50   0x00000024   Code   RO           43    i.ST7735_FillScreen  st7735.o
-    0x00000b74   0x0000007c   Code   RO           45    i.ST7735_InitR      st7735.o
-    0x00000bf0   0x000001ec   Code   RO          310    i.ST7735_Line       plotter.o
-    0x00000ddc   0x000000d4   Code   RO           47    i.ST7735_OutChar    st7735.o
-    0x00000eb0   0x00000016   Code   RO           48    i.ST7735_OutString  st7735.o
-    0x00000ec6   0x00000002   PAD
-    0x00000ec8   0x00000020   Code   RO           58    i.ST7735_SetCursor  st7735.o
-    0x00000ee8   0x00000018   Code   RO          554    i.Screens_Init      screens.o
-    0x00000f00   0x00000018   Code   RO          399    i.Timer0A_Handler   eventwatch.o
-    0x00000f18   0x00000074   Code   RO          400    i.Timer0A_Init      eventwatch.o
-    0x00000f8c   0x00000028   Code   RO          829    i.__ARM_fpclassify  m_ws.l(fpclassify.o)
-    0x00000fb4   0x00000388   Code   RO          833    i.__ieee754_rem_pio2  m_ws.l(rred.o)
-    0x0000133c   0x000000fc   Code   RO          824    i.__kernel_cos      m_ws.l(cos_i.o)
-    0x00001438   0x000000aa   Code   RO          831    i.__kernel_poly     m_ws.l(poly.o)
-    0x000014e2   0x00000002   PAD
-    0x000014e4   0x000000ec   Code   RO          838    i.__kernel_sin      m_ws.l(sin_i.o)
-    0x000015d0   0x00000010   Code   RO          827    i.__mathlib_dbl_underflow  m_ws.l(dunder.o)
-    0x000015e0   0x00000288   Code   RO          760    i.acos              m_ws.l(acos.o)
-    0x00001868   0x0000027c   Code   RO          770    i.asin              m_ws.l(asin.o)
-    0x00001ae4   0x00000010   Code   RO          466    i.checkAlarm        clocktime.o
-    0x00001af4   0x00000056   Code   RO           62    i.commandList       st7735.o
-    0x00001b4a   0x00000002   PAD
-    0x00001b4c   0x00000184   Code   RO           63    i.commonInit        st7735.o
-    0x00001cd0   0x0000000a   Code   RO          555    i.convertASCII      screens.o
-    0x00001cda   0x00000002   PAD
-    0x00001cdc   0x000000ac   Code   RO          780    i.cos               m_ws.l(cos.o)
-    0x00001d88   0x000002a4   Code   RO          556    i.drawAnalogClock   screens.o
-    0x0000202c   0x00000032   Code   RO          557    i.drawCurrentScreen  screens.o
-    0x0000205e   0x000000e2   Code   RO          558    i.drawDigitalClock  screens.o
-    0x00002140   0x00000084   Code   RO          559    i.drawMainMenu      screens.o
-    0x000021c4   0x00000278   Code   RO          560    i.drawSettings      screens.o
-    0x0000243c   0x00000014   Code   RO          467    i.getAlarmTime      clocktime.o
-    0x00002450   0x0000000c   Code   RO          563    i.getCurrentScreen  screens.o
-    0x0000245c   0x00000014   Code   RO          468    i.getCurrentTime    clocktime.o
-    0x00002470   0x00000100   Code   RO          351    i.initForLab3       lab3main.o
-    0x00002570   0x0000000c   Code   RO          469    i.isAlarmEnabled    clocktime.o
-    0x0000257c   0x00000014   Code   RO          352    i.main              lab3main.o
-    0x00002590   0x00000048   Code   RO          404    i.minuteUpdate      eventwatch.o
-    0x000025d8   0x00000012   Code   RO           68    i.pushColor         st7735.o
-    0x000025ea   0x00000002   PAD
-    0x000025ec   0x00000074   Code   RO           69    i.setAddrWindow     st7735.o
-    0x00002660   0x0000000c   Code   RO          313    i.setLineThreshold  plotter.o
-    0x0000266c   0x000000b0   Code   RO          788    i.sin               m_ws.l(sin.o)
-    0x0000271c   0x0000004c   Code   RO          796    i.sqrt              m_ws.l(sqrt.o)
-    0x00002768   0x00000040   Code   RO          529    i.toggleAlarm       alarm.o
-    0x000027a8   0x00000030   Code   RO           70    i.writecommand      st7735.o
-    0x000027d8   0x00000020   Code   RO           71    i.writedata         st7735.o
-    0x000027f8   0x00000150   Code   RO          733    x$fpl$dadd          fz_ws.l(daddsub_clz.o)
-    0x00002948   0x00000010   Code   RO          866    x$fpl$dcheck1       fz_ws.l(dcheck1.o)
-    0x00002958   0x00000018   Code   RO          813    x$fpl$dcmpinf       fz_ws.l(dcmpi.o)
-    0x00002970   0x000002b0   Code   RO          740    x$fpl$ddiv          fz_ws.l(ddiv.o)
-    0x00002c20   0x00000078   Code   RO          743    x$fpl$deqf          fz_ws.l(deqf.o)
-    0x00002c98   0x0000005e   Code   RO          745    x$fpl$dfix          fz_ws.l(dfix.o)
-    0x00002cf6   0x0000002e   Code   RO          750    x$fpl$dflt          fz_ws.l(dflt_clz.o)
-    0x00002d24   0x00000026   Code   RO          749    x$fpl$dfltu         fz_ws.l(dflt_clz.o)
-    0x00002d4a   0x00000002   PAD
-    0x00002d4c   0x00000078   Code   RO          755    x$fpl$dleqf         fz_ws.l(dleqf.o)
-    0x00002dc4   0x00000154   Code   RO          757    x$fpl$dmul          fz_ws.l(dmul.o)
-    0x00002f18   0x0000009c   Code   RO          815    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
-    0x00002fb4   0x0000000c   Code   RO          817    x$fpl$dretinf       fz_ws.l(dretinf.o)
-    0x00002fc0   0x00000016   Code   RO          734    x$fpl$drsb          fz_ws.l(daddsub_clz.o)
-    0x00002fd6   0x00000002   PAD
-    0x00002fd8   0x00000198   Code   RO          819    x$fpl$dsqrt         fz_ws.l(dsqrt_umaal.o)
-    0x00003170   0x000001d4   Code   RO          735    x$fpl$dsub          fz_ws.l(daddsub_clz.o)
-    0x00003344   0x00000064   Code   RO          881    x$fpl$retnan        fz_ws.l(retnan.o)
-    0x000033a8   0x0000005c   Code   RO          821    x$fpl$scalbn        fz_ws.l(scalbn.o)
-    0x00003404   0x00000030   Code   RO          928    x$fpl$trapveneer    fz_ws.l(trapv.o)
-    0x00003434   0x00000000   Code   RO          823    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x00003434   0x000007e2   Data   RO           73    .constdata          st7735.o
-    0x00003c16   0x00001000   Data   RO          576    .constdata          screens.o
-    0x00004c16   0x00000002   PAD
-    0x00004c18   0x00000050   Data   RO          761    .constdata          m_ws.l(acos.o)
-    0x00004c68   0x00000050   Data   RO          771    .constdata          m_ws.l(asin.o)
-    0x00004cb8   0x00000030   Data   RO          825    .constdata          m_ws.l(cos_i.o)
-    0x00004ce8   0x000000c8   Data   RO          835    .constdata          m_ws.l(rred.o)
-    0x00004db0   0x00000028   Data   RO          839    .constdata          m_ws.l(sin_i.o)
-    0x00004dd8   0x00000002   Data   RO          577    .conststring        screens.o
-    0x00004dda   0x00000002   PAD
-    0x00004ddc   0x00000020   Data   RO         1006    Region$$Table       anon$$obj.o
+    0x00000628   0x00000014   Code   RO          403    i.EventWatch_Init   eventwatch.o
+    0x0000063c   0x00000074   Code   RO          351    i.GPIOPortF_Handler  lab3main.o
+    0x000006b0   0x00000030   Code   RO          465    i.MinuteTick        clocktime.o
+    0x000006e0   0x0000007c   Code   RO           12    i.PLL_Init          pll.o
+    0x0000075c   0x00000120   Code   RO           35    i.ST7735_DrawBitmap  st7735.o
+    0x0000087c   0x0000010c   Code   RO           36    i.ST7735_DrawChar   st7735.o
+    0x00000988   0x000000f4   Code   RO           37    i.ST7735_DrawCharS  st7735.o
+    0x00000a7c   0x00000048   Code   RO           40    i.ST7735_DrawPixel  st7735.o
+    0x00000ac4   0x00000054   Code   RO           41    i.ST7735_DrawString  st7735.o
+    0x00000b18   0x000000ac   Code   RO           42    i.ST7735_FillRect   st7735.o
+    0x00000bc4   0x00000024   Code   RO           43    i.ST7735_FillScreen  st7735.o
+    0x00000be8   0x0000007c   Code   RO           45    i.ST7735_InitR      st7735.o
+    0x00000c64   0x000001ec   Code   RO          310    i.ST7735_Line       plotter.o
+    0x00000e50   0x000000d4   Code   RO           47    i.ST7735_OutChar    st7735.o
+    0x00000f24   0x00000016   Code   RO           48    i.ST7735_OutString  st7735.o
+    0x00000f3a   0x00000002   PAD
+    0x00000f3c   0x00000020   Code   RO           58    i.ST7735_SetCursor  st7735.o
+    0x00000f5c   0x00000018   Code   RO          554    i.Screens_Init      screens.o
+    0x00000f74   0x00000018   Code   RO          404    i.Timer0A_Handler   eventwatch.o
+    0x00000f8c   0x00000060   Code   RO          405    i.Timer0A_Init      eventwatch.o
+    0x00000fec   0x00000028   Code   RO          829    i.__ARM_fpclassify  m_ws.l(fpclassify.o)
+    0x00001014   0x00000388   Code   RO          833    i.__ieee754_rem_pio2  m_ws.l(rred.o)
+    0x0000139c   0x000000fc   Code   RO          824    i.__kernel_cos      m_ws.l(cos_i.o)
+    0x00001498   0x000000aa   Code   RO          831    i.__kernel_poly     m_ws.l(poly.o)
+    0x00001542   0x00000002   PAD
+    0x00001544   0x000000ec   Code   RO          838    i.__kernel_sin      m_ws.l(sin_i.o)
+    0x00001630   0x00000010   Code   RO          827    i.__mathlib_dbl_underflow  m_ws.l(dunder.o)
+    0x00001640   0x00000288   Code   RO          760    i.acos              m_ws.l(acos.o)
+    0x000018c8   0x0000027c   Code   RO          770    i.asin              m_ws.l(asin.o)
+    0x00001b44   0x00000010   Code   RO          466    i.checkAlarm        clocktime.o
+    0x00001b54   0x00000056   Code   RO           62    i.commandList       st7735.o
+    0x00001baa   0x00000002   PAD
+    0x00001bac   0x00000184   Code   RO           63    i.commonInit        st7735.o
+    0x00001d30   0x0000000a   Code   RO          555    i.convertASCII      screens.o
+    0x00001d3a   0x00000002   PAD
+    0x00001d3c   0x000000ac   Code   RO          780    i.cos               m_ws.l(cos.o)
+    0x00001de8   0x0000013a   Code   RO          407    i.down              eventwatch.o
+    0x00001f22   0x00000002   PAD
+    0x00001f24   0x000002a4   Code   RO          556    i.drawAnalogClock   screens.o
+    0x000021c8   0x00000032   Code   RO          557    i.drawCurrentScreen  screens.o
+    0x000021fa   0x000000e2   Code   RO          558    i.drawDigitalClock  screens.o
+    0x000022dc   0x00000084   Code   RO          559    i.drawMainMenu      screens.o
+    0x00002360   0x00000278   Code   RO          560    i.drawSettings      screens.o
+    0x000025d8   0x0000008e   Code   RO          408    i.enter             eventwatch.o
+    0x00002666   0x00000002   PAD
+    0x00002668   0x00000014   Code   RO          561    i.getAlarmSettingTime  screens.o
+    0x0000267c   0x00000014   Code   RO          467    i.getAlarmTime      clocktime.o
+    0x00002690   0x0000000c   Code   RO          562    i.getCurrentMenuOpt  screens.o
+    0x0000269c   0x0000000c   Code   RO          563    i.getCurrentScreen  screens.o
+    0x000026a8   0x0000000c   Code   RO          564    i.getCurrentSettingsOpt  screens.o
+    0x000026b4   0x0000000c   Code   RO          565    i.getCurrentSettingsOpt2  screens.o
+    0x000026c0   0x00000014   Code   RO          468    i.getCurrentTime    clocktime.o
+    0x000026d4   0x00000014   Code   RO          566    i.getSettingTime    screens.o
+    0x000026e8   0x00000100   Code   RO          352    i.initForLab3       lab3main.o
+    0x000027e8   0x0000000c   Code   RO          469    i.isAlarmEnabled    clocktime.o
+    0x000027f4   0x00000018   Code   RO          353    i.main              lab3main.o
+    0x0000280c   0x00000048   Code   RO          409    i.minuteUpdate      eventwatch.o
+    0x00002854   0x00000012   Code   RO           68    i.pushColor         st7735.o
+    0x00002866   0x00000002   PAD
+    0x00002868   0x00000074   Code   RO           69    i.setAddrWindow     st7735.o
+    0x000028dc   0x00000018   Code   RO          570    i.setAlarmSettingTime  screens.o
+    0x000028f4   0x00000010   Code   RO          471    i.setAlarmTime      clocktime.o
+    0x00002904   0x0000000c   Code   RO          571    i.setCurrentMenuOpt  screens.o
+    0x00002910   0x0000000c   Code   RO          572    i.setCurrentScreen  screens.o
+    0x0000291c   0x0000000c   Code   RO          573    i.setCurrentSettingsOpt  screens.o
+    0x00002928   0x0000000c   Code   RO          574    i.setCurrentSettingsOpt2  screens.o
+    0x00002934   0x00000010   Code   RO          472    i.setCurrentTime    clocktime.o
+    0x00002944   0x0000000c   Code   RO          313    i.setLineThreshold  plotter.o
+    0x00002950   0x00000018   Code   RO          575    i.setSettingTime    screens.o
+    0x00002968   0x000000b0   Code   RO          788    i.sin               m_ws.l(sin.o)
+    0x00002a18   0x0000004c   Code   RO          796    i.sqrt              m_ws.l(sqrt.o)
+    0x00002a64   0x00000040   Code   RO          529    i.toggleAlarm       alarm.o
+    0x00002aa4   0x00000128   Code   RO          410    i.up                eventwatch.o
+    0x00002bcc   0x00000030   Code   RO           70    i.writecommand      st7735.o
+    0x00002bfc   0x00000020   Code   RO           71    i.writedata         st7735.o
+    0x00002c1c   0x00000150   Code   RO          733    x$fpl$dadd          fz_ws.l(daddsub_clz.o)
+    0x00002d6c   0x00000010   Code   RO          866    x$fpl$dcheck1       fz_ws.l(dcheck1.o)
+    0x00002d7c   0x00000018   Code   RO          813    x$fpl$dcmpinf       fz_ws.l(dcmpi.o)
+    0x00002d94   0x000002b0   Code   RO          740    x$fpl$ddiv          fz_ws.l(ddiv.o)
+    0x00003044   0x00000078   Code   RO          743    x$fpl$deqf          fz_ws.l(deqf.o)
+    0x000030bc   0x0000005e   Code   RO          745    x$fpl$dfix          fz_ws.l(dfix.o)
+    0x0000311a   0x0000002e   Code   RO          750    x$fpl$dflt          fz_ws.l(dflt_clz.o)
+    0x00003148   0x00000026   Code   RO          749    x$fpl$dfltu         fz_ws.l(dflt_clz.o)
+    0x0000316e   0x00000002   PAD
+    0x00003170   0x00000078   Code   RO          755    x$fpl$dleqf         fz_ws.l(dleqf.o)
+    0x000031e8   0x00000154   Code   RO          757    x$fpl$dmul          fz_ws.l(dmul.o)
+    0x0000333c   0x0000009c   Code   RO          815    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
+    0x000033d8   0x0000000c   Code   RO          817    x$fpl$dretinf       fz_ws.l(dretinf.o)
+    0x000033e4   0x00000016   Code   RO          734    x$fpl$drsb          fz_ws.l(daddsub_clz.o)
+    0x000033fa   0x00000002   PAD
+    0x000033fc   0x00000198   Code   RO          819    x$fpl$dsqrt         fz_ws.l(dsqrt_umaal.o)
+    0x00003594   0x000001d4   Code   RO          735    x$fpl$dsub          fz_ws.l(daddsub_clz.o)
+    0x00003768   0x00000064   Code   RO          881    x$fpl$retnan        fz_ws.l(retnan.o)
+    0x000037cc   0x0000005c   Code   RO          821    x$fpl$scalbn        fz_ws.l(scalbn.o)
+    0x00003828   0x00000030   Code   RO          928    x$fpl$trapveneer    fz_ws.l(trapv.o)
+    0x00003858   0x00000000   Code   RO          823    x$fpl$usenofp       fz_ws.l(usenofp.o)
+    0x00003858   0x000007e2   Data   RO           73    .constdata          st7735.o
+    0x0000403a   0x00001000   Data   RO          576    .constdata          screens.o
+    0x0000503a   0x00000006   PAD
+    0x00005040   0x00000050   Data   RO          761    .constdata          m_ws.l(acos.o)
+    0x00005090   0x00000050   Data   RO          771    .constdata          m_ws.l(asin.o)
+    0x000050e0   0x00000030   Data   RO          825    .constdata          m_ws.l(cos_i.o)
+    0x00005110   0x000000c8   Data   RO          835    .constdata          m_ws.l(rred.o)
+    0x000051d8   0x00000028   Data   RO          839    .constdata          m_ws.l(sin_i.o)
+    0x00005200   0x00000002   Data   RO          577    .conststring        screens.o
+    0x00005202   0x00000002   PAD
+    0x00005204   0x00000020   Data   RO         1006    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x000000b0, Max: 0xffffffff, ABSOLUTE)
@@ -1466,7 +1503,7 @@ Memory Map of the image
     0x20000000   0x0000002c   Data   RW           74    .data               st7735.o
     0x2000002c   0x00000004   PAD
     0x20000030   0x00000018   Data   RW          315    .data               plotter.o
-    0x20000048   0x0000000c   Data   RW          407    .data               eventwatch.o
+    0x20000048   0x0000000c   Data   RW          412    .data               eventwatch.o
     0x20000054   0x00000005   Data   RW          473    .data               clocktime.o
     0x20000059   0x00000001   Data   RW          530    .data               alarm.o
     0x2000005a   0x00000002   PAD
@@ -1489,20 +1526,20 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        64         14          0          1          0        463   alarm.o
-       148         36          0          5          0       2324   clocktime.o
-       232         44          0         12          0       2269   eventwatch.o
-       276         38          0          0          0       1017   lab3main.o
-       124          6          0          0          0       1791   pll.o
-       504         14          0         24          0       2474   plotter.o
-      1762        270       4098         81          0       5303   screens.o
-      2274        210       2018         44          0      16632   st7735.o
-       692        632          0          0       1024        836   startup.o
+        64         14          0          1          0        515   alarm.o
+       180         44          0          5          0       3260   clocktime.o
+       964         42          0         12          0       4005   eventwatch.o
+       396         64          0          0          0       1545   lab3main.o
+       124          6          0          0          0       1815   pll.o
+       504         14          0         24          0       2570   plotter.o
+      1934        332       4098         81          0       9886   screens.o
+      2274        210       2018         44          0      17136   st7735.o
+       692        632          0          0       1024        884   startup.o
 
     ----------------------------------------------------------------------
-      6084       1264       6152        176       1024      33109   Object Totals
+      7144       1358       6156        176       1024      41616   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         8          0          4          9          0          0   (incl. Padding)
+        12          0          8          9          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1589,15 +1626,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13364       1802       6600        176       1120      33137   Grand Totals
-     13364       1802       6600        176       1120      33137   ELF Image Totals
-     13364       1802       6600        176          0          0   ROM Totals
+     14424       1896       6604        176       1120      40760   Grand Totals
+     14424       1896       6604        176       1120      40760   ELF Image Totals
+     14424       1896       6604        176          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                19964 (  19.50kB)
+    Total RO  Size (Code + RO Data)                21028 (  20.54kB)
     Total RW  Size (RW Data + ZI Data)              1296 (   1.27kB)
-    Total ROM Size (Code + RO Data + RW Data)      20140 (  19.67kB)
+    Total ROM Size (Code + RO Data + RW Data)      21204 (  20.71kB)
 
 ==============================================================================
 

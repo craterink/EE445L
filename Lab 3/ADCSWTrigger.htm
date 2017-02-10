@@ -3,21 +3,21 @@
 <title>Static Call Graph - [.\ADCSWTrigger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\ADCSWTrigger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Wed Feb 08 12:25:36 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Fri Feb 10 14:54:27 2017
 <BR><P>
 <H3>Maximum Stack Usage =        400 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-minuteUpdate &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+GPIOPortF_Handler &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 <P>
 <H3>
 Functions with no stack information
 </H3><UL>
  <LI><a href="#[82]">Reset_Handler</a>
- <LI><a href="#[112]">DisableInterrupts</a>
- <LI><a href="#[113]">EnableInterrupts</a>
- <LI><a href="#[bd]">StartCritical</a>
- <LI><a href="#[be]">EndCritical</a>
- <LI><a href="#[114]">WaitForInterrupt</a>
+ <LI><a href="#[122]">DisableInterrupts</a>
+ <LI><a href="#[e9]">EnableInterrupts</a>
+ <LI><a href="#[123]">StartCritical</a>
+ <LI><a href="#[124]">EndCritical</a>
+ <LI><a href="#[eb]">WaitForInterrupt</a>
  <LI><a href="#[9e]">__user_initial_stackheap</a>
 </UL>
 </UL>
@@ -65,7 +65,7 @@ Function Pointers
  <LI><a href="#[f]">GPIOPortC_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[10]">GPIOPortD_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[11]">GPIOPortE_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[2b]">GPIOPortF_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[2b]">GPIOPortF_Handler</a> from lab3main.o(i.GPIOPortF_Handler) referenced from startup.o(RESET)
  <LI><a href="#[2c]">GPIOPortG_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2d]">GPIOPortH_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[43]">GPIOPortJ_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -312,9 +312,6 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[11]"></a>GPIOPortE_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[2b]"></a>GPIOPortF_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[2c]"></a>GPIOPortG_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
@@ -596,9 +593,9 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
 </UL>
 
-<P><STRONG><a name="[f0]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[100]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
-<P><STRONG><a name="[f1]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[101]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
 <P><STRONG><a name="[87]"></a>__scatterload_copy</STRONG> (Thumb, 26 bytes, Stack size unknown bytes, __scatter_copy.o(!!handler_copy), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
@@ -606,7 +603,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
 </UL>
 
-<P><STRONG><a name="[f2]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
+<P><STRONG><a name="[102]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
 
 <P><STRONG><a name="[88]"></a>_printf_d</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_d.o(.ARM.Collect$$_printf_percent$$00000009))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56 + Unknown Stack Size
@@ -619,74 +616,74 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
 </UL>
 
-<P><STRONG><a name="[f3]"></a>_printf_percent_end</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_percent_end.o(.ARM.Collect$$_printf_percent$$00000017))
+<P><STRONG><a name="[103]"></a>_printf_percent_end</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_percent_end.o(.ARM.Collect$$_printf_percent$$00000017))
 
 <P><STRONG><a name="[8d]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
 </UL>
 
-<P><STRONG><a name="[f4]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
+<P><STRONG><a name="[104]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
 
-<P><STRONG><a name="[f5]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002A))
+<P><STRONG><a name="[105]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002A))
 
-<P><STRONG><a name="[f6]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+<P><STRONG><a name="[106]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
 
-<P><STRONG><a name="[f7]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+<P><STRONG><a name="[107]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
 
-<P><STRONG><a name="[f8]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
+<P><STRONG><a name="[108]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
 
-<P><STRONG><a name="[f9]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+<P><STRONG><a name="[109]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
 
-<P><STRONG><a name="[fa]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
+<P><STRONG><a name="[10a]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
 
-<P><STRONG><a name="[fb]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+<P><STRONG><a name="[10b]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
 
-<P><STRONG><a name="[fc]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
+<P><STRONG><a name="[10c]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
 
-<P><STRONG><a name="[fd]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000008))
+<P><STRONG><a name="[10d]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000008))
 
-<P><STRONG><a name="[fe]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000F))
+<P><STRONG><a name="[10e]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000F))
 
-<P><STRONG><a name="[ff]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
+<P><STRONG><a name="[10f]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
 
-<P><STRONG><a name="[100]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+<P><STRONG><a name="[110]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
 
-<P><STRONG><a name="[101]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+<P><STRONG><a name="[111]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
 
-<P><STRONG><a name="[102]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+<P><STRONG><a name="[112]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
 
-<P><STRONG><a name="[103]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+<P><STRONG><a name="[113]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
 
-<P><STRONG><a name="[104]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000031))
+<P><STRONG><a name="[114]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000031))
 
-<P><STRONG><a name="[105]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
+<P><STRONG><a name="[115]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
 
-<P><STRONG><a name="[106]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+<P><STRONG><a name="[116]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
 
-<P><STRONG><a name="[107]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
+<P><STRONG><a name="[117]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
 
 <P><STRONG><a name="[92]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
 </UL>
 
-<P><STRONG><a name="[108]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000006))
+<P><STRONG><a name="[118]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000006))
 
-<P><STRONG><a name="[109]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E))
+<P><STRONG><a name="[119]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E))
 
-<P><STRONG><a name="[10a]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+<P><STRONG><a name="[11a]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
 
-<P><STRONG><a name="[10b]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000009))
+<P><STRONG><a name="[11b]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000009))
 
-<P><STRONG><a name="[10c]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000003))
+<P><STRONG><a name="[11c]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000003))
 
-<P><STRONG><a name="[10d]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000B))
+<P><STRONG><a name="[11d]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000B))
 
 <P><STRONG><a name="[85]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry.o(.ARM.Collect$$rtentry$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
 </UL>
 
-<P><STRONG><a name="[10e]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+<P><STRONG><a name="[11e]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000002))
 
 <P><STRONG><a name="[8a]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry4.o(.ARM.Collect$$rtentry$$00000004))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -699,7 +696,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
 </UL>
 
-<P><STRONG><a name="[10f]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000009))
+<P><STRONG><a name="[11f]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[8e]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
@@ -709,7 +706,7 @@ Global Symbols
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 </UL>
 
-<P><STRONG><a name="[110]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+<P><STRONG><a name="[120]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
 
 <P><STRONG><a name="[9f]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -719,25 +716,25 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
 </UL>
 
-<P><STRONG><a name="[111]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+<P><STRONG><a name="[121]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
 
 <P><STRONG><a name="[93]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
 
-<P><STRONG><a name="[112]"></a>DisableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[122]"></a>DisableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[113]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
-
-<P><STRONG><a name="[bd]"></a>StartCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_Init
+<P><STRONG><a name="[e9]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForLab3
 </UL>
 
-<P><STRONG><a name="[be]"></a>EndCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_Init
-</UL>
+<P><STRONG><a name="[123]"></a>StartCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[114]"></a>WaitForInterrupt</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[124]"></a>EndCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+
+<P><STRONG><a name="[eb]"></a>WaitForInterrupt</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
 
 <P><STRONG><a name="[9e]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
@@ -750,7 +747,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
 </UL>
 
 <P><STRONG><a name="[97]"></a>__printf</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, __printf.o(.text))
@@ -770,11 +767,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_d
 </UL>
 
-<P><STRONG><a name="[115]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[125]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[116]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[126]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[117]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[127]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
 <P><STRONG><a name="[9a]"></a>__read_errno</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, _rserrno.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
@@ -785,11 +782,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
 </UL>
 
 <P><STRONG><a name="[99]"></a>_printf_int_common</STRONG> (Thumb, 184 bytes, Stack size 32 bytes, _printf_intcommon.o(.text))
@@ -817,17 +814,17 @@ Global Symbols
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__read_errno
 </UL>
 
-<P><STRONG><a name="[118]"></a>__errno$intlibspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text), UNUSED)
+<P><STRONG><a name="[128]"></a>__errno$intlibspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text), UNUSED)
 
-<P><STRONG><a name="[119]"></a>__rt_errno_addr$intlibspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text), UNUSED)
+<P><STRONG><a name="[129]"></a>__rt_errno_addr$intlibspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text), UNUSED)
 
-<P><STRONG><a name="[11a]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[12a]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[9d]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[11b]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[12b]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[8b]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -849,166 +846,176 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[11c]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[12c]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[11d]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[12d]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[11e]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
+<P><STRONG><a name="[12e]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[db]"></a>ClockInit</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, clocktime.o(i.ClockInit))
+<P><STRONG><a name="[ea]"></a>ClockInit</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, clocktime.o(i.ClockInit))
 <BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cc]"></a>Delay1ms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, st7735.o(i.Delay1ms))
+<P><STRONG><a name="[cd]"></a>Delay1ms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, st7735.o(i.Delay1ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Delay1ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
+<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
 
-<P><STRONG><a name="[a0]"></a>EventWatch_Init</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, eventwatch.o(i.EventWatch_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
-<LI>Call Chain = EventWatch_Init &rArr; Timer0A_Init
+<P><STRONG><a name="[a0]"></a>EventWatch_Init</STRONG> (Thumb, 12 bytes, Stack size 4 bytes, eventwatch.o(i.EventWatch_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = EventWatch_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[dc]"></a>MinuteTick</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, clocktime.o(i.MinuteTick))
+<P><STRONG><a name="[2b]"></a>GPIOPortF_Handler</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, lab3main.o(i.GPIOPortF_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
+<LI>Call Chain = GPIOPortF_Handler &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[ec]"></a>MinuteTick</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, clocktime.o(i.MinuteTick))
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;minuteUpdate
 </UL>
 
-<P><STRONG><a name="[da]"></a>PLL_Init</STRONG> (Thumb, 118 bytes, Stack size 0 bytes, pll.o(i.PLL_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForLab3
+<P><STRONG><a name="[e8]"></a>PLL_Init</STRONG> (Thumb, 118 bytes, Stack size 0 bytes, pll.o(i.PLL_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForLab3
 </UL>
 
-<P><STRONG><a name="[a2]"></a>ST7735_DrawBitmap</STRONG> (Thumb, 280 bytes, Stack size 40 bytes, st7735.o(i.ST7735_DrawBitmap))
+<P><STRONG><a name="[a6]"></a>ST7735_DrawBitmap</STRONG> (Thumb, 280 bytes, Stack size 40 bytes, st7735.o(i.ST7735_DrawBitmap))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[a5]"></a>ST7735_DrawChar</STRONG> (Thumb, 256 bytes, Stack size 56 bytes, st7735.o(i.ST7735_DrawChar))
+<P><STRONG><a name="[a9]"></a>ST7735_DrawChar</STRONG> (Thumb, 256 bytes, Stack size 56 bytes, st7735.o(i.ST7735_DrawChar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = ST7735_DrawChar &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
 </UL>
 
-<P><STRONG><a name="[a7]"></a>ST7735_DrawCharS</STRONG> (Thumb, 232 bytes, Stack size 48 bytes, st7735.o(i.ST7735_DrawCharS))
+<P><STRONG><a name="[ab]"></a>ST7735_DrawCharS</STRONG> (Thumb, 232 bytes, Stack size 48 bytes, st7735.o(i.ST7735_DrawCharS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawString
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawString
 </UL>
 
-<P><STRONG><a name="[a8]"></a>ST7735_DrawPixel</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, st7735.o(i.ST7735_DrawPixel))
+<P><STRONG><a name="[ac]"></a>ST7735_DrawPixel</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, st7735.o(i.ST7735_DrawPixel))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ST7735_DrawPixel &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
 </UL>
 
-<P><STRONG><a name="[aa]"></a>ST7735_DrawString</STRONG> (Thumb, 84 bytes, Stack size 32 bytes, st7735.o(i.ST7735_DrawString))
+<P><STRONG><a name="[ae]"></a>ST7735_DrawString</STRONG> (Thumb, 84 bytes, Stack size 32 bytes, st7735.o(i.ST7735_DrawString))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
 </UL>
 
-<P><STRONG><a name="[a9]"></a>ST7735_FillRect</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, st7735.o(i.ST7735_FillRect))
+<P><STRONG><a name="[ad]"></a>ST7735_FillRect</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, st7735.o(i.ST7735_FillRect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
 </UL>
 
-<P><STRONG><a name="[ab]"></a>ST7735_FillScreen</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, st7735.o(i.ST7735_FillScreen))
+<P><STRONG><a name="[af]"></a>ST7735_FillScreen</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, st7735.o(i.ST7735_FillScreen))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[ac]"></a>ST7735_InitR</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, st7735.o(i.ST7735_InitR))
+<P><STRONG><a name="[b0]"></a>ST7735_InitR</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, st7735.o(i.ST7735_InitR))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = ST7735_InitR &rArr; ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
 </UL>
 
-<P><STRONG><a name="[b1]"></a>ST7735_Line</STRONG> (Thumb, 484 bytes, Stack size 160 bytes, plotter.o(i.ST7735_Line))
+<P><STRONG><a name="[b5]"></a>ST7735_Line</STRONG> (Thumb, 484 bytes, Stack size 160 bytes, plotter.o(i.ST7735_Line))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[b9]"></a>ST7735_OutChar</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, st7735.o(i.ST7735_OutChar))
+<P><STRONG><a name="[bd]"></a>ST7735_OutChar</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, st7735.o(i.ST7735_OutChar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawString
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawString
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawCharS
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
+<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
 </UL>
 
-<P><STRONG><a name="[ba]"></a>ST7735_OutString</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, st7735.o(i.ST7735_OutString))
+<P><STRONG><a name="[be]"></a>ST7735_OutString</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, st7735.o(i.ST7735_OutString))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
+<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutChar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
-</UL>
-
-<P><STRONG><a name="[b0]"></a>ST7735_SetCursor</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, st7735.o(i.ST7735_SetCursor))
-<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
 </UL>
 
-<P><STRONG><a name="[bb]"></a>Screens_Init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, screens.o(i.Screens_Init))
+<P><STRONG><a name="[b4]"></a>ST7735_SetCursor</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, st7735.o(i.ST7735_SetCursor))
+<BR><BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
+</UL>
+
+<P><STRONG><a name="[bf]"></a>Screens_Init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, screens.o(i.Screens_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
 <LI>Call Chain = Screens_Init &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1018,251 +1025,321 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[a1]"></a>Timer0A_Init</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, eventwatch.o(i.Timer0A_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
-<LI>Call Chain = Timer0A_Init
-</UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EndCritical
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartCritical
-</UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventWatch_Init
+<P><STRONG><a name="[a1]"></a>Timer0A_Init</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, eventwatch.o(i.Timer0A_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventWatch_Init
 </UL>
 
-<P><STRONG><a name="[c8]"></a>__ARM_fpclassify</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, fpclassify.o(i.__ARM_fpclassify))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<P><STRONG><a name="[c9]"></a>__ARM_fpclassify</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, fpclassify.o(i.__ARM_fpclassify))
+<BR><BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
-<P><STRONG><a name="[bf]"></a>__ieee754_rem_pio2</STRONG> (Thumb, 832 bytes, Stack size 136 bytes, rred.o(i.__ieee754_rem_pio2))
+<P><STRONG><a name="[c0]"></a>__ieee754_rem_pio2</STRONG> (Thumb, 832 bytes, Stack size 136 bytes, rred.o(i.__ieee754_rem_pio2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
 </UL>
 
-<P><STRONG><a name="[c5]"></a>__kernel_cos</STRONG> (Thumb, 230 bytes, Stack size 48 bytes, cos_i.o(i.__kernel_cos))
+<P><STRONG><a name="[c6]"></a>__kernel_cos</STRONG> (Thumb, 230 bytes, Stack size 48 bytes, cos_i.o(i.__kernel_cos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = __kernel_cos &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
 </UL>
 
-<P><STRONG><a name="[c6]"></a>__kernel_poly</STRONG> (Thumb, 170 bytes, Stack size 24 bytes, poly.o(i.__kernel_poly))
+<P><STRONG><a name="[c7]"></a>__kernel_poly</STRONG> (Thumb, 170 bytes, Stack size 24 bytes, poly.o(i.__kernel_poly))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = __kernel_poly &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
 </UL>
 
-<P><STRONG><a name="[c7]"></a>__kernel_sin</STRONG> (Thumb, 224 bytes, Stack size 64 bytes, sin_i.o(i.__kernel_sin))
+<P><STRONG><a name="[c8]"></a>__kernel_sin</STRONG> (Thumb, 224 bytes, Stack size 64 bytes, sin_i.o(i.__kernel_sin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = __kernel_sin &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
-</UL>
-
-<P><STRONG><a name="[c9]"></a>__mathlib_dbl_underflow</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dunder.o(i.__mathlib_dbl_underflow))
-<BR><BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-</UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
 </UL>
 
-<P><STRONG><a name="[ca]"></a>acos</STRONG> (Thumb, 586 bytes, Stack size 40 bytes, acos.o(i.acos))
+<P><STRONG><a name="[ca]"></a>__mathlib_dbl_underflow</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dunder.o(i.__mathlib_dbl_underflow))
+<BR><BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+</UL>
+
+<P><STRONG><a name="[cb]"></a>acos</STRONG> (Thumb, 586 bytes, Stack size 40 bytes, acos.o(i.acos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = acos &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[cb]"></a>asin</STRONG> (Thumb, 584 bytes, Stack size 56 bytes, asin.o(i.asin))
+<P><STRONG><a name="[cc]"></a>asin</STRONG> (Thumb, 584 bytes, Stack size 56 bytes, asin.o(i.asin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = asin &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[de]"></a>checkAlarm</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, clocktime.o(i.checkAlarm))
+<P><STRONG><a name="[ed]"></a>checkAlarm</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, clocktime.o(i.checkAlarm))
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;minuteUpdate
 </UL>
 
-<P><STRONG><a name="[d6]"></a>convertASCII</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, screens.o(i.convertASCII))
-<BR><BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
+<P><STRONG><a name="[e1]"></a>convertASCII</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, screens.o(i.convertASCII))
+<BR><BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
 </UL>
 
-<P><STRONG><a name="[cd]"></a>cos</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, cos.o(i.cos))
+<P><STRONG><a name="[ce]"></a>cos</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, cos.o(i.cos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = cos &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[ce]"></a>drawAnalogClock</STRONG> (Thumb, 650 bytes, Stack size 160 bytes, screens.o(i.drawAnalogClock))
+<P><STRONG><a name="[a2]"></a>down</STRONG> (Thumb, 314 bytes, Stack size 16 bytes, eventwatch.o(i.down))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = down &rArr; setSettingTime
+</UL>
+<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setSettingTime
+<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentSettingsOpt
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentScreen
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentMenuOpt
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAlarmSettingTime
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getSettingTime
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt2
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentScreen
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentMenuOpt
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAlarmSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPortF_Handler
+</UL>
+
+<P><STRONG><a name="[da]"></a>drawAnalogClock</STRONG> (Thumb, 650 bytes, Stack size 160 bytes, screens.o(i.drawAnalogClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLineThreshold
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLineThreshold
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
 </UL>
 
-<P><STRONG><a name="[bc]"></a>drawCurrentScreen</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, screens.o(i.drawCurrentScreen))
+<P><STRONG><a name="[a3]"></a>drawCurrentScreen</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, screens.o(i.drawCurrentScreen))
 <BR><BR>[Stack]<UL><LI>Max Depth = 392 + Unknown Stack Size
 <LI>Call Chain = drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentScreen
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentScreen
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawMainMenu
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;minuteUpdate
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
+<LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPortF_Handler
 </UL>
 
-<P><STRONG><a name="[d5]"></a>drawDigitalClock</STRONG> (Thumb, 226 bytes, Stack size 64 bytes, screens.o(i.drawDigitalClock))
+<P><STRONG><a name="[e0]"></a>drawDigitalClock</STRONG> (Thumb, 226 bytes, Stack size 64 bytes, screens.o(i.drawDigitalClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = drawDigitalClock &rArr; ST7735_DrawChar &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convertASCII
+<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convertASCII
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
 </UL>
 
-<P><STRONG><a name="[d3]"></a>drawMainMenu</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, screens.o(i.drawMainMenu))
+<P><STRONG><a name="[de]"></a>drawMainMenu</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, screens.o(i.drawMainMenu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = drawMainMenu &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
 </UL>
 
-<P><STRONG><a name="[d4]"></a>drawSettings</STRONG> (Thumb, 438 bytes, Stack size 56 bytes, screens.o(i.drawSettings))
+<P><STRONG><a name="[df]"></a>drawSettings</STRONG> (Thumb, 438 bytes, Stack size 56 bytes, screens.o(i.drawSettings))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = drawSettings &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isAlarmEnabled
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAlarmTime
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
+<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isAlarmEnabled
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentTime
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAlarmTime
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_SetCursor
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_OutString
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
 </UL>
 
-<P><STRONG><a name="[d7]"></a>getAlarmTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, clocktime.o(i.getAlarmTime))
+<P><STRONG><a name="[a4]"></a>enter</STRONG> (Thumb, 142 bytes, Stack size 16 bytes, eventwatch.o(i.enter))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = enter &rArr; setCurrentTime
+</UL>
+<BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentTime
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentSettingsOpt2
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentScreen
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAlarmTime
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getSettingTime
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt2
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentScreen
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentMenuOpt
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAlarmSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPortF_Handler
+</UL>
+
+<P><STRONG><a name="[d7]"></a>getAlarmSettingTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, screens.o(i.getAlarmSettingTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getAlarmSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[e2]"></a>getAlarmTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, clocktime.o(i.getAlarmTime))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getAlarmTime
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
 </UL>
 
-<P><STRONG><a name="[d2]"></a>getCurrentScreen</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.getCurrentScreen))
-<BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<P><STRONG><a name="[d0]"></a>getCurrentMenuOpt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.getCurrentMenuOpt))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
 </UL>
 
-<P><STRONG><a name="[cf]"></a>getCurrentTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, clocktime.o(i.getCurrentTime))
+<P><STRONG><a name="[cf]"></a>getCurrentScreen</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.getCurrentScreen))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[d3]"></a>getCurrentSettingsOpt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.getCurrentSettingsOpt))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[d2]"></a>getCurrentSettingsOpt2</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.getCurrentSettingsOpt2))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[db]"></a>getCurrentTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, clocktime.o(i.getCurrentTime))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getCurrentTime
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawDigitalClock
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[d9]"></a>initForLab3</STRONG> (Thumb, 218 bytes, Stack size 8 bytes, lab3main.o(i.initForLab3))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = initForLab3
+<P><STRONG><a name="[d5]"></a>getSettingTime</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, screens.o(i.getSettingTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getSettingTime
 </UL>
-<BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[e7]"></a>initForLab3</STRONG> (Thumb, 198 bytes, Stack size 8 bytes, lab3main.o(i.initForLab3))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = initForLab3
+</UL>
+<BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnableInterrupts
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d8]"></a>isAlarmEnabled</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, clocktime.o(i.isAlarmEnabled))
-<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
+<P><STRONG><a name="[e3]"></a>isAlarmEnabled</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, clocktime.o(i.isAlarmEnabled))
+<BR><BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawSettings
 </UL>
 
-<P><STRONG><a name="[8f]"></a>main</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, lab3main.o(i.main))
+<P><STRONG><a name="[8f]"></a>main</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, lab3main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
 <LI>Call Chain = main &rArr; Screens_Init &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
+<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screens_Init
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventWatch_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClockInit
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForLab3
+<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClockInit
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initForLab3
+<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitForInterrupt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1271,306 +1348,370 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
 <LI>Call Chain = minuteUpdate &rArr; drawCurrentScreen &rArr; drawAnalogClock &rArr; ST7735_Line &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggleAlarm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkAlarm
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MinuteTick
+<BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggleAlarm
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkAlarm
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MinuteTick
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawCurrentScreen
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> eventwatch.o(i.EventWatch_Init)
 </UL>
-<P><STRONG><a name="[d1]"></a>setLineThreshold</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, plotter.o(i.setLineThreshold))
-<BR><BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<P><STRONG><a name="[d8]"></a>setAlarmSettingTime</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, screens.o(i.setAlarmSettingTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = setAlarmSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
 </UL>
 
-<P><STRONG><a name="[d0]"></a>sin</STRONG> (Thumb, 166 bytes, Stack size 32 bytes, sin.o(i.sin))
+<P><STRONG><a name="[e6]"></a>setAlarmTime</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, clocktime.o(i.setAlarmTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = setAlarmTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+</UL>
+
+<P><STRONG><a name="[d1]"></a>setCurrentMenuOpt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.setCurrentMenuOpt))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[d9]"></a>setCurrentScreen</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.setCurrentScreen))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[d4]"></a>setCurrentSettingsOpt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.setCurrentSettingsOpt))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[e4]"></a>setCurrentSettingsOpt2</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, screens.o(i.setCurrentSettingsOpt2))
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+</UL>
+
+<P><STRONG><a name="[e5]"></a>setCurrentTime</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, clocktime.o(i.setCurrentTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = setCurrentTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter
+</UL>
+
+<P><STRONG><a name="[dd]"></a>setLineThreshold</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, plotter.o(i.setLineThreshold))
+<BR><BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+</UL>
+
+<P><STRONG><a name="[d6]"></a>setSettingTime</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, screens.o(i.setSettingTime))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = setSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;down
+</UL>
+
+<P><STRONG><a name="[dc]"></a>sin</STRONG> (Thumb, 166 bytes, Stack size 32 bytes, sin.o(i.sin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
+<BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[b7]"></a>sqrt</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, sqrt.o(i.sqrt))
+<P><STRONG><a name="[bb]"></a>sqrt</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, sqrt.o(i.sqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
+<BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
 </UL>
 
-<P><STRONG><a name="[dd]"></a>toggleAlarm</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, alarm.o(i.toggleAlarm))
+<P><STRONG><a name="[ee]"></a>toggleAlarm</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, alarm.o(i.toggleAlarm))
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;minuteUpdate
 </UL>
 
-<P><STRONG><a name="[c0]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
+<P><STRONG><a name="[a5]"></a>up</STRONG> (Thumb, 296 bytes, Stack size 16 bytes, eventwatch.o(i.up))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = up &rArr; setSettingTime
+</UL>
+<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setSettingTime
+<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentSettingsOpt
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentScreen
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCurrentMenuOpt
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAlarmSettingTime
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getSettingTime
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt2
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentSettingsOpt
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentScreen
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCurrentMenuOpt
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAlarmSettingTime
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPortF_Handler
+</UL>
+
+<P><STRONG><a name="[c1]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[e0]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
+<P><STRONG><a name="[f0]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
 </UL>
 
-<P><STRONG><a name="[e4]"></a>__fpl_dcheck_NaN1</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dcheck1.o(x$fpl$dcheck1))
-<BR><BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
+<P><STRONG><a name="[f4]"></a>__fpl_dcheck_NaN1</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dcheck1.o(x$fpl$dcheck1))
+<BR><BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-</UL>
-
-<P><STRONG><a name="[e8]"></a>__fpl_dcmp_Inf</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, dcmpi.o(x$fpl$dcmpinf), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
+<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 </UL>
 
-<P><STRONG><a name="[b5]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<P><STRONG><a name="[f8]"></a>__fpl_dcmp_Inf</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, dcmpi.o(x$fpl$dcmpinf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
+</UL>
+
+<P><STRONG><a name="[b9]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[e6]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<P><STRONG><a name="[f6]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[b3]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf))
+<P><STRONG><a name="[b7]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmpeq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
 </UL>
 
-<P><STRONG><a name="[e7]"></a>_dcmpeq</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
+<P><STRONG><a name="[f7]"></a>_dcmpeq</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
 </UL>
 
-<P><STRONG><a name="[c1]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
+<P><STRONG><a name="[c2]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[e9]"></a>_dfix</STRONG> (Thumb, 94 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<P><STRONG><a name="[f9]"></a>_dfix</STRONG> (Thumb, 94 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[b2]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
-<BR><BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<P><STRONG><a name="[b6]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
+<BR><BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[11f]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
+<P><STRONG><a name="[12f]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
 
-<P><STRONG><a name="[c3]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
-<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<P><STRONG><a name="[c4]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
+<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[120]"></a>_dfltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu), UNUSED)
+<P><STRONG><a name="[130]"></a>_dfltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu), UNUSED)
 
-<P><STRONG><a name="[b8]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
+<P><STRONG><a name="[bc]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
 </UL>
 
-<P><STRONG><a name="[ea]"></a>_dcmple</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
+<P><STRONG><a name="[fa]"></a>_dcmple</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
 </UL>
 
-<P><STRONG><a name="[121]"></a>__fpl_dcmple_InfNaN</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, dleqf.o(x$fpl$dleqf), UNUSED)
+<P><STRONG><a name="[131]"></a>__fpl_dcmple_InfNaN</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, dleqf.o(x$fpl$dleqf), UNUSED)
 
-<P><STRONG><a name="[b4]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
+<P><STRONG><a name="[b8]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawAnalogClock
 </UL>
 
-<P><STRONG><a name="[eb]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<P><STRONG><a name="[fb]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[e3]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf))
+<P><STRONG><a name="[f3]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __fpl_dnaninf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
-<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfix
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+<BR>[Called By]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
+<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfix
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
 </UL>
 
-<P><STRONG><a name="[e2]"></a>__fpl_dretinf</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, dretinf.o(x$fpl$dretinf), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+<P><STRONG><a name="[f2]"></a>__fpl_dretinf</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, dretinf.o(x$fpl$dretinf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
 </UL>
 
-<P><STRONG><a name="[c2]"></a>__aeabi_drsub</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb))
+<P><STRONG><a name="[c3]"></a>__aeabi_drsub</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_drsub
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
 </UL>
 
-<P><STRONG><a name="[ec]"></a>_drsb</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
+<P><STRONG><a name="[fc]"></a>_drsb</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
 </UL>
 
-<P><STRONG><a name="[df]"></a>_dsqrt</STRONG> (Thumb, 404 bytes, Stack size 24 bytes, dsqrt_umaal.o(x$fpl$dsqrt))
+<P><STRONG><a name="[ef]"></a>_dsqrt</STRONG> (Thumb, 404 bytes, Stack size 24 bytes, dsqrt_umaal.o(x$fpl$dsqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 </UL>
 
-<P><STRONG><a name="[b6]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
+<P><STRONG><a name="[ba]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dsub
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_Line
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
 </UL>
 
-<P><STRONG><a name="[ee]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
+<P><STRONG><a name="[fe]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
 </UL>
 
-<P><STRONG><a name="[e5]"></a>__fpl_return_NaN</STRONG> (Thumb, 100 bytes, Stack size 0 bytes, retnan.o(x$fpl$retnan))
-<BR><BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_cmpreturn
+<P><STRONG><a name="[f5]"></a>__fpl_return_NaN</STRONG> (Thumb, 100 bytes, Stack size 0 bytes, retnan.o(x$fpl$retnan))
+<BR><BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_cmpreturn
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN1
-</UL>
-
-<P><STRONG><a name="[c4]"></a>__ARM_scalbn</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, scalbn.o(x$fpl$scalbn))
-<BR><BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN1
-</UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+<BR>[Called By]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN1
 </UL>
 
-<P><STRONG><a name="[ef]"></a>__fpl_cmpreturn</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, trapv.o(x$fpl$trapveneer))
-<BR><BR>[Called By]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
+<P><STRONG><a name="[c5]"></a>__ARM_scalbn</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, scalbn.o(x$fpl$scalbn))
+<BR><BR>[Calls]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcheck_NaN1
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cos
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acos
+</UL>
+
+<P><STRONG><a name="[ff]"></a>__fpl_cmpreturn</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, trapv.o(x$fpl$trapveneer))
+<BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_return_NaN
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[ae]"></a>commandList</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, st7735.o(i.commandList))
+<P><STRONG><a name="[b2]"></a>commandList</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, st7735.o(i.commandList))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = commandList &rArr; Delay1ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
+<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
 </UL>
 
-<P><STRONG><a name="[ad]"></a>commonInit</STRONG> (Thumb, 340 bytes, Stack size 8 bytes, st7735.o(i.commonInit))
+<P><STRONG><a name="[b1]"></a>commonInit</STRONG> (Thumb, 340 bytes, Stack size 8 bytes, st7735.o(i.commonInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = commonInit &rArr; commandList &rArr; Delay1ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
+<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
 </UL>
 
-<P><STRONG><a name="[a6]"></a>pushColor</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, st7735.o(i.pushColor))
+<P><STRONG><a name="[aa]"></a>pushColor</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, st7735.o(i.pushColor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = pushColor
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
 </UL>
 
-<P><STRONG><a name="[a3]"></a>setAddrWindow</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, st7735.o(i.setAddrWindow))
+<P><STRONG><a name="[a7]"></a>setAddrWindow</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, st7735.o(i.setAddrWindow))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
-</UL>
-
-<P><STRONG><a name="[af]"></a>writecommand</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, st7735.o(i.writecommand))
-<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawPixel
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawChar
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
 </UL>
 
-<P><STRONG><a name="[a4]"></a>writedata</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, st7735.o(i.writedata))
-<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
+<P><STRONG><a name="[b3]"></a>writecommand</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, st7735.o(i.writecommand))
+<BR><BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
 
-<P><STRONG><a name="[ed]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
+<P><STRONG><a name="[a8]"></a>writedata</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, st7735.o(i.writedata))
+<BR><BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setAddrWindow
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushColor
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
 
-<P><STRONG><a name="[e1]"></a>_dsub1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+<P><STRONG><a name="[fd]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
+</UL>
+
+<P><STRONG><a name="[f1]"></a>_dsub1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
 </UL>
 
 <P><STRONG><a name="[80]"></a>_printf_input_char</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, _printf_char_common.o(.text))

@@ -5,6 +5,7 @@
 #include "ClockTime.h"
 #include "Alarm.h"
 
+
 // event registry
 #define NUM_EVENTS 5
 #define NUM_HANDLERS 8
@@ -27,7 +28,7 @@ void (*PeriodicTask)(void);   // user function
 //          period in units (1/clockfreq), 32 bits
 // Outputs: none
 void Timer0A_Init(void(*task)(void), uint32_t period){long sr;
-  sr = StartCritical(); 
+   
   SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
   PeriodicTask = task;          // user function
   TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
@@ -42,7 +43,7 @@ void Timer0A_Init(void(*task)(void), uint32_t period){long sr;
 // vector number 35, interrupt number 19
   NVIC_EN0_R = 1<<19;           // 9) enable IRQ 19 in NVIC
   TIMER0_CTL_R = 0x00000001;    // 10) enable TIMER0A
-  EndCritical(sr);
+  
 }
 
 void Timer0A_Handler(void){
@@ -196,25 +197,27 @@ void enter(void){
 }
 
 
-void GPIO_PortF_Handler(void){
+/*void GPIOPortF_Handler(void){
 	GPIO_PORTF_IM_R &= ~0x13;     // disarm interrupts to debounce/prevent critical sections, if any 	
 	if(GPIO_PORTF_RIS_R&0x01){
-		GPIO_PORTE_ICR_R = 0x01;			//clear flag
+		GPIO_PORTF_ICR_R = 0x01;			//clear flag
 		down();												//act accordingly
+		drawCurrentScreen();		
 	}
 	if(GPIO_PORTF_RIS_R&0x02){
-		GPIO_PORTE_ICR_R = 0x02;
+		GPIO_PORTF_ICR_R = 0x02;
 		enter();
+		drawCurrentScreen();
 	}
 	if(GPIO_PORTF_RIS_R&0x10){
-		GPIO_PORTE_ICR_R = 0x10;
+		GPIO_PORTF_ICR_R = 0x10;
 		up();
+		drawCurrentScreen();
 	}
 	
 	GPIO_PORTF_IM_R |= 0x13;     // re-enable
-	drawCurrentScreen();
 }
-
+*/
 
 uint16_t counter = 0;
 void minuteUpdate(void) {
@@ -223,12 +226,13 @@ void minuteUpdate(void) {
 	if(counter == 60000) {
 		counter = 0;
 		MinuteTick();
+		checkAlarm(); 
+		drawCurrentScreen();
 	}
 	if(counter % 600 == 0) {
 		toggleAlarm();
 	}
-	checkAlarm(); 
-	drawCurrentScreen();
+	
 }
 
 /*
