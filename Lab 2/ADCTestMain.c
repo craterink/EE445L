@@ -17,6 +17,10 @@
 
 #define SWITCHES                (*((volatile unsigned long *)0x40025044))
 #define SW1       0x10                      // on the left side of the Launchpad board
+#define PF1       (*((volatile uint32_t *)0x40025008))
+#define PF2       (*((volatile uint32_t *)0x40025010))
+#define PF3       (*((volatile uint32_t *)0x40025020))
+	 
 
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -206,6 +210,8 @@ void processData(uint16_t *ADCLog, uint32_t logSize, uint32_t multiplier){
 }
 
 void logTimes(void) {
+	PF1 ^= 0x02;
+	PF2 ^= 0x04;
 	// beginning corner case
 	if(lastTime == 0) {
 		lastTime = TIMER1_TAR_R;
@@ -220,6 +226,7 @@ void logTimes(void) {
 	if(timeLogIndex == 1000) {
 		timeLogFull = 1;
 	}
+	PF1 ^= 0x02;
 }
 
 void logADCData(void) {
@@ -431,7 +438,7 @@ int main(void){
 		}
 		
 		// following code updates ADCvalue every 100,000 cycles
-    GPIO_PORTF_DATA_R |= 0x04;          // profile
+    GPIO_PORTF_DATA_R ^= 0x04;          // profile
     ADCvalue = ADC0_InSeq3();
     GPIO_PORTF_DATA_R &= ~0x04;
     for(delay=0; delay<100000; delay++){};
