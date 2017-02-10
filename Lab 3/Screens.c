@@ -178,12 +178,14 @@ void drawAnalogClock(void){
 	yOrig = 84;
 	
 	current = getCurrentTime();
-	xDestMH = cos(phase + dirCoef*(current.minute / 60.0)*2*pi);
-	yDestMH = sin(phase + dirCoef*(current.minute / 60.0)*2*pi);
-	xDestHH = cos(phase + dirCoef*((current.hour % 12) / 12.0)*2*pi);
-	yDestHH = sin(phase + dirCoef*((current.hour % 12) / 12.0)*2*pi);
-		
+	xDestMH = minuteHandLength * cos(phase + dirCoef*(current.minute / 60.0)*2*pi);
+	yDestMH = minuteHandLength * sin(phase + dirCoef*(current.minute / 60.0)*2*pi);
+	xDestHH = hourHandLength * cos(phase + dirCoef*((current.hour % 12) / 12.0)*2*pi);
+	yDestHH = hourHandLength * sin(phase + dirCoef*((current.hour % 12) / 12.0)*2*pi);
+	
+	setLineThreshold(hourHandWidthThreshold);
 	ST7735_Line(xOrig, yOrig, xDestHH, yDestHH, ST7735_GREEN);	
+	setLineThreshold(minuteHandWidthThreshold);
 	ST7735_Line(xOrig, yOrig, xDestMH, yDestMH, ST7735_BLUE);
 }
 

@@ -21,6 +21,5 @@ void alarmInit(void) {
 
 void toggleAlarm(void) {
 	pc4Val = 1 - pc4Val; // toggle
-	
 	pc4Val ? (GPIO_PORTC_DATA_R |= 0x10) : (GPIO_PORTC_DATA_R &= 0xEF); // set bit 4 to pc4Val
 }
