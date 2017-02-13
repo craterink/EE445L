@@ -13,32 +13,13 @@ _Bool alarmEnabled;
 void checkAlarm(void) {
 	if(alarmEnabled) {
 		if(currentTime.hour == alarmTime.hour &&
-						currentTime.minute == alarmTime.minute) {
+			currentTime.minute == alarmTime.minute) {
 			//ring alarm
 		}
 	}
 }
-/*
-void HourTickAlarm(void){
-	alarmTime.hour = (currentTime.hour + 1)%24;
-}
 
-void MinuteTickAlarm(void){
-	alarmTime.minute += 1;
-	if(alarmTime.minute == 60) {
-		alarmTime.minute = 0;
-		alarmTime.hour += 1;
-		if(alarmTime.hour == 24) {
-			alarmTime.hour = 0;
-		}
-	}
-	
-}
 
-void HourTick(void){
-	currentTime.hour = (currentTime.hour + 1)%24;
-}
-*/
 void MinuteTick(void) {
 	currentTime.minute += 1;
 	if(currentTime.minute == 60) {
