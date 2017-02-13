@@ -3,8 +3,8 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-Y:\School\Spring 2017\445L\Keil\EE445L\Lab 3\Lab3.uvproj
-Project File Date:  02/10/2017
+C:\Keil\EE445L\Lab 3\Lab3.uvproj
+Project File Date:  02/12/2017
 
 <h2>Output:</h2>
 Rebuild target 'Lab3'
@@ -43,27 +43,16 @@ Alarm.c: 1 warning, 0 errors
 compiling Screens.c...
 ClockTime.h(19): warning:  #1-D: last line of file ends without a newline
   void checkAlarm(void);
-Screens.c(446): warning:  #177-D: variable "omega" was declared but never referenced
+Screens.c(510): warning:  #177-D: variable "omega" was declared but never referenced
         double omega, pi = acos(-1), phase = asin(1), dirCoef = -1;
-Screens.c(567): warning:  #186-D: pointless comparison of unsigned integer with zero
+Screens.c(580): warning:  #223-D: function "ifRingAlarm" declared implicitly
+        if(ifRingAlarm()) {
+Screens.c(642): warning:  #186-D: pointless comparison of unsigned integer with zero
         if(currentMenuOpt < 0)
-Screens.c: 3 warnings, 0 errors
+Screens.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=14972 RO-data=15304 RW-data=176 ZI-data=1120  
-".\ADCSWTrigger.axf" - 0 Error(s), 13 Warning(s).
-Load "Y:\\School\\Spring 2017\\445L\\Keil\\EE445L\\Lab 3\\ADCSWTrigger.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
-sh Download failed  -  Target DLL has been cancelled
-Load "Y:\\School\\Spring 2017\\445L\\Keil\\EE445L\\Lab 3\\ADCSWTrigger.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
-AG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
-Error: Target DLL has been cancelled. Debugger aborted !
+.\ADCSWTrigger.axf: Error: L6218E: Undefined symbol ifRingAlarm (referred from screens.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+".\ADCSWTrigger.axf" - 1 Error(s), 14 Warning(s).
+Target not created

@@ -19,11 +19,25 @@
 uint8_t getCurrentMenuOpt(void);
 void setCurrentMenuOpt(uint8_t menu);
 
+//back message definitions
+#define BACK_XLOC 2
+#define BACK_YLOC 12
+#define BACK_YLOCDELTA 1
+#define BACK_MSG1 "Bress enter to go "
+#define BACK_MSG2 " back to main menu"
+
+//alarm definitions
+#define ALARM_XLOC 2
+#define ALARM_YLOC 11
+#define ALARM_MSG 		"DING!\r"
+#define ALARM_SNOOZE 	"SNOOZE    (up)"
+#define ALARM_STOP 		"STOP      (enter)"
+
 //digital definitions
-#define DIGITAL_XLOC 20			//x location for first number of digital clock. Optimize later
+#define DIGITAL_XLOC 18		//x location for first number of digital clock. Optimize later
 #define DIGITAL_YLOC 60			// same
-#define DIGITAL_FONT_SIZE 10	
-#define DIGITAL_XMOVE 10
+#define DIGITAL_FONT_SIZE 2	
+#define DIGITAL_XMOVE 12
 
 //settings
 #define SETTINGS_CLOCK 0

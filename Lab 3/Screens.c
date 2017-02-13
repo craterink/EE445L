@@ -19,10 +19,74 @@ char convertASCII(uint8_t x){
 	return '0' + x;
 }
 
+void drawBackMessage(uint16_t backColor, uint16_t textColor) {
+	Output_Color(backColor);
+	ST7735_SetCursor(BACK_XLOC, BACK_YLOC);
+	ST7735_SetTextColor(textColor);
+	ST7735_OutString(BACK_MSG1);
+	ST7735_SetCursor(BACK_XLOC, BACK_YLOC + BACK_YLOCDELTA);
+	ST7735_OutString(BACK_MSG2);
+}
+
+void drawAlarmMessage(uint16_t backColor, uint16_t textColor) {
+	Output_Color(backColor);
+	ST7735_SetCursor(ALARM_XLOC, ALARM_YLOC);
+	ST7735_SetTextColor(textColor);
+	ST7735_OutString(ALARM_MSG);
+	ST7735_SetCursor(ALARM_XLOC, ALARM_YLOC + 1);
+	ST7735_OutString(ALARM_SNOOZE);
+	ST7735_SetCursor(ALARM_XLOC, ALARM_YLOC + 2);
+	ST7735_OutString(ALARM_STOP);
+}
+
 void Screens_Init(void){
-	currentScreen = MAIN_MENU;
+	Time t;
+	currentScreen = DIGITAL_CLOCK;//MAIN_MENU;
 	
 	ST7735_InitR(INITR_REDTAB); // init LCD
+	drawCurrentScreen();
+	
+	// TESTCASES
+	t = getCurrentTime();
+	t.hour = 12;
+	t.minute = 30;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 0;
+	t.minute = 59;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 23;
+	t.minute = 0;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 5;
+	t.minute = 36;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	currentScreen = ANALOG_CLOCK;
+	t.hour = 12;
+	t.minute = 30;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 0;
+	t.minute = 59;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 23;
+	t.minute = 0;
+	setCurrentTime(t);
+	drawCurrentScreen();
+	
+	t.hour = 5;
+	t.minute = 36;
+	setCurrentTime(t);
 	drawCurrentScreen();
 	
 	// RegisterHandler(EVENT_BTN_DOWN, &mainMenu_handleDown);
@@ -439,14 +503,14 @@ const unsigned short ClockFace[] = {
 
 void drawAnalogClock(void){
 	int xOrig, yOrig, xDestMH, yDestMH, xDestHH, yDestHH;
-	int hourHandLength = 30;
+	int hourHandLength = 19;
 	double hourHandWidthThreshold = 1;
 	double minuteHandWidthThreshold = 0.5;
-	int minuteHandLength = 38;
+	int minuteHandLength = 29;
 	double omega, pi = acos(-1), phase = asin(1), dirCoef = -1;
 	Time current;
 	
-	ST7735_FillScreen(ST7735_BLACK);
+	ST7735_FillScreen(ST7735_WHITE);
 	ST7735_DrawBitmap(24,100,ClockFace,80,80);
 	
 	// clock origin
@@ -462,14 +526,16 @@ void drawAnalogClock(void){
 	setLineThreshold(minuteHandWidthThreshold);
 	ST7735_Line(xOrig, yOrig, xDestMH, yDestMH, ST7735_BLUE);
 	setLineThreshold(hourHandWidthThreshold);
-	ST7735_Line(xOrig, yOrig, xDestHH, yDestHH, ST7735_GREEN);
+	ST7735_Line(xOrig, yOrig, xDestHH, yDestHH, ST7735_RED);
+	
+	drawBackMessage(ST7735_WHITE, ST7735_BLACK);
 }
 
 
 
 
 void drawDigitalClock(void){
-	uint8_t minOnes, minTens, hour, hourOnes, hourTens, i;
+	uint8_t minOnes, minTens, hour, displayHour, hourOnes, hourTens, i;
 	char min_ones, min_tens, hour_ones, hour_tens;
 	char display[8]; 
 	struct time current;
@@ -486,10 +552,11 @@ void drawDigitalClock(void){
 		display[6] = 'P';
 		if(hour != 12) hour -= 12;			//variable state is in military time
 	}
-	hourOnes = hour%10;
+	displayHour = ((hour+11)%12) + 1;
+	hourOnes = displayHour%10;
 	hour_ones = convertASCII(hourOnes);
-	hourTens = hour/10;
-	hour_tens = convertASCII(hour_tens);
+	hourTens = displayHour/10;
+	hour_tens = convertASCII(hourTens);
 	
 	if(hourTens == 0){
 		display[0] = ' ';
@@ -509,6 +576,14 @@ void drawDigitalClock(void){
 	for(i = 0; i < 8; i++){
 		ST7735_DrawChar(DIGITAL_XLOC + (DIGITAL_XMOVE * i), DIGITAL_YLOC, display[i], ST7735_RED, ST7735_BLACK, DIGITAL_FONT_SIZE);    
 	}
+	
+	if(ifRingAlarm()) {
+		drawAlarmMessage(ST7735_BLACK, ST7735_RED);
+	}
+	else {
+		drawBackMessage(ST7735_BLACK, ST7735_RED);
+	}
+	
 }
 
 // main menu vars
