@@ -12,3 +12,4 @@
 .\lab3main.o: EventWatch.h
 .\lab3main.o: ClockTime.h
 .\lab3main.o: Screens.h
+.\lab3main.o: Alarm.h

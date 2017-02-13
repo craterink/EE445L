@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Lab2</TargetName>
+      <TargetName>Lab3</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -411,16 +411,6 @@
               <FilePath>.\startup.s</FilePath>
             </File>
             <File>
-              <FileName>ADCSWTrigger.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ADCSWTrigger.c</FilePath>
-            </File>
-            <File>
-              <FileName>ADCTestMain.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ADCTestMain.c</FilePath>
-            </File>
-            <File>
               <FileName>PLL.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\PLL.c</FilePath>
@@ -434,6 +424,31 @@
               <FileName>plotter.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\plotter.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab3Main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lab3Main.c</FilePath>
+            </File>
+            <File>
+              <FileName>EventWatch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\EventWatch.c</FilePath>
+            </File>
+            <File>
+              <FileName>ClockTime.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ClockTime.c</FilePath>
+            </File>
+            <File>
+              <FileName>Alarm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Alarm.c</FilePath>
+            </File>
+            <File>
+              <FileName>Screens.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Screens.c</FilePath>
             </File>
           </Files>
         </Group>

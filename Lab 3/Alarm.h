@@ -2,4 +2,3 @@
 
 void toggleAlarm(void);
 
-void alarmInit(void);

@@ -5,9 +5,11 @@
 #include "ClockTime.h"
 #include "Alarm.h"
 
+
 // event registry
 #define NUM_EVENTS 5
 #define NUM_HANDLERS 8
+#define PF1       (*((volatile uint32_t *)0x40025008))
 
 int8_t handlerCounts[NUM_EVENTS]; // keeps track of number of registered handlers for each event
 void(*eventRegistry[NUM_EVENTS][NUM_HANDLERS])(void); // can register up to 8 handlers for each event
@@ -27,7 +29,7 @@ void (*PeriodicTask)(void);   // user function
 //          period in units (1/clockfreq), 32 bits
 // Outputs: none
 void Timer0A_Init(void(*task)(void), uint32_t period){long sr;
-  sr = StartCritical(); 
+  DisableInterrupts();
   SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
   PeriodicTask = task;          // user function
   TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
@@ -40,9 +42,10 @@ void Timer0A_Init(void(*task)(void), uint32_t period){long sr;
   NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF)|0x80000000; // 8) priority 4
 // interrupts enabled in the main program after all devices initialized
 // vector number 35, interrupt number 19
-  NVIC_EN0_R = 1<<19;           // 9) enable IRQ 19 in NVIC
+  NVIC_EN0_R |= 1<<19;           // 9) enable IRQ 19 in NVIC
   TIMER0_CTL_R = 0x00000001;    // 10) enable TIMER0A
-  EndCritical(sr);
+	EnableInterrupts();
+  
 }
 
 void Timer0A_Handler(void){
@@ -53,6 +56,39 @@ void Timer0A_Handler(void){
 void Timer0A_UpdateTask(void(*task)(void)){
   PeriodicTask = task;
 }
+
+
+uint16_t counter = 0;
+void minuteUpdate(void) {
+	struct time update;
+	counter++;
+	if(counter == 60000) {
+		counter = 0;
+		MinuteTick();
+		checkAlarm(); 
+		drawCurrentScreen();
+	}
+	if(counter % 800 == 0) {	//heartbeat
+		PF1 ^= 0x02;
+	}
+	if(PF1 == 0x02 && counter % 7 == 0){
+		PF1 = 0x00;
+	}
+	
+}
+
+
+void EventWatch_Init(void) {
+	Timer0A_Init(minuteUpdate, 80000); // interrupt every 80000 * 12.5ns = 1 millisecond
+}
+
+
+
+/* ***************** BUTTONS *******************
+		the following functions edit the current screen based 
+		a button press.
+*/
+
 
 void up(void){
 	struct time update;
@@ -101,11 +137,11 @@ void up(void){
 		}
 	}
 	
-	if(getCurrentScreen() == ANALOG_CLOCK){
+	else if(getCurrentScreen() == ANALOG_CLOCK){
 		setCurrentScreen(DIGITAL_CLOCK);
 	}
 	
-	if(getCurrentScreen() == DIGITAL_CLOCK){
+	else if(getCurrentScreen() == DIGITAL_CLOCK){
 		setCurrentScreen(ANALOG_CLOCK);
 	}
 }
@@ -116,7 +152,7 @@ void down(void){
 			setCurrentMenuOpt((getCurrentMenuOpt()+1)%3);
 	}
 	
-	if(getCurrentScreen() == SETTINGS){
+	else if(getCurrentScreen() == SETTINGS){
 		if(getCurrentSettingsOpt2() == SETTINGS_DEFAULT){
 			setCurrentSettingsOpt((getCurrentSettingsOpt()+1)%2);
 		}
@@ -154,11 +190,11 @@ void down(void){
 		}
 	}
 	
-	if(getCurrentScreen() == ANALOG_CLOCK){
+	else if(getCurrentScreen() == ANALOG_CLOCK){
 		setCurrentScreen(DIGITAL_CLOCK);
 	}
 	
-	if(getCurrentScreen() == DIGITAL_CLOCK){
+	else if(getCurrentScreen() == DIGITAL_CLOCK){
 		setCurrentScreen(ANALOG_CLOCK);
 	}
 }
@@ -177,7 +213,7 @@ void enter(void){
 		}
 	}
 	
-	if(getCurrentScreen() == SETTINGS){
+	else if(getCurrentScreen() == SETTINGS){
 		setCurrentSettingsOpt2(getCurrentSettingsOpt2()+1);
 		if(getCurrentSettingsOpt2() == SETTINGS_DONE){
 			setCurrentSettingsOpt2(SETTINGS_DEFAULT);
@@ -186,71 +222,51 @@ void enter(void){
 		}
 	}
 	
-	if(getCurrentScreen() == ANALOG_CLOCK){
+	else if(getCurrentScreen() == ANALOG_CLOCK){
 		setCurrentScreen(MAIN_MENU);
 	}
 	
-	if(getCurrentScreen() == DIGITAL_CLOCK){
+	else if(getCurrentScreen() == DIGITAL_CLOCK){
 		setCurrentScreen(MAIN_MENU);
 	}
 }
 
 
-void GPIO_PortF_Handler(void){
-	GPIO_PORTF_IM_R &= ~0x13;     // disarm interrupts to debounce/prevent critical sections, if any 	
-	if(GPIO_PORTF_RIS_R&0x01){
-		GPIO_PORTE_ICR_R = 0x01;			//clear flag
-		down();												//act accordingly
-	}
-	if(GPIO_PORTF_RIS_R&0x02){
-		GPIO_PORTE_ICR_R = 0x02;
-		enter();
-	}
+/* ******************HANDLERS*************
+		THE FOLLOWING FUNCTIONS ARE HANDLERS FOR BUTTONS INTERRUPTS
+*/
+
+void GPIOPortF_Handler(void){
+	GPIO_PORTF_IM_R &= ~0x10;     // disarm interrupts to debounce/prevent critical sections, if any 	
+
 	if(GPIO_PORTF_RIS_R&0x10){
-		GPIO_PORTE_ICR_R = 0x10;
-		up();
+		GPIO_PORTF_ICR_R = 0x10;
+		enter();
+		drawCurrentScreen();
 	}
 	
-	GPIO_PORTF_IM_R |= 0x13;     // re-enable
-	drawCurrentScreen();
+	GPIO_PORTF_IM_R |= 0x10;     // re-enable
+}
+
+void GPIOPortE_Handler(void){
+	GPIO_PORTE_IM_R &= ~0x06;		// disarm interrupts to debounce/prevent critical sections, if any 
+	
+	if(GPIO_PORTE_RIS_R&0x04){
+		GPIO_PORTE_ICR_R = 0x04;			//clear flag
+		down();												//act accordingly
+		drawCurrentScreen();		
+	}
+	
+	if(GPIO_PORTE_RIS_R&0x02){
+		GPIO_PORTE_ICR_R = 0x02;
+		up();
+		drawCurrentScreen();
+	}
+	
+	GPIO_PORTE_IM_R |= 0x06;     // re-enable
+	
 }
 
 
-uint16_t counter = 0;
-void minuteUpdate(void) {
-	struct time update;
-	counter++;
-	if(counter == 60000) {
-		counter = 0;
-		MinuteTick();
-	}
-	if(counter % 600 == 0) {
-		toggleAlarm();
-	}
-	checkAlarm(); 
-	drawCurrentScreen();
-}
 
-/*
-void notifyEvent(uint8_t event) {
-	int i;
-	if(event < NUM_EVENTS) {
-		
-	}
-}
-*/
-// TO CHECK
-void EventWatch_Init(void) {
-	Timer0A_Init(minuteUpdate, 80000); // interrupt every 80000 * 12.5ns = 1 millisecond
-}
-
-/*
-// TO CHECK
-void RegisterHandler(uint8_t event, uint8_t screen, void (*handlerFn)(void)) {
-	if(event < NUM_EVENTS && handlerCounts[event] < NUM_HANDLERS) {
-		eventRegistry[event][screen] = handlerFn;
-		handlerCounts[event] += 1;
-	}
-}
-*/
 
